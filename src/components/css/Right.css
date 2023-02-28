@@ -1,5 +1,6 @@
 .searchNav{
   position: fixed;
-  width: 100px;
-  right: 100px
+  padding: 0px;
+  width: 200px;
+  right: 0px
 }

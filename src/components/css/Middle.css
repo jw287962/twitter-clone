@@ -7,3 +7,10 @@ main{
   padding: 0px 200px;
   
 }
+
+nav{
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  height: 100vh;
+  padding: 50px;
+}

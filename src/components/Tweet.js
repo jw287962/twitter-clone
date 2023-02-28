@@ -1,7 +1,6 @@
 
 import React,{useState} from "react";
 const Tweet = () => {
-
   return (
         <div className="tweet">
               <h3>randomUserName </h3>
