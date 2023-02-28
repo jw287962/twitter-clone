@@ -1,7 +1,7 @@
 main{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   width: 80vw;
   overflow: hidden;
   padding: 0px 200px;
@@ -14,3 +14,4 @@ nav{
   height: 100vh;
   padding: 50px;
 }
+

@@ -8,16 +8,7 @@ const Middle = () => {
   return (
     <main className="content">
       <Form></Form>
-        <Tweet></Tweet>
-        <Tweet></Tweet>
-        <Tweet></Tweet>
-        <Tweet></Tweet>
-        <Tweet></Tweet>
-        <Tweet></Tweet>
-        <Tweet></Tweet>
-        <Tweet></Tweet>
-        <Tweet></Tweet>
-        <Tweet></Tweet>
+        
     </main>
   )
 }
