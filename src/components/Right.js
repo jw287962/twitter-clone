@@ -1,11 +1,31 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import './css/Right.css'
-import { signInPopUp } from "./firebase";
-const Right = () => {
+import { signInPopUp,getUserAuth } from "./firebase";
+
+const Right = (props) => {
+
+  const {setLogin,login} = props;
+
+const signInUser = () => {
+  signInPopUp();
+  setLogin(getUserAuth().currentUser);
+}
+
+
+  if(login){
+    return (
+      <nav className="searchNav">
+        <button  >Logout</button>
+          <form>
+            <input type='text'></input>
+          </form>
+      </nav>
+    )
+  }
 
   return (
     <nav className="searchNav">
-      <button onClick={signInPopUp}>Login</button>
+      <button onClick={signInUser} >Login</button>
         <form>
           <input type='text'></input>
         </form>
