@@ -1,11 +1,22 @@
 import React,{useState} from "react";
 import './css/Middle.css'
+import Tweet from "./Tweet";
+
 const Middle = () => {
 
   return (
-    <nav className="userNav">
-
-    </nav>
+    <main className="content">
+        <Tweet></Tweet>
+        <Tweet></Tweet>
+        <Tweet></Tweet>
+        <Tweet></Tweet>
+        <Tweet></Tweet>
+        <Tweet></Tweet>
+        <Tweet></Tweet>
+        <Tweet></Tweet>
+        <Tweet></Tweet>
+        <Tweet></Tweet>
+    </main>
   )
 }
 

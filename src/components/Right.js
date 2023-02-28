@@ -4,7 +4,9 @@ const Right = () => {
 
   return (
     <nav className="searchNav">
-
+        <form>
+          <input type='text'></input>
+        </form>
     </nav>
   )
 }
