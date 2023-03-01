@@ -14,7 +14,7 @@ const Middle = (props) => {
 
   return (
     <main className="content">
-      <Form ></Form>
+      <Form login={login}></Form>
         <button onClick={testing}>Test</button>
     </main>
   )

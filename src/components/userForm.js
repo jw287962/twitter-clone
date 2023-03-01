@@ -1,10 +1,13 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 
 const Form = (props) => {
 
   const {login} = props;
 
 
+  useEffect(() => {
+    console.log(login);
+  })
   if(!login){
     return(
       <form id="userform">

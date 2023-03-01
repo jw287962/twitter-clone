@@ -15,9 +15,10 @@ function App() {
   useEffect(() => {
     
     const user = localStorage.getItem('user');
+    console.log(user);
       if(user){
-        JSON.parse(user);
-        setLogin(user);
+        setLogin(JSON.parse(user));
+       
       }
   },[])
 

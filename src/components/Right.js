@@ -9,18 +9,15 @@ const Right = (props) => {
  async function signInUser(){
   const signedIn = signInPopUp()
   console.log(signedIn);
- signedIn.then(()=>   setLogin(getUserAuth().currentUser) );
-
-
-  localStorage.setItem('user',JSON.stringify(getUserAuth().currentUser));
+  signedIn.then(()=>  {
+      setLogin(getUserAuth().currentUser) 
+      localStorage.setItem('user',JSON.stringify(getUserAuth().currentUser));
+    });
 
 }
 const signOutUser = () => {
-  
-setLogin(null);
-
+  setLogin(null);
   localStorage.setItem('user','');
-
 }
 
 useEffect(() => {
