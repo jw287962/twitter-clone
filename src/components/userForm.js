@@ -1,12 +1,17 @@
 import React,{useState,useEffect} from "react";
+import 'material-icons/iconfont/material-icons.css';
+
 
 const Form = (props) => {
 
   const {login} = props;
-
+const toggleFileInput = () => {
+  const fileInput = document.querySelector('#media');
+  fileInput.click();
+  
+}
 
   useEffect(() => {
-    console.log(login);
   })
   if(!login){
     return(
@@ -23,7 +28,8 @@ const Form = (props) => {
       <h3>Hi, {login.displayName.substring(0,login.displayName.indexOf(' '))}</h3>
       <textarea name="tweet" form="userform"></textarea>
       <label htmlFor="media"></label>
-      <span className="material-symbols-outlined"> <input type="file" id="media" name="media" accept="image/png, image/jpeg, video/*"></input></span>
+      <button onClick={toggleFileInput} class="material-icons">image<input type="file" id="media" name="media" accept="image/png, image/jpeg, video/*"></input></button>    
+       
    
       <input  type="submit" value="Tweet"></input>
     </form>

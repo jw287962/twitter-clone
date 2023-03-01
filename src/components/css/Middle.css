@@ -1,3 +1,5 @@
+
+
 main{
   display: flex;
   flex-direction: column;
@@ -16,11 +18,12 @@ nav{
 }
 
 input[type="file"] {
+display: none;
 }
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 48
+
+
+.material-icons{
+outline: none;
+border: none;
+background-color: white;
 }
