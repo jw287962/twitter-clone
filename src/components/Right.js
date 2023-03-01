@@ -6,14 +6,15 @@ const Right = (props) => {
 
   const {setLogin,login} = props;
 
-const signInUser = () => {
-  signInPopUp();
-  setLogin(getUserAuth().currentUser);
+ async function signInUser(){
+  const signedIn = signInPopUp()
+  console.log(signedIn);
+ signedIn.then(()=>   setLogin(getUserAuth().currentUser) );
+
 
   localStorage.setItem('user',JSON.stringify(getUserAuth().currentUser));
 
 }
-
 const signOutUser = () => {
   
 setLogin(null);
