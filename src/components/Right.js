@@ -14,6 +14,14 @@ const signInUser = () => {
 
 }
 
+const signOutUser = () => {
+  
+setLogin(null);
+
+  localStorage.setItem('user','');
+
+}
+
 useEffect(() => {
 
 })
@@ -21,7 +29,7 @@ useEffect(() => {
   if(login){
     return (
       <nav className="searchNav">
-        <button  >Logout</button>
+        <button  onClick={signOutUser}>Logout</button>
           <form>
             <input type='text'></input>
           </form>
