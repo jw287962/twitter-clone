@@ -9,8 +9,14 @@ const Right = (props) => {
 const signInUser = () => {
   signInPopUp();
   setLogin(getUserAuth().currentUser);
+
+  localStorage.setItem('user',JSON.stringify(getUserAuth().currentUser));
+
 }
 
+useEffect(() => {
+
+})
 
   if(login){
     return (
