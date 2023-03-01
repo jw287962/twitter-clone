@@ -1,9 +1,27 @@
 .userNav{
-  width: 200px;
+  width: 230px;
   position: fixed;
   top: 0px;
   left: 0px;
   padding: 0px;
   overflow: hidden;
 
+}
+.userNav>ul{
+  margin: 0px;
+  padding: 10px 20px;
+}
+
+.userNav>ul>li{
+  display: grid;
+  grid-template-columns: 20px 100px;
+  scale: 1.2;
+  text-align: left;
+  margin: 20px 10px;
+  gap: 15px;
+}
+
+h3{
+margin: 0px;
+font-weight: 400;
 }

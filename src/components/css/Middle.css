@@ -6,7 +6,8 @@ main{
   justify-content: start;
   width: 80vw;
   overflow: hidden;
-  padding: 0px 200px;
+  padding: 0px 230px;
+  align-items: center;
   
 }
 
@@ -27,3 +28,8 @@ outline: none;
 border: none;
 background-color: white;
 }
+
+button{
+  width: 100px;
+}
+

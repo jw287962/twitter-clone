@@ -28,8 +28,10 @@ const toggleFileInput = () => {
       <h3>Hi, {login.displayName.substring(0,login.displayName.indexOf(' '))}</h3>
       <textarea name="tweet" form="userform"></textarea>
       <label htmlFor="media"></label>
-      <button onClick={toggleFileInput} class="material-icons">image<input type="file" id="media" name="media" accept="image/png, image/jpeg, video/*"></input></button>    
-       
+      <div>
+        <button onClick={toggleFileInput} className="material-icons">image<input type="file" id="media" name="media" accept="image/png, image/jpeg, video/*"></input></button>
+        
+      </div>
    
       <input  type="submit" value="Tweet"></input>
     </form>
