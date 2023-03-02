@@ -28,16 +28,29 @@ h3{
 margin: 0px;
 font-weight: 400;
 }
-
+.user{
+  display: none;
+}
 
 @media (max-width: 900px) {
 .userNav>ul>li>h3{
   display: none;
+
 }
 .userNav>ul>li{
   margin: 20px 0px;
 }
 .userNav{
   width: 50px;
+  display: flex;
+  flex-direction: column ;
+  justify-content: space-between;
+}
+
+.user{
+  display:inline;
+  background-color: white;
+  border-radius: 30px;
+  width: 30px;
 }
 }
