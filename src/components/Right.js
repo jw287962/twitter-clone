@@ -31,7 +31,7 @@ useEffect(() => {
       <nav className="searchNav">
         <button  onClick={signOutUser}>Logout</button>
           <form>
-            <label className="flexcol"><span className="material-icons" id="searchbar">search</span>  <input type='text'></input></label>
+            <label className="flexrow"><span className="material-icons" id="searchbar">search</span>  <input type='text'></input></label>
            
           </form>
       </nav>
