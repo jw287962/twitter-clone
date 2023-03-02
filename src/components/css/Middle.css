@@ -5,10 +5,12 @@ main{
   flex-direction: column;
   justify-content: start;
   overflow: hidden;
-
   align-items: center;
+  box-sizing: border-box;
 }
-
+form{
+  margin: 10px 0px;
+}
 nav{
   border-left: 1px solid black;
   border-right: 1px solid black;
@@ -35,15 +37,22 @@ button{
   min-width: 500px
 }
 
-/* .leftholder{
-  max-width: var(--rightWidth);
-}
-.rightholder{
-  max-width: var(--rightWidth);
-} */
 
 .tweet{
   background-color: white;
-  min-width: 300px;
+  min-width: 400px;
   border: 2px solid lightblue;
+  border-radius: 30px;
+  min-height: 150px;
 }
+
+.tweet>.tweetuser{
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 900px) {
+ 
+  .content{
+  }
+  }

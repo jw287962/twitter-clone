@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import './css/Right.css'
-import { signInPopUp,getUserAuth } from "./firebase";
+import { signInPopUp,getUserAuth,addUserFirebase} from "./firebase";
 
 import 'material-icons/iconfont/material-icons.css';
 
@@ -14,6 +14,8 @@ const Right = (props) => {
   signedIn.then(()=>  {
       setLogin(getUserAuth().currentUser) 
       localStorage.setItem('user',JSON.stringify(getUserAuth().currentUser));
+      addUserFirebase();
+
     });
 
 }

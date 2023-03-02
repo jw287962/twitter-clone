@@ -54,8 +54,8 @@ if(media){
   addTweetFireBase(userTweetText, "");
  }
 
-//  setUserTweetText('');
-//  setMedia('');
+ setUserTweetText('');
+ setMedia('');
   }
 
 

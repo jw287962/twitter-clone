@@ -10,20 +10,25 @@ useEffect(()=>{
 
       if(media){
             return(
-      <button className="tweet">
-            <h3>@{user} </h3>
+      <div className="tweet">
+            <div className="flexrow tweetuser">
+                  <h3>@{user} </h3>
+                  <p>{date.substring(date.indexOf(' '),21)}</p>
+            </div>
             <p>{text}</p>
               <img src={media} height="100"></img>
-            <p>{date.substring(0,12)}</p>
-      </button>
+      </div>
             )
       }
   return (
-      <button className="tweet">
-            <h3>@{user} </h3>
+      <div className="tweet">
+            <div className="flexrow tweetuser">
+                  <h3>@{user} </h3>
+                  <p>{date.substring(date.indexOf(' '),21)}</p>
+            </div>
+
             <p>{text}</p>
-            <p>{date.substring(0,21)}</p>
-       </button>
+       </div>
   )
 }
 

@@ -6,7 +6,7 @@
   left: 0px;
   padding: 0px;
   overflow: hidden;
-
+  box-sizing: border-box;
 }
 .userNav>ul{
   margin: 0px;
@@ -14,9 +14,11 @@
 }
 
 .userNav>ul>li{
-  display: grid;
+  /* display: grid;
   grid-template-columns: 20px 100px;
-  scale: 1.2;
+  scale: 1.2; */
+  display: flex;
+  flex-shrink: 1;
   text-align: left;
   margin: 20px 10px;
   gap: 15px;
@@ -25,4 +27,17 @@
 h3{
 margin: 0px;
 font-weight: 400;
+}
+
+
+@media (max-width: 900px) {
+.userNav>ul>li>h3{
+  display: none;
+}
+.userNav>ul>li{
+  margin: 20px 0px;
+}
+.userNav{
+  width: 50px;
+}
 }

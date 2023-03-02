@@ -148,6 +148,29 @@ await setDoc(doc(db, user.substring(0,user.indexOf('@')), `tweet${date}`), {
 // });
 }
 
+async function addUserFirebase(){
+
+  const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const user = getAuth().currentUser.email;
+    const date = Date();
+  // Add a new document in collection "cities"
+  await setDoc(doc(db, 'users', user), {
+    user: user.substring(0,user.indexOf('@')),
+    date: date,
+    
+  });
+  
+  // await setDoc(doc(db, 'alltweets', `${user.substring(0,user.indexOf('@'))}${date}`), {
+  //   text: text,
+  //   media: url,
+  //   user: user.substring(0,user.indexOf('@')),
+  //   date: date,
+  
+  // });
+  }
+
+
 async function queryData(tweetsData,setTweetsData){
   console.log('query')
   const app = initializeApp(firebaseConfig);
@@ -176,4 +199,4 @@ setTweetsData(newArray)
 // }
 }
 
-export { signInPopUp,signOutUser,getUserAuth, addTweetFireBase,uploadImage,queryData};
+export { signInPopUp,signOutUser,getUserAuth, addTweetFireBase,uploadImage,queryData, addUserFirebase};
