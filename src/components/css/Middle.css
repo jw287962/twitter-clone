@@ -41,3 +41,9 @@ button{
 .rightholder{
   max-width: var(--rightWidth);
 } */
+
+.tweet{
+  background-color: white;
+  min-width: 300px;
+  border: 2px solid lightblue;
+}

@@ -4,7 +4,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 import { signOut } from "firebase/auth";
 import { getStorage, ref,uploadBytesResumable,uploadBytes , getDownloadURL} from "firebase/storage";
-import { getFirestore,doc, setDoc } from "firebase/firestore";
+import { getFirestore,doc, setDoc ,getDoc, getDocs, collection, query,where} from "firebase/firestore";
 
 
 
@@ -65,21 +65,23 @@ function getUserAuth() {
 function uploadImage(img){
 // Create a root reference
 const storage = getStorage();
-
-// Create a reference to 'mountains.jpg'
-// const mountainsRef = ref(storage, img);
-
-// Create a reference to 'images/mountains.jpg'
+var file = new File([img.file], "name");
+console.log(file);
 const storageRef = ref(storage, img.name);
 const metadata = {
   contentType: 'image/jpeg',
-  user: getAuth().currentUser.email,
 };
 
-const uploadTask = uploadBytesResumable(storageRef, img.file,metadata);
+console.log(img.file);
+const uploadTask = uploadBytesResumable(storageRef,file ,metadata)
+// .then((snapshot) => {
+//   console.log(snapshot);
+//   console.log('Uploaded a blob or file!');
+// });;
 
 uploadTask.on('state_changed', 
   (snapshot) => {
+    console.log(snapshot);
     // Observe state change events such as progress, pause, and resume
     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -128,13 +130,50 @@ const app = initializeApp(firebaseConfig);
   const user = getAuth().currentUser.email;
   const date = Date();
 // Add a new document in collection "cities"
-await setDoc(doc(db, user.substring(0,user.indexOf('@')), "tweet"), {
+await setDoc(doc(db, user.substring(0,user.indexOf('@')), `tweet${date}`), {
   text: text,
   media: url,
   user: user.substring(0,user.indexOf('@')),
   date: date,
+  likes:0 ,
+
 });
+
+// await setDoc(doc(db, 'alltweets', `${user.substring(0,user.indexOf('@'))}${date}`), {
+//   text: text,
+//   media: url,
+//   user: user.substring(0,user.indexOf('@')),
+//   date: date,
+
+// });
 }
 
+async function queryData(tweetsData,setTweetsData){
+  console.log('query')
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-export { signInPopUp,signOutUser,getUserAuth, addTweetFireBase,uploadImage};
+  const q = query(collection(db, "jasonwong287962"));
+  const newArray = [];
+// const docSnap = await getDoc(docRef);
+const querySnapshot = await getDocs(q);
+// return querySnapshot;
+querySnapshot.forEach((doc) => {
+  // doc.data() is never undefined for query doc snapshots
+  // console.log(doc.id, " => ", doc.data());
+   const tweet = doc.data();
+   console.log(tweet);
+   newArray.push(tweet);
+});
+setTweetsData(newArray)
+
+// return querySnapshot;
+// if (docSnap.exists()) {
+//   console.log("Document data:", docSnap.data());
+// } else {
+//   // doc.data() will be undefined in this case
+//   console.log("No such document!");
+// }
+}
+
+export { signInPopUp,signOutUser,getUserAuth, addTweetFireBase,uploadImage,queryData};

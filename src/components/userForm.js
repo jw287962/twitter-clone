@@ -24,10 +24,13 @@ const Form = (props) => {
     // e.preventDefault();
     // console.log(this.readFile(e.target.value)) 
     const reader = new FileReader();
+    console.log(e.target.files)
     reader.addEventListener('load', () => {
       const holder = reader.result;
-      setMedia({file: holder,name:e.target.files[0].name})
+      const imgURL  = URL.createObjectURL(e.target.files[0]);
+      setMedia({file: e.target.files[0] ,name:e.target.files[0].name, load:imgURL})
           // setMedia(reader.result);
+
     })
     console.log(e.target.files);
 
@@ -35,17 +38,24 @@ const Form = (props) => {
   }
   
   const processTweetData = (e) => {
-    
+
     e.preventDefault();
 
-    console.log(e);
+    console.log(media);
+if(media){
+  // const img = document.querySelector('#media');
+  // console.log(img.files[0])
+  // const imgURL  = URL.createObjectURL(img.files[0]);
+  // console.log(imgURL);
+  const uploadTask = uploadImage(media);
+  getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {addTweetFireBase(userTweetText,downloadURL)  });
+}
+ else{
+  addTweetFireBase(userTweetText, "");
+ }
 
-    const uploadTask = uploadImage(media);
-    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {addTweetFireBase(userTweetText,downloadURL) });
-
-
-
-
+//  setUserTweetText('');
+//  setMedia('');
   }
 
 
@@ -70,7 +80,7 @@ const Form = (props) => {
       <label htmlFor="media"></label>
 
       <div className="flexcol">
-      <img className="mediaInput" src={media.file} width="250"></img>
+      <img className="mediaInput" src={media.load} width="250"></img>
 
         <div onClick={toggleFileInput} className="material-icons">image
               <input onChange={handleFileInput} type="file" id="media" name="media" accept="image/png, image/jpeg, video/*, gif/*" ></input>
