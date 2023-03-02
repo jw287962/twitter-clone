@@ -1,10 +1,12 @@
 import React,{useState,useEffect} from "react";
 import 'material-icons/iconfont/material-icons.css';
-
-
+import { uploadImage,addTweetFireBase } from "./firebase";
+import {getDownloadURL} from "firebase/storage";
+import { getAuth } from "firebase/auth";
 const Form = (props) => {
 
   const {login} = props;
+
   const [userTweetText,setUserTweetText] = useState('');
   const [media,setMedia] = useState('');
 
@@ -13,11 +15,6 @@ const Form = (props) => {
     fileInput.click();
   }
 
-  const processTweetData = (e) => {
-    e.preventDefault();
-
-    console.log(e);
-  }
   
   const textAreaInput = (e) => {
     setUserTweetText(e.target.value);
@@ -28,7 +25,8 @@ const Form = (props) => {
     // console.log(this.readFile(e.target.value)) 
     const reader = new FileReader();
     reader.addEventListener('load', () => {
-      setMedia(reader.result)
+      const holder = reader.result;
+      setMedia({file: holder,name:e.target.files[0].name})
           // setMedia(reader.result);
     })
     console.log(e.target.files);
@@ -36,7 +34,24 @@ const Form = (props) => {
     reader.readAsDataURL(e.target.files[0]);
   }
   
+  const processTweetData = (e) => {
+    
+    e.preventDefault();
+
+    console.log(e);
+
+    const uploadTask = uploadImage(media);
+    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {addTweetFireBase(userTweetText,downloadURL) });
+
+
+
+
+  }
+
+
+
   useEffect(() => {
+    console.log(getAuth().currentUser)
   })
   if(!login){
     return(
@@ -55,7 +70,7 @@ const Form = (props) => {
       <label htmlFor="media"></label>
 
       <div className="flexcol">
-      <img className="mediaInput" src={media} width="250"></img>
+      <img className="mediaInput" src={media.file} width="250"></img>
 
         <div onClick={toggleFileInput} className="material-icons">image
               <input onChange={handleFileInput} type="file" id="media" name="media" accept="image/png, image/jpeg, video/*, gif/*" ></input>
