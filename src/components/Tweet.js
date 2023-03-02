@@ -1,12 +1,26 @@
 
 import React,{useState,useEffect} from "react";
+import { Markup } from 'interweave';
 const Tweet = (props) => {
 
-      const {text,user,media,date} = props
+      const {text,user,media,date} = props;
+      const [origText,setNewText] = useState(text);
+
 
 useEffect(()=>{
-      console.log(media);
+      const urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+      if(origText ==text && urlRegex.test(text)){
+            setNewText(linkify(origText));
+      }
+
 })
+
+function linkify(text) {
+      const urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+      return text.replace(urlRegex, function(url) {
+          return '<a href="' + url + '">' + url + '</a>';
+      });
+  }
 
       if(media){
             return(
@@ -15,7 +29,8 @@ useEffect(()=>{
                   <h3>@{user} </h3>
                   <p>{date.substring(date.indexOf(' '),21)}</p>
             </div>
-            <p>{text}</p>
+            <Markup content = {origText}></Markup>
+
               <img src={media} height="100"></img>
       </div>
             )
@@ -27,7 +42,7 @@ useEffect(()=>{
                   <p>{date.substring(date.indexOf(' '),21)}</p>
             </div>
 
-            <p>{text}</p>
+            <Markup content = {origText}></Markup>
        </div>
   )
 }
