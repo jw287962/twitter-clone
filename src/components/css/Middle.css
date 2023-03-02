@@ -11,6 +11,15 @@ main{
 }
 form{
   margin: 10px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 90%;
+}
+textarea{
+  min-height: 50px;
+  min-width: 40%;
 }
 nav{
   border-left: 1px solid black;
@@ -37,7 +46,16 @@ button{
 .content{
   min-width: 500px
 }
+#userform>input[type="submit"]{
+  background-color: white;
+  background-color: lightblue;
+  border: none;
+  border-radius: 30px;
+  padding: 5px 10px;
+  font-weight: bolder;
+  width: 100px;
 
+}
 
 .tweet{
   background-color: white;
@@ -54,7 +72,9 @@ button{
 }
 
 @media (max-width: 900px) {
- 
+  textarea{
+    min-width: 70%;
+  }
   .content{
     align-items: flex-start;
     padding-left: clamp(80px,10%,12%);
