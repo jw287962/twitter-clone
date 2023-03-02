@@ -7,6 +7,7 @@ main{
   overflow: hidden;
   align-items: center;
   box-sizing: border-box;
+  width: 100%;
 }
 form{
   margin: 10px 0px;
@@ -43,6 +44,7 @@ button{
   min-width: 400px;
   border: 2px solid lightblue;
   border-radius: 30px;
+  margin-top: 5px;
   min-height: 150px;
 }
 
@@ -54,5 +56,33 @@ button{
 @media (max-width: 900px) {
  
   .content{
+    align-items: flex-start;
+    padding-left: clamp(80px,10%,12%);
+  }
+ 
+  form{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
   }
   }
+
+  @media (max-width: 800px) {
+   
+    .searchNav{
+      display: none;
+     }
+    .tweet,form{
+      min-width: 95%;
+    }
+  }
+  @media (max-width: 600px) {
+ 
+    .content{
+      max-width: 550px;
+    }
+   
+ 
+  
+    }
