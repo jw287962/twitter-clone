@@ -1,5 +1,6 @@
+
 .userNav{
-  width: 230px;
+  width: var(--leftWidth);
   position: fixed;
   top: 0px;
   left: 0px;

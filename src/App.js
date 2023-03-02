@@ -29,7 +29,9 @@ function App() {
   return (
     <div className="App" >
         <Left login={login}></Left>
+        <div className="leftholder"></div>
         <Middle login={login}></Middle>
+      <div className="rightholder"></div>
         <Right  login={login} setLogin={setLogin}></Right>
     </div>
   );

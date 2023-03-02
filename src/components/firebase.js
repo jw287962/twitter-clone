@@ -60,5 +60,9 @@ function getUserAuth() {
 }
 
 
+function addTweetFireBase(){
 
-export { signInPopUp,signOutUser,getUserAuth};
+}
+
+
+export { signInPopUp,signOutUser,getUserAuth, addTweetFireBase};

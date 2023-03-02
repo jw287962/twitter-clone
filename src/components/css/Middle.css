@@ -4,11 +4,9 @@ main{
   display: flex;
   flex-direction: column;
   justify-content: start;
-  width: 80vw;
   overflow: hidden;
-  padding: 0px 230px;
+
   align-items: center;
-  
 }
 
 nav{
@@ -33,3 +31,13 @@ button{
   width: 100px;
 }
 
+.content{
+  min-width: 500px
+}
+
+/* .leftholder{
+  max-width: var(--rightWidth);
+}
+.rightholder{
+  max-width: var(--rightWidth);
+} */

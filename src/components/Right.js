@@ -2,6 +2,8 @@ import React,{useState,useEffect} from "react";
 import './css/Right.css'
 import { signInPopUp,getUserAuth } from "./firebase";
 
+import 'material-icons/iconfont/material-icons.css';
+
 const Right = (props) => {
 
   const {setLogin,login} = props;
@@ -29,7 +31,8 @@ useEffect(() => {
       <nav className="searchNav">
         <button  onClick={signOutUser}>Logout</button>
           <form>
-            <input type='text'></input>
+            <label className="flexcol"><span className="material-icons" id="searchbar">search</span>  <input type='text'></input></label>
+           
           </form>
       </nav>
     )

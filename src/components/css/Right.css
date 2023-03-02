@@ -1,6 +1,26 @@
 .searchNav{
   position: fixed;
   padding: 0px;
-  width: 200px;
+  width: var(--rightWidth);
   right: 0px
+}
+
+input[type="text"]{
+  max-width: 160px;
+  padding: 9px 30px;
+  border-radius: 30px;
+  border: 1px solid black;
+}
+button{
+  margin: 10px;
+}
+
+#searchbar{
+  position: relative;
+  left: 30px;
+  top: 8px;
+  background-color:unset;
+}
+label{
+  position: relative;
 }

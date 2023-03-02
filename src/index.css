@@ -1,3 +1,7 @@
+:root{
+  --leftWidth: 230px;
+  --rightWidth: 250px;
+}
 
 
 body {
@@ -27,3 +31,26 @@ li{
 }
 
 
+button,input[type="submit"]{
+  background-color: white;
+  background-color: lightblue;
+  border: none;
+  border-radius: 30px;
+  padding: 5px 10px;
+  font-weight: bolder;
+  
+
+}
+
+
+/* HELPER class */
+
+.flexcol{
+  display: flex;
+  flex-direction: column;
+}
+
+.flexrow{
+  display: flex;
+  flex-direction: row;
+}
