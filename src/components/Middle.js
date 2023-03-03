@@ -14,6 +14,7 @@ const Middle = (props) => {
   console.log(tweetsData);
   if(tweetsData.length === 0){
     // querySnapshotUpdate();
+      console.log('query data again NO')
     queryData(tweetsData,setTweetsData);
   }
 

@@ -175,20 +175,33 @@ async function queryData(tweetsData,setTweetsData){
   console.log('query')
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+  const allUsers =  query(collection(db,'users'));
+  const allUserSnapshot = await getDocs(allUsers);
+  // prob better when more users, to change to followers or something instead of all users or if users > 30
+  const usersArray = [];
+   allUserSnapshot.forEach((doc) => {
+      usersArray.push(doc.data());
+   })
+const newArray = [];
 
-  const q = query(collection(db, "jasonwong287962"));
-  const newArray = [];
-// const docSnap = await getDoc(docRef);
-const querySnapshot = await getDocs(q);
-// return querySnapshot;
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  // console.log(doc.id, " => ", doc.data());
-   const tweet = doc.data();
-   console.log(tweet);
-   newArray.push(tweet);
-});
+   usersArray.forEach(async element => {
+            const q = query(collection(db, element.user));
+          
+        // const docSnap = await getDoc(docRef);
+        const querySnapshot = await getDocs(q);
+        // return querySnapshot;
+        querySnapshot.forEach((doc) => {
+          // doc.data() is never undefined for query doc snapshots
+          // console.log(doc.id, " => ", doc.data());
+          const tweet = doc.data();
+          console.log(tweet);
+          newArray.push(tweet);
+        });
+
 setTweetsData(newArray)
+   });
+
+  
 
 // return querySnapshot;
 // if (docSnap.exists()) {
