@@ -26,9 +26,7 @@ const Middle = (props) => {
 
 
   function isBottom(e) {
-    // console.log(loadLimiter);
-    // console.log(tweetsData.length)
-    // console.log(loadLimiter);
+  
     if(tweetsData.length <= loadLimiter){
       return;
     }
@@ -38,15 +36,13 @@ const Middle = (props) => {
       }
     }
    else if( window.pageYOffset >= window.innerHeight){
-    // Math.abs(window.outerHeight - window.pageYOffset)
-        
       addFiveLimit();
     }
-    console.log(document.body.scrollHeight,  'scrollehight of body');
-    console.log(window.innerHeight , 'innerheight screen')
-    console.log(window.outerHeight, ' outerheight, ')
+    // console.log(document.body.scrollHeight,  'scrollehight of body');
+    // console.log(window.innerHeight , 'innerheight screen')
+    // console.log(window.outerHeight, ' outerheight, ')
 
-    console.log(window.pageYOffset);
+    // console.log(window.pageYOffset);
 
   }
  useEffect(() => {

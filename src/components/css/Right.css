@@ -4,7 +4,12 @@
   width: var(--rightWidth);
   right: 0px
 }
-
+.searchNav>*{
+  position: fixed;
+}
+.searchNav>form{
+    
+}
 input[type="text"]{
   max-width: 160px;
   padding: 9px 30px;

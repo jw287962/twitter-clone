@@ -6,15 +6,15 @@
   left: 0px;
   padding: 0px;
   overflow: hidden;
-  box-sizing: border-box;
   z-index: 99;
   background-color: white;
-  border-left: none;
+  border: none;
+  /* height: 100%; */
 }
 .userNav>ul{
   margin: 0px;
   padding: 10px 20px;
-  
+  position: fixed;
 }
 
 .userNav>ul>li{

@@ -31,21 +31,25 @@ useEffect(() => {
   if(login){
     return (
       <nav className="searchNav">
-        <button  onClick={signOutUser}>Logout</button>
-          <form>
-            <label className="flexrow"><span className="material-icons" id="searchbar">search</span>  <input type='text'></input></label>
-           
-          </form>
+        <div>
+          <button  onClick={signOutUser}>Logout</button>
+            <form>
+              <label className="flexrow"><span className="material-icons" id="searchbar">search</span>  <input type='text'></input></label>
+          
+            </form>
+        </div>
       </nav>
     )
   }
 
   return (
     <nav className="searchNav">
-      <button onClick={signInUser} >Login</button>
-        <form>
-          <input type='text'></input>
-        </form>
+      <div>
+        <button onClick={signInUser} >Login</button>
+          <form>
+            <input type='text'></input>
+          </form>
+      </div>
     </nav>
   )
 }

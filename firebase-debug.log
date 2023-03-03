@@ -1,0 +1,15 @@
+[debug] [2023-03-03T06:37:09.569Z] ----------------------------------------------------------------------
+[debug] [2023-03-03T06:37:09.570Z] Command:       /home/jason/.nvm/versions/node/v16.17.0/bin/node /home/jason/.nvm/versions/node/v16.17.0/bin/firebase deploy
+[debug] [2023-03-03T06:37:09.570Z] CLI Version:   11.24.0
+[debug] [2023-03-03T06:37:09.570Z] Platform:      linux
+[debug] [2023-03-03T06:37:09.570Z] Node Version:  v16.17.0
+[debug] [2023-03-03T06:37:09.571Z] Time:          Fri Mar 03 2023 00:37:09 GMT-0600 (Central Standard Time)
+[debug] [2023-03-03T06:37:09.571Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-03-03T06:37:09.572Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2023-03-03T06:37:09.630Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-03-03T06:37:09.631Z] > authorizing via signed-in user (jasonwong287962@gmail.com)
+[debug] [2023-03-03T06:37:09.631Z] [iam] checking project twitter-clone-33714 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-03-03T06:37:09.631Z] > refreshing access token with scopes: []
+[debug] [2023-03-03T06:37:09.632Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-03-03T06:37:09.632Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]

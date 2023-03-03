@@ -10,6 +10,11 @@ main{
   align-items: center;
   box-sizing: border-box;
   flex-grow: 1;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+.content{
+  min-width: 450px
 }
 form{
   margin: 10px 0px;
@@ -45,9 +50,7 @@ button{
   width: 100px;
 }
 
-.content{
-  min-width: 450px
-}
+
 #userform>input[type="submit"]{
   background-color: white;
   background-color: lightblue;
@@ -62,8 +65,9 @@ button{
 .tweet{
   background-color: white;
   width: 100%;
+  padding: 10px;
   border: 2px solid black;
-  border-left: 1px solid black;
+  border-left: 2px solid black;
   border-bottom: 0px;
   min-height: 150px;
   display: flex;
