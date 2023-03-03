@@ -64,9 +64,7 @@ button{
   background-color: white;
   width: 100%;
   padding: 10px;
-  border: 2px solid black;
-  border-left: none;
-  border-bottom: 0px;
+  outline: 2px solid black;
   min-height: 150px;
   display: flex;
   flex-wrap: wrap;
@@ -103,7 +101,6 @@ h2{
   }
   .content{
     align-items: flex-start;
-    border-right: none;
   }
  
   .content>form{
@@ -112,11 +109,15 @@ h2{
     flex-direction: column;
     min-width:  var(--userTweetInputWidth);
   }
+  
   }
 
   @media (max-width: 800px) {
     :root{
       --userTweetInputWidth: clamp(450px,90%,100%);
+    }
+    main{
+      border-right: 1px solid black;
     }
     .searchNav{
       display: none;
@@ -129,10 +130,14 @@ h2{
     
  
     .content{
-      max-width: 550px;
+    outline: none;
+    border: 1px solid black;
+    border-right: none;
+    border-top: none;
+      max-width: 90%;
+
     }
    
-    .content>form{
-    }
-  
+   
+   
     }
