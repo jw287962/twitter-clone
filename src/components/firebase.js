@@ -194,10 +194,9 @@ const newArray = [];
           // doc.data() is never undefined for query doc snapshots
           // console.log(doc.id, " => ", doc.data());
           const tweet = doc.data();
-          console.log(tweet);
           newArray.push(tweet);
         });
-
+// console.log(newArray);
 setTweetsData(newArray)
    });
 

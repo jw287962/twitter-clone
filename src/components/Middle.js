@@ -7,18 +7,63 @@ import { getUserAuth,queryData } from "./firebase";
 const Middle = (props) => {
 
     const [tweetsData,setTweetsData] = useState([]);
-
+    const [tweetsDataSliced,setTweetsDataSliced] = useState([]);
+    const [loadLimiter, setLoadLimiter] = useState(5);
+    
+    const addFiveLimit = () => {
+      setLoadLimiter(loadLimiter+5);
+    }
 
   const {login} = props;
+  useEffect(() => {
+    console.log(tweetsData);
+    if(tweetsData.length <=loadLimiter){
+      // querySnapshotUpdate();
+        console.log('query data again NO')
+      queryData(tweetsData,setTweetsData);
+    }
+  },[loadLimiter])
+
+
+  function isBottom(e) {
+    // console.log(loadLimiter);
+    // console.log(tweetsData.length)
+    // console.log(loadLimiter);
+    if(tweetsData.length <= loadLimiter){
+      return;
+    }
+    if(window.innerHeight*2 >= document.body.scrollHeight){
+      if(Math.abs(document.body.scrollHeight-  window.innerHeight- window.pageYOffset) <=8){
+        addFiveLimit();
+      }
+    }
+   else if( window.pageYOffset >= window.innerHeight){
+    // Math.abs(window.outerHeight - window.pageYOffset)
+        
+      addFiveLimit();
+    }
+    console.log(document.body.scrollHeight,  'scrollehight of body');
+    console.log(window.innerHeight , 'innerheight screen')
+    console.log(window.outerHeight, ' outerheight, ')
+
+    console.log(window.pageYOffset);
+
+  }
  useEffect(() => {
-  console.log(tweetsData);
-  if(tweetsData.length === 0){
+    document.addEventListener('scroll',isBottom);
+
+  if(tweetsDataSliced.length !== loadLimiter){
+    console.log('slice data');
     // querySnapshotUpdate();
-      console.log('query data again NO')
-    queryData(tweetsData,setTweetsData);
+      setTweetsDataSliced(tweetsData.slice(0,loadLimiter));
   }
 
- })
+
+ },[tweetsData,loadLimiter])
+
+ useEffect(()=> {
+
+ },)
 // async function querySnapshotUpdate(){
 //   const querySnapshot = await queryData(tweetsData,setTweetsData);
 //   const newArray = [];
@@ -36,7 +81,8 @@ const Middle = (props) => {
     <main className="content">
       <Form login={login}></Form>
       {/* text,user,media,date */}
-      {tweetsData.map((tweet) => {
+      {tweetsDataSliced.map((tweet) => {
+       
       return(
         
           <Tweet key={tweet.user +tweet.date.substring(10,23)}text={tweet.text} user={tweet.user} media ={tweet.media} date = {tweet.date}></Tweet>
