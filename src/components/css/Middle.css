@@ -16,6 +16,7 @@ main{
 .content{
   min-width: 450px
 }
+/* top form section */
 form{
   margin: 10px 0px;
   display: flex;
@@ -26,15 +27,10 @@ form{
 }
 textarea{
   min-height: 50px;
-  min-width: 40%;
-}
-nav{
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  height: 100vh;
-  padding: 50px;
+  min-width: 80%;
 }
 
+/* for img file picker */
 input[type="file"] {
 display: none;
 }
@@ -62,12 +58,14 @@ button{
 
 }
 
+
+/* TWEETS  */
 .tweet{
   background-color: white;
   width: 100%;
   padding: 10px;
   border: 2px solid black;
-  border-left: 2px solid black;
+  border-left: none;
   border-bottom: 0px;
   min-height: 150px;
   display: flex;
@@ -83,12 +81,16 @@ button{
   justify-content: space-between;
 }
 
+
+/* media queries */
+
 @media (max-width: 900px) {
   textarea{
     min-width: 70%;
   }
   .content{
     align-items: flex-start;
+    border-right: none;
   }
  
   .content>form{
