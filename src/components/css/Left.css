@@ -1,16 +1,20 @@
 
 .userNav{
   width: var(--leftWidth);
-  position: fixed;
+  /* position: fixed; */
   top: 0px;
   left: 0px;
   padding: 0px;
   overflow: hidden;
   box-sizing: border-box;
+  z-index: 99;
+  background-color: white;
+  border-left: none;
 }
 .userNav>ul{
   margin: 0px;
   padding: 10px 20px;
+  
 }
 
 .userNav>ul>li{

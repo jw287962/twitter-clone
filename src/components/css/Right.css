@@ -1,5 +1,5 @@
 .searchNav{
-  position: fixed;
+  /* position: fixed; */
   padding: 0px;
   width: var(--rightWidth);
   right: 0px
