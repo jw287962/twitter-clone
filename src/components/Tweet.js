@@ -26,19 +26,19 @@ function linkify(text) {
             return(
       <div className="tweet">
             <div className="flexrow tweetuser">
-                  <h3>@{user} </h3>
+                  <h2>@{user} </h2>
                   <p>{date.substring(date.indexOf(' '),21)}</p>
             </div>
             <Markup content = {origText}></Markup>
 
-              <img src={media} height="100"></img>
+              <img src={media} ></img>
       </div>
             )
       }
   return (
       <div className="tweet">
             <div className="flexrow tweetuser">
-                  <h3>@{user} </h3>
+                  <h2>@{user} </h2>
                   <p>{date.substring(date.indexOf(' '),21)}</p>
             </div>
 
