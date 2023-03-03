@@ -171,7 +171,8 @@ async function addUserFirebase(){
   }
 
 
-async function queryData(tweetsData,setTweetsData){
+async function queryData(tweetsData,setTweetsData,setLoadingData){
+  setLoadingData(true);
   console.log('query')
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
@@ -198,6 +199,9 @@ const newArray = [];
         });
 // console.log(newArray);
 setTweetsData(newArray)
+
+setLoadingData(false);
+
    });
 
   

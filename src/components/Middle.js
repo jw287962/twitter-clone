@@ -9,6 +9,7 @@ const Middle = (props) => {
     const [tweetsData,setTweetsData] = useState([]);
     const [tweetsDataSliced,setTweetsDataSliced] = useState([]);
     const [loadLimiter, setLoadLimiter] = useState(5);
+    const [loadingData, setLoadingData] = useState(false);
     
     const addFiveLimit = () => {
       setLoadLimiter(loadLimiter+5);
@@ -20,7 +21,7 @@ const Middle = (props) => {
     if(tweetsData.length <=loadLimiter){
       // querySnapshotUpdate();
         console.log('query data again NO')
-      queryData(tweetsData,setTweetsData);
+      queryData(tweetsData,setTweetsData,setLoadingData);
     }
   },[loadLimiter])
 
@@ -82,10 +83,9 @@ const Middle = (props) => {
       return(
         
           <Tweet key={tweet.user +tweet.date.substring(10,23)}text={tweet.text} user={tweet.user} media ={tweet.media} date = {tweet.date}></Tweet>
-      )
-      })
-
-      }
+        )
+        })}
+    {<div id={!loadingData? 'hidden': 'loader'} > </div>}
     </main>
   )
 }
