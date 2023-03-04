@@ -171,6 +171,8 @@ async function addUserFirebase(){
   }
 
 
+  // add seconds instad of just minte in data collection name and query by date or something
+
 async function queryData(tweetsData,setTweetsData,setLoadingData){
   setLoadingData(true);
   console.log('query')
