@@ -9,10 +9,14 @@ const [viewport,setViewport] = useState(window.innerWidth)
 
   useEffect(() => {
     window.addEventListener("resize", findViewport);
+    const nav = document.querySelector('.userNav');
+
     if(viewport >= 501){
-      const nav = document.querySelector('.userNav');
       nav.style.visibility = 'visible'; 
     }
+   else {
+    nav.style.visibility = 'hidden'; 
+   }
   })
   const findViewport = () => {
     setViewport(window.innerWidth);
@@ -34,10 +38,8 @@ const [viewport,setViewport] = useState(window.innerWidth)
   const nav = document.querySelector('.userNav');
   const main = document.querySelector('main');
 
-  main.classList.toggle('darkness');
-  menu ? 
-  nav.style.visibility = 'visible' : 
-  nav.style.visibility = 'hidden' ;
+  menu ? main.classList.add('darkness'): main.classList.remove('darkness');
+  menu ?  nav.style.visibility = 'visible' : nav.style.visibility = 'hidden' ;
   setMenu(!menu);
  }
   return (
