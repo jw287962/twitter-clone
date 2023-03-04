@@ -1,5 +1,6 @@
 :root{
   --userTweetInputWidth: 400px;
+  --border: 1px solid grey;
 }
 
 main{
@@ -10,8 +11,8 @@ main{
   align-items: center;
   box-sizing: border-box;
   flex-grow: 1;
-  border-left: 2px solid black;
-  border-right: 2px solid black;
+  border-left: var(--border);
+  border-right: var(--border);
 
 }
 .content{
@@ -67,7 +68,7 @@ button{
   background-color: white;
   width: 100%;
   padding: 10px;
-  outline: 2px solid black;
+  outline: var(--border);
   min-height: 150px;
   display: flex;
   flex-wrap: wrap;
@@ -145,8 +146,6 @@ h2{
       max-width: 90%;
         
     }
-   
-   
    
     }
 

@@ -17,7 +17,7 @@ const [viewport,setViewport] = useState(window.innerWidth)
    else {
     nav.style.visibility = 'hidden'; 
    }
-  })
+  },[viewport])
   const findViewport = () => {
     setViewport(window.innerWidth);
   }
@@ -37,6 +37,9 @@ const [viewport,setViewport] = useState(window.innerWidth)
  const toggleMenu = () => {
   const nav = document.querySelector('.userNav');
   const main = document.querySelector('main');
+  const mainNav = document.querySelector('.mainNavList');
+
+  !menu ? mainNav.classList.add('widthTrans'): mainNav.classList.remove('widthTrans');
 
   menu ? main.classList.add('darkness'): main.classList.remove('darkness');
   menu ?  nav.style.visibility = 'visible' : nav.style.visibility = 'hidden' ;
@@ -45,7 +48,7 @@ const [viewport,setViewport] = useState(window.innerWidth)
   return (
     <nav className="userNav" aria-label="User Settings">
       TOOT
-       <ul >
+       <ul className="mainNavList" >
         <img className="logo" alt="logo"></img>
           <li>    <span className="material-icons">home</span> <h3>Home</h3></li>
           <li> <span className="material-icons">search</span> <h3>Explore</h3></li>
