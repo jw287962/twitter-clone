@@ -10,9 +10,10 @@ const [viewport,setViewport] = useState(window.innerWidth)
   useEffect(() => {
     window.addEventListener("resize", findViewport);
     const nav = document.querySelector('.userNav');
-
+    const main = document.querySelector('main');
     if(viewport >= 501){
       nav.style.visibility = 'visible'; 
+      main.classList.remove('darkness')
     }
    else {
     nav.style.visibility = 'hidden'; 
