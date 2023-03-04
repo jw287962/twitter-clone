@@ -4,6 +4,19 @@ import 'material-icons/iconfont/material-icons.css';
 import { signInPopUp,getUserAuth,addUserFirebase} from "./firebase";
 const Left = (props) => {
   const {setLogin,login} = props;
+  const [menu, setMenu] = useState(true);
+const [viewport,setViewport] = useState(window.innerWidth)
+
+  useEffect(() => {
+    window.addEventListener("resize", findViewport);
+    if(viewport >= 501){
+      const nav = document.querySelector('.userNav');
+      nav.style.visibility = 'visible'; 
+    }
+  })
+  const findViewport = () => {
+    setViewport(window.innerWidth);
+  }
 
   async function signInUser(){
     if(login == null){
@@ -15,11 +28,21 @@ const Left = (props) => {
     
         });
     }
-   
- 
+ }
+
+ const toggleMenu = () => {
+  const nav = document.querySelector('.userNav');
+  const main = document.querySelector('main');
+
+  main.classList.toggle('darkness');
+  menu ? 
+  nav.style.visibility = 'visible' : 
+  nav.style.visibility = 'hidden' ;
+  setMenu(!menu);
  }
   return (
     <nav className="userNav" aria-label="User Settings">
+      TOOT
        <ul >
         <img className="logo" alt="logo"></img>
           <li>    <span className="material-icons">home</span> <h3>Home</h3></li>
@@ -30,7 +53,7 @@ const Left = (props) => {
           <li> <span className="material-icons">face</span> <h3>Profile</h3></li>
           <li> <span className="material-icons">more</span> <h3>More</h3></li>
         </ul>
-
+        <button className="menu" onClick={toggleMenu}><span className="material-icons">menu</span></button>
         <button className="user" onClick={signInUser}><span className="material-icons">person</span></button>
     </nav>
   )

@@ -1,7 +1,6 @@
 /* USER NAV ON LEFT */
 .userNav{
   width: var(--leftWidth);
-  /* position: fixed; */
   top: 0px;
   left: 0px;
   padding: 0px;
@@ -9,7 +8,9 @@
   z-index: 99;
   background-color: white;
   border: none;
-  /* height: 100%; */
+  flex-grow: 1;
+  min-width: 50px;
+  ;
 }
 .userNav>ul{
   margin: 0px;
@@ -19,8 +20,6 @@
 
 .userNav>button{
   position: fixed;
-  bottom: 10px;
-
 }
 
 .userNav>ul>li{
@@ -38,20 +37,29 @@ h3{
 margin: 0px;
 font-weight: 400;
 }
-.user{
+.user,.menu{
   display: none;
+  background-color: unset;
+  
 }
 
+.hidden{
+  visibility: hidden;
+}
+.darkness{
+  filter: brightness(50%);
+}
 @media (max-width: 900px) {
 .userNav>ul>li>h3{
   display: none;
 
 }
 .userNav>ul>li{
-  margin: 20px 0px;
+  margin: 25px 0px;
 }
 .userNav{
-  width: 50px;
+
+  min-width: 50px;
   display: flex;
   flex-direction: column ;
   justify-content: space-between;
@@ -59,8 +67,47 @@ font-weight: 400;
 /* user button on bottom left */
 .user{
   display:inline;
-  background-color: white;
   border-radius: 30px;
   width: 30px;
+  bottom: 10px;
+
 }
+
+
+}
+@media (max-width: 500px) {
+  .userNav{
+    position: fixed;
+visibility: hidden;
+    z-index: 99;
+    background-color: white;
+    }
+    ul{
+      height: 100vh;
+      padding: 10px;
+      background-color: white;
+      border-right: 1px solid black;
+    }
+    .userNav>ul>li>h3{
+      display: block;
+    }
+   
+  .menu{
+    box-sizing: border-box;
+    border-bottom: 1px solid black;
+    display: flex;
+    position: fixed;
+    width: 100vw;
+    background-color: white;
+    margin: 0px;
+   padding: 10px;
+   border-radius: 0px;
+   visibility: visible;
+  }
+  .content{
+    padding-top: 10px;
+
+  }
+  
+  
 }

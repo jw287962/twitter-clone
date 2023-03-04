@@ -12,18 +12,21 @@ main{
   flex-grow: 1;
   border-left: 2px solid black;
   border-right: 2px solid black;
+
 }
 .content{
   min-width: 450px
 }
 /* top form section */
 form{
-  margin: 10px 0px;
+  margin: 0px 0px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-width: 90%;
+  background-color: white;
 }
 textarea{
   min-height: 50px;
@@ -100,7 +103,7 @@ h2{
     min-width: 70%;
   }
   .content{
-    align-items: flex-start;
+    /* align-items: flex-start; */
   }
  
   .content>form{
@@ -125,6 +128,11 @@ h2{
     .tweet,form{
       min-width: 95%;
     }
+    .userNav{
+      flex-grow: unset;
+      flex-shrink: unset;
+      width: 50px;
+    }
   }
   @media (max-width: 600px) {
     
@@ -135,7 +143,7 @@ h2{
     border-right: none;
     border-top: none;
       max-width: 90%;
-
+        
     }
    
    
@@ -143,6 +151,10 @@ h2{
     }
 
     #loader{
+       /* display: flex;
+       justify-content: center;
+       align-items: center;
+        */
       border: 1rem solid black;
       border-radius: 50%;
       border-top: 1rem solid white;
