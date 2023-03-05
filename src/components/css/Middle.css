@@ -19,7 +19,7 @@ main{
   min-width: 450px
 }
 /* top form section */
-form{
+.tweetform{
   margin: 0px 0px;
   padding: 40px;
   display: flex;

@@ -74,7 +74,7 @@ if(media){
   }
 
   return (
-    <form id="userform">
+    <form className="tweetform" id="userform">
       <h3>Hi, {login.displayName.substring(0,login.displayName.indexOf(' '))}</h3>
       <textarea name="tweet" form="userform" value={userTweetText} onChange={textAreaInput}></textarea>
       <label htmlFor="media"></label>
