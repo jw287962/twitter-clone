@@ -4,7 +4,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 import { signOut } from "firebase/auth";
 import { getStorage, ref,uploadBytesResumable,uploadBytes , getDownloadURL} from "firebase/storage";
-import { getFirestore,doc, setDoc ,getDoc, getDocs, collection, query,where} from "firebase/firestore";
+import { getFirestore,doc, setDoc ,getDoc, getDocs, collection, query,where,} from "firebase/firestore";
 
 
 
@@ -129,8 +129,10 @@ const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const user = getAuth().currentUser.email;
   const date = Date();
-// Add a new document in collection "cities"
-await setDoc(doc(db, user.substring(0,user.indexOf('@')), `tweet${date}`), {
+// Add a new document in collection jasonwong28798
+// await setDoc(doc(db, user.substring(0,user.indexOf('@')), `tweet${date}`), {
+  // const currentUser = collection(db, 'users', `${user.substring(0,user.indexOf('@'))}`,'tweets',`${date}`)
+  await setDoc(doc(db, 'users', `${user}`,'tweets',`${date}`), {
   text: text,
   media: url,
   user: user.substring(0,user.indexOf('@')),
@@ -156,9 +158,8 @@ async function addUserFirebase(){
     const date = Date();
   // Add a new document in collection "cities"
   await setDoc(doc(db, 'users', user), {
-    user: user.substring(0,user.indexOf('@')),
+    user: user,
     date: date,
-    
   });
   
   // await setDoc(doc(db, 'alltweets', `${user.substring(0,user.indexOf('@'))}${date}`), {
@@ -178,6 +179,7 @@ async function queryData(tweetsData,setTweetsData,setLoadingData){
   console.log('query')
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+
   const allUsers =  query(collection(db,'users'));
   const allUserSnapshot = await getDocs(allUsers);
   // prob better when more users, to change to followers or something instead of all users or if users > 30
@@ -188,18 +190,21 @@ async function queryData(tweetsData,setTweetsData,setLoadingData){
 const newArray = [];
 
    usersArray.forEach(async element => {
-            const q = query(collection(db, element.user));
+    console.log(element);
+            const q = query(collection(db, 'users',element.user,'tweets'));
           
         // const docSnap = await getDoc(docRef);
-        const querySnapshot = await getDocs(q);
+        const tweetsSnapshot = await getDocs(q);
+        console.log(tweetsSnapshot)
         // return querySnapshot;
-        querySnapshot.forEach((doc) => {
+        tweetsSnapshot.forEach((doc) => {
           // doc.data() is never undefined for query doc snapshots
           // console.log(doc.id, " => ", doc.data());
-          const tweet = doc.data();
-          newArray.push(tweet);
+          console.log(doc.data());
+
+          newArray.push(doc.data());
         });
-// console.log(newArray);
+console.log(newArray);
 setTweetsData(newArray)
 
 setLoadingData(false);
