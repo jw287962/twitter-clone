@@ -64,68 +64,68 @@ function getUserAuth() {
 
 function uploadImage(img){
 // Create a root reference
-const storage = getStorage();
-var file = new File([img.file], "name");
-console.log(file);
-const storageRef = ref(storage, img.name);
-const metadata = {
-  contentType: 'image/jpeg',
-};
+  const storage = getStorage();
+  var file = new File([img.file], "name");
+  console.log(file);
+  const storageRef = ref(storage, img.name);
+  const metadata = {
+    contentType: 'image/jpeg',
+  };
 
-console.log(img.file);
-const uploadTask = uploadBytesResumable(storageRef,file ,metadata)
-// .then((snapshot) => {
-//   console.log(snapshot);
-//   console.log('Uploaded a blob or file!');
-// });;
+  console.log(img.file);
+  const uploadTask = uploadBytesResumable(storageRef,file ,metadata)
+  // .then((snapshot) => {
+  //   console.log(snapshot);
+  //   console.log('Uploaded a blob or file!');
+  // });;
 
-uploadTask.on('state_changed', 
-  (snapshot) => {
-    console.log(snapshot);
-    // Observe state change events such as progress, pause, and resume
-    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    console.log('Upload is ' + progress + '% done');
-    switch (snapshot.state) {
-      case 'paused':
-        console.log('Upload is paused');
-        break;
-      case 'running':
-        console.log('Upload is running');
-        break;
-    }
-  }, 
+  uploadTask.on('state_changed', 
+    (snapshot) => {
+      console.log(snapshot);
+      // Observe state change events such as progress, pause, and resume
+      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+      switch (snapshot.state) {
+        case 'paused':
+          console.log('Upload is paused');
+          break;
+        case 'running':
+          console.log('Upload is running');
+          break;
+      }
+    }, 
   (error) => {
-    switch (error.code) {
-      case 'storage/unauthorized':
-        // User doesn't have permission to access the object
-        break;
-      case 'storage/canceled':
-        // User canceled the upload
-        break;
+      switch (error.code) {
+        case 'storage/unauthorized':
+          // User doesn't have permission to access the object
+          break;
+        case 'storage/canceled':
+          // User canceled the upload
+          break;
 
-      // ...
+        // ...
 
-      case 'storage/unknown':
-        // Unknown error occurred, inspect error.serverResponse
-        break;
-    }
+        case 'storage/unknown':
+          // Unknown error occurred, inspect error.serverResponse
+          break;
+      }
 
-  }, 
-  () => {
+    }, 
+    () => {
     // Handle successful uploads on complete
     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
       console.log('File available at', downloadURL);
-    });
-  }
+      });
+     } 
   );
   return uploadTask;
 }
 
 async function addTweetFireBase(text,url){
 
-const app = initializeApp(firebaseConfig);
+  const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const user = getAuth().currentUser.email;
   const date = Date();
@@ -139,15 +139,8 @@ const app = initializeApp(firebaseConfig);
   date: date,
   likes:0 ,
 
-});
+  });
 
-// await setDoc(doc(db, 'alltweets', `${user.substring(0,user.indexOf('@'))}${date}`), {
-//   text: text,
-//   media: url,
-//   user: user.substring(0,user.indexOf('@')),
-//   date: date,
-
-// });
 }
 
 async function addUserFirebase(){
@@ -157,19 +150,20 @@ async function addUserFirebase(){
     const user = getAuth().currentUser.email;
     const date = Date();
   // Add a new document in collection "cities"
-  await setDoc(doc(db, 'users', user), {
+    await setDoc(doc(db, 'users', user), {
     user: user,
     date: date,
   });
+}
+// if user clicks  a tweet, should load replies  and be able to reply with new form from (addReplyFirebase)
+
+function addReplyFirebase(){
+
+}
+
+function queryReplyFirebase(){
   
-  // await setDoc(doc(db, 'alltweets', `${user.substring(0,user.indexOf('@'))}${date}`), {
-  //   text: text,
-  //   media: url,
-  //   user: user.substring(0,user.indexOf('@')),
-  //   date: date,
-  
-  // });
-  }
+}
 
 
   // add seconds instad of just minte in data collection name and query by date or something
@@ -187,7 +181,7 @@ async function queryData(tweetsData,setTweetsData,setLoadingData){
    allUserSnapshot.forEach((doc) => {
       usersArray.push(doc.data());
    })
-const newArray = [];
+  const newArray = [];
 
    usersArray.forEach(async element => {
     console.log(element);
@@ -196,7 +190,7 @@ const newArray = [];
         // const docSnap = await getDoc(docRef);
         const tweetsSnapshot = await getDocs(q);
         console.log(tweetsSnapshot)
-        // return querySnapshot;
+        // return querySapshot;
         tweetsSnapshot.forEach((doc) => {
           // doc.data() is never undefined for query doc snapshots
           // console.log(doc.id, " => ", doc.data());
@@ -204,22 +198,12 @@ const newArray = [];
 
           newArray.push(doc.data());
         });
-console.log(newArray);
-setTweetsData(newArray)
+    console.log(newArray);
+    setTweetsData(newArray)
 
-setLoadingData(false);
+    setLoadingData(false);
 
    });
-
-  
-
-// return querySnapshot;
-// if (docSnap.exists()) {
-//   console.log("Document data:", docSnap.data());
-// } else {
-//   // doc.data() will be undefined in this case
-//   console.log("No such document!");
-// }
 }
 
 export { signInPopUp,signOutUser,getUserAuth, addTweetFireBase,uploadImage,queryData, addUserFirebase};
