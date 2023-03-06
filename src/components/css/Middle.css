@@ -73,7 +73,6 @@ button{
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   position: relative;
 }
 h2{
@@ -98,19 +97,39 @@ h2{
 
 .tweetbuttons{
   position: relative;
-  bottom: -5px;
+  display: flex;
+  margin: 2px;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
 }
 .tweetbutton{
   padding: 0px;
   margin: 0px;
+  width: 20px;
   background-color: unset;
-
-
+  height: 100%;
+  
 }
 .tweetbutton>.material-icons{
   font-size: 20px;
   color: black;
 }
+.tweetbutton>span{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+button>span{
+  width: 30px;
+  height: 30px;
+}
+/* button  */
+button>span:hover{
+  background-color: lightblue;
+  border-radius: 50%;
+}
+
 /* media queries */
 
 @media (max-width: 900px) {

@@ -33,7 +33,7 @@ function linkify(text) {
 
               <img src={media} ></img>
               <div className="tweetbuttons">
-                  <button className="tweetbutton"><span className="material-icons">chat bubble</span></button> 
+                  <button className="tweetbutton"><span className="material-icons">chat_bubble</span></button> 
                   <button className="tweetbutton"><span className="material-icons">favorite</span></button>
                    <button className="tweetbutton"><span className="material-icons">share</span></button>
                    </div>
@@ -49,7 +49,7 @@ function linkify(text) {
 
             <Markup content = {origText}></Markup>
             <div className="tweetbuttons">
-                  <button className="tweetbutton"><span className="material-icons">chat bubble</span></button> 
+                  <button className="tweetbutton"><span className="material-icons">chat_bubble</span></button> 
                   <button className="tweetbutton"><span className="material-icons">favorite</span></button>
                    <button className="tweetbutton"><span className="material-icons">share</span></button>
                    </div>
