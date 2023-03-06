@@ -125,8 +125,12 @@ button>span{
   height: 30px;
 }
 /* button  */
+.material-icons:hover{
+  color: rgb(255, 255, 255);
+  
+}
 button>span:hover{
-  background-color: lightblue;
+  background-color: rgb(132, 191, 211);
   border-radius: 50%;
 }
 
