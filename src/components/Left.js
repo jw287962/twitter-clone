@@ -13,20 +13,24 @@ const [viewport,setViewport] = useState(window.innerWidth)
     const main = document.querySelector('main');
     const search = document.querySelector('.searchNav');
     console.log(window.innerWidth);
-    
+    if(viewport>= 950){
+      const padding =(viewport-1000)/2
+      nav.style.paddingLeft = `${padding}px`;
+      search.style.paddingRight = `${padding}px`;
+    }
+    else{
+      nav.style.paddingLeft = '0px'
+      search.style.paddingRight = '0px'
+    }
     if(viewport >= 501){
       nav.style.visibility = 'visible'; 
       main.classList.remove('darkness');
-      if(viewport>= 950){
-        const padding =(viewport-1000)/2
-        nav.style.paddingLeft = `${padding}px`;
-        search.style.paddingRight = `${padding}px`;
-      }
+    
+
     }
    else {
     nav.style.visibility = 'hidden'; 
-    nav.style.paddingLeft = '0px'
-        search.style.paddingRight = '0px'
+    
    }
   },[viewport])
 
