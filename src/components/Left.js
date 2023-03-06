@@ -25,8 +25,11 @@ const [viewport,setViewport] = useState(window.innerWidth)
     }
    else {
     nav.style.visibility = 'hidden'; 
+    nav.style.paddingLeft = '0px'
+        search.style.paddingRight = '0px'
    }
   },[viewport])
+
   const findViewport = () => {
     setViewport(window.innerWidth);
   }

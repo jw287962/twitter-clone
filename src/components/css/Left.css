@@ -58,7 +58,7 @@ font-weight: 400;
 }
 .userNav{
   padding: 0px;
-
+  
   max-width: 50px;
   display: flex;
   flex-direction: column ;
