@@ -3,7 +3,6 @@
   width: var(--leftWidth);
   top: 0px;
   left: 0px;
-  padding: 0px;
   overflow: hidden;
   z-index: 99;
   background-color: white;
@@ -50,15 +49,16 @@ font-weight: 400;
 .darkness{
   filter: brightness(50%);
 }
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
 .userNav>ul>li>h3{
   display: none;
-
 }
 .userNav>ul>li{
   margin: 25px 0px;
 }
 .userNav{
+  padding: 0px;
+
   max-width: 50px;
   display: flex;
   flex-direction: column ;

@@ -11,9 +11,17 @@ const [viewport,setViewport] = useState(window.innerWidth)
     window.addEventListener("resize", findViewport);
     const nav = document.querySelector('.userNav');
     const main = document.querySelector('main');
+    const search = document.querySelector('.searchNav');
+    console.log(window.innerWidth);
+    
     if(viewport >= 501){
       nav.style.visibility = 'visible'; 
-      main.classList.remove('darkness')
+      main.classList.remove('darkness');
+      if(viewport>= 930){
+        const padding =(viewport-950)/2
+        nav.style.paddingLeft = `${padding}px`;
+        search.style.paddingRight = `${padding}px`;
+      }
     }
    else {
     nav.style.visibility = 'hidden'; 

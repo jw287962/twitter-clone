@@ -16,7 +16,7 @@ main{
 
 }
 .content{
-  min-width: 450px
+  min-width: 550px
 }
 /* top form section */
 .tweetform{
@@ -144,7 +144,7 @@ h2{
     border-right: none;
     border-top: none;
       max-width: 90%;
-        
+        min-width: 450px;
     }
    
     }
