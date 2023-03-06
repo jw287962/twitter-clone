@@ -17,8 +17,8 @@ const [viewport,setViewport] = useState(window.innerWidth)
     if(viewport >= 501){
       nav.style.visibility = 'visible'; 
       main.classList.remove('darkness');
-      if(viewport>= 930){
-        const padding =(viewport-950)/2
+      if(viewport>= 950){
+        const padding =(viewport-1000)/2
         nav.style.paddingLeft = `${padding}px`;
         search.style.paddingRight = `${padding}px`;
       }
