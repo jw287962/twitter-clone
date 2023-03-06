@@ -25,12 +25,9 @@ const [viewport,setViewport] = useState(window.innerWidth)
     if(viewport >= 501){
       nav.style.visibility = 'visible'; 
       main.classList.remove('darkness');
-    
-
     }
    else {
     nav.style.visibility = 'hidden'; 
-    
    }
   },[viewport])
 
