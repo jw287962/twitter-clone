@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import './css/Middle.css'
-import Tweet from "./Tweet";
+import Tweets from "./Tweets";
 import Form from "./userForm";
 import { getUserAuth,queryData } from "./firebase";
 
@@ -91,7 +91,7 @@ console.log(loadingData)
       {tweetsDataSliced.map((tweet) => {
       return(
         
-          <Tweet key={tweet.user +tweet.date.substring(10,24)}text={tweet.text} displayName ={tweet.displayName} email ={tweet.email}user={tweet.user} media ={tweet.media} date = {tweet.date} login={login}></Tweet>
+          <Tweets key={tweet.user +tweet.date.substring(10,24)}text={tweet.text} displayName ={tweet.displayName} email ={tweet.email}user={tweet.user} media ={tweet.media} date = {tweet.date} login={login}></Tweets>
         )
         })}
     {<div id={!loadingData? 'hidden': 'loader'} > </div>}
