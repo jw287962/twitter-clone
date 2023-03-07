@@ -41,13 +41,9 @@ display: none;
 }
 
 
-.material-icons{
-outline: none;
-border: none;
-background-color: white;
-}
 
-button{
+/* right side button */
+.searchNav>div>button{
   width: 100px;
 }
 
@@ -129,9 +125,15 @@ button>span{
   
 }
 /* button  */
+.tweetform>.flexcol>.material-icons:hover{
+  background-color: lightblue;
+  border: 5px solid rgb(156, 207, 224);
+  border-radius: 50%;
+  color: black;
+}
 .material-icons:hover{
   color: rgb(255, 255, 255);
-  
+ 
 }
 button>span:hover{
   background-color: rgb(132, 191, 211);
