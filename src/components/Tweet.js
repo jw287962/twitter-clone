@@ -4,7 +4,7 @@ import { Markup } from 'interweave';
 import { Link } from "react-router-dom";
 const Tweet = (props) => {
 
-      const {text,user,media,date} = props;
+      const {text,user,media,date,email,displayName} = props;
       const [origText,setNewText] = useState(text);
       const {login} = props
 
@@ -30,10 +30,11 @@ function linkify(text) {
                     {/* <Link to={{pathname:"/shop/checkout" }} state={{ allProducts: allProducts}}><button >Checkout</button></Link> */}
                   <Link to={{
                         pathname: "/profile",
-                        search: `?${user}`,
+                        search: `?${email}`,
                         }}
                         state={{ login: login}}>
-                        <h2>@{user} </h2>
+                          <h2>{displayName} <span>@{user} </span></h2>
+                             
                   </Link>
                   <p>{date.substring(date.indexOf(' '),21)}</p>
             </div>
@@ -53,14 +54,13 @@ function linkify(text) {
                   <div className="flexrow tweetuser">
                   <Link to={{
                         pathname: "/profile",
-                        search: `?${user}`,
-                        hash: "",
-                        state: { fromDashboard: true }
-                        }}>
-                        <h2>@{user} </h2>
+                        search: `?${email}`,
+                        }}
+                        state={{ login: login}}>
+                       <h2>{displayName} <span className="userhandle">@{user} </span></h2>
                   </Link>
                   <p>{date.substring(date.indexOf(' '),21)}</p>
-            </div>
+                        </div>
 
             <Markup content = {origText}></Markup>
             <div className="tweetbuttons">

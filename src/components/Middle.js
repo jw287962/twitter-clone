@@ -59,6 +59,7 @@ const Middle = (props) => {
  },[tweetsData,loadLimiter])
 
  useEffect(()=> {
+  console.log(props.login);
 
  },)
 // async function querySnapshotUpdate(){
@@ -79,10 +80,9 @@ const Middle = (props) => {
       <Form login={login}></Form>
       {/* text,user,media,date */}
       {tweetsDataSliced.map((tweet) => {
-       
       return(
         
-          <Tweet key={tweet.user +tweet.date.substring(10,24)}text={tweet.text} user={tweet.user} media ={tweet.media} date = {tweet.date} login={login}></Tweet>
+          <Tweet key={tweet.user +tweet.date.substring(10,24)}text={tweet.text} displayName ={tweet.displayName} email ={tweet.email}user={tweet.user} media ={tweet.media} date = {tweet.date} login={login}></Tweet>
         )
         })}
     {<div id={!loadingData? 'hidden': 'loader'} > </div>}

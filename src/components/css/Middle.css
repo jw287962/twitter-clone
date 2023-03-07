@@ -11,6 +11,7 @@ main{
   align-items: center;
   box-sizing: border-box;
   flex-grow: 1;
+min-height: 100vh;
   border-left: var(--border);
   border-right: var(--border);
 
@@ -124,6 +125,9 @@ button>span{
   width: 30px;
   height: 30px;
 }
+.userhandle{
+  
+}
 /* button  */
 .material-icons:hover{
   color: rgb(255, 255, 255);
@@ -136,10 +140,13 @@ button>span:hover{
 
 /* Links Profile */
 .tweetuser>a{
+  text-decoration: none;
+}
+.userhandle{
   color: grey;
 }
 .tweetuser>a>h2{
-  color: grey;
+  color: black;
   font-size: 15px;
 }
 

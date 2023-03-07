@@ -17,12 +17,12 @@ const firebaseConfig = {
   appId: "1:977024522205:web:57e9a73496d1d9ff040834"
 };
 const user = initializeApp(firebaseConfig);
-
+const auth = getAuth();
 
  function signInPopUp(){
   const provider = new GoogleAuthProvider();
   const signedIn = 0;
-  const auth = getAuth();
+  
   const promise = signInWithPopup(auth, provider)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
@@ -127,15 +127,18 @@ async function addTweetFireBase(text,url){
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-  const user = getAuth().currentUser.email;
+  const user = getAuth().currentUser;
+
   const date = Date();
 // Add a new document in collection jasonwong28798
 // await setDoc(doc(db, user.substring(0,user.indexOf('@')), `tweet${date}`), {
   // const currentUser = collection(db, 'users', `${user.substring(0,user.indexOf('@'))}`,'tweets',`${date}`)
-  await setDoc(doc(db, 'users', `${user}`,'tweets',`${date}`), {
+  await setDoc(doc(db, 'users', `${user.email}`,'tweets',`${date}`), {
   text: text,
   media: url,
-  user: user.substring(0,user.indexOf('@')),
+  user: user.email.substring(0,user.email.indexOf('@')),
+  displayName: user.displayName,
+  email: user.email,
   date: date,
   likes:0 ,
 
@@ -147,16 +150,42 @@ async function addUserFirebase(){
 
   const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const user = getAuth().currentUser.email;
+    const user = getAuth().currentUser;
     const date = Date();
   // Add a new document in collection "cities"
     await setDoc(doc(db, 'users', user), {
-    user: user,
+    user: user.email,
     date: date,
+    displayName: user.displayName,
+    age: undefined,
+    nickname: undefined,
+    background: undefined,
+    profilepic: undefined,
   });
 }
-// if user clicks  a tweet, should load replies  and be able to reply with new form from (addReplyFirebase)
+async function getUserData(searchParam = auth.currentUser.email,setLoadingData,setUser){
+  setLoadingData(true);
+  if(!searchParam) {
+    searchParam = getAuth().currentUser.email
+  }
+  console.log('query',searchParam)
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const allUsers =  query(doc(db,'users',`${searchParam}`));
+  const allUserSnapshot = await getDoc(allUsers);
+  setLoadingData(false);
+  console.log(allUserSnapshot.data())
+  // prob better when more users, to change to followers or something instead of all users or if users > 30
+  if(allUserSnapshot.data() === undefined){
+    
+    setUser({user: {user: 'no user found',email: 'n/a'}});
 
+  }
+  setUser(allUserSnapshot.data());
+
+}
+
+// if user clicks  a tweet, should load replies  and be able to reply with new form from (addReplyFirebase)
 function addReplyFirebase(){
 
 }
@@ -170,6 +199,7 @@ function queryReplyFirebase(){
 
 async function queryData(tweetsData,setTweetsData,setLoadingData){
   setLoadingData(true);
+  console.log('auth',getAuth().currentUser);
   console.log('query')
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
@@ -194,7 +224,6 @@ async function queryData(tweetsData,setTweetsData,setLoadingData){
         tweetsSnapshot.forEach((doc) => {
           // doc.data() is never undefined for query doc snapshots
           // console.log(doc.id, " => ", doc.data());
-          console.log(doc.data());
 
           newArray.push(doc.data());
         });
@@ -206,4 +235,4 @@ async function queryData(tweetsData,setTweetsData,setLoadingData){
    });
 }
 
-export { signInPopUp,signOutUser,getUserAuth, addTweetFireBase,uploadImage,queryData, addUserFirebase};
+export { signInPopUp,signOutUser,getUserAuth, addTweetFireBase,uploadImage,queryData, addUserFirebase, getUserData};
