@@ -7,21 +7,10 @@ const Tweet = (props) => {
       const {text,user,media,date,email,displayName} = props;
       const [origText,setNewText] = useState(text);
       const {login} = props
-
+      const [dateNumber] = useState(new Date(date));
 useEffect(()=>{
-      const urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-      if(origText ==text && urlRegex.test(text)){
-            setNewText(linkify(origText));
-      }
-
 })
 
-function linkify(text) {
-      const urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-      return text.replace(urlRegex, function(url) {
-          return '<a href="' + url + '">' + url + '</a>';
-      });
-  }
 
       if(media){
             return(
@@ -42,7 +31,12 @@ function linkify(text) {
 
               <img src={media} ></img>
               <div className="tweetbuttons">
-                  <button className="tweetbutton"><span className="material-icons">chat_bubble</span></button> 
+              <Link to={{
+                        pathname: `/tweet/${user}/${dateNumber.getTime()}`,
+                        }}
+                        state={{ tweet: props,login: login,} }>
+                  <button className="tweetbutton"><span className="material-icons">chat_bubble</span></button>
+                   </Link>
                   <button className="tweetbutton"><span className="material-icons">favorite</span></button>
                    <button className="tweetbutton"><span className="material-icons">share</span></button>
                    </div>
@@ -56,7 +50,7 @@ function linkify(text) {
                         pathname: "/profile",
                         search: `?${email}`,
                         }}
-                        state={{ login: login}}>
+                        state={{ ...props,login: login,} }>
                        <h2>{displayName} <span className="userhandle">@{user} </span></h2>
                   </Link>
                   <p>{date.substring(date.indexOf(' '),21)}</p>
@@ -64,10 +58,20 @@ function linkify(text) {
 
             <Markup content = {origText}></Markup>
             <div className="tweetbuttons">
-                  <button className="tweetbutton"><span className="material-icons">chat_bubble</span></button> 
+                  <Link to={{
+                        pathname: `/tweet/${user}/${dateNumber.getTime()}`,
+                        }}
+                        state={{ tweet: props,login: login,} }>
+                  <button className="tweetbutton"><span className="material-icons">chat_bubble</span></button>
+                   </Link>
                   <button className="tweetbutton"><span className="material-icons">favorite</span></button>
                    <button className="tweetbutton"><span className="material-icons">share</span></button>
                    </div>
+
+            {/* <div className="replies">
+
+            </div> */}
+
        </div>
   )
 }

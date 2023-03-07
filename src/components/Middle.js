@@ -90,8 +90,8 @@ console.log(loadingData)
       {/* text,user,media,date */}
       {tweetsDataSliced.map((tweet) => {
       return(
-        
-          <Tweets key={tweet.user +tweet.date.substring(10,24)}text={tweet.text} displayName ={tweet.displayName} email ={tweet.email}user={tweet.user} media ={tweet.media} date = {tweet.date} login={login}></Tweets>
+        // 
+          <Tweets key={tweet.user+tweet.date.substring(10,24)}text={tweet.text} displayName ={tweet.displayName} email ={tweet.email}user={tweet.user} media ={tweet.media} date = {tweet.date} login={login}></Tweets>
         )
         })}
     {<div id={!loadingData? 'hidden': 'loader'} > </div>}

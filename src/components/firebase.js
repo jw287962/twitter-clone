@@ -129,17 +129,17 @@ async function addTweetFireBase(text,url){
   const db = getFirestore(app);
   const user = getAuth().currentUser;
 
-  const date = Date();
+  const date = new Date();
 // Add a new document in collection jasonwong28798
 // await setDoc(doc(db, user.substring(0,user.indexOf('@')), `tweet${date}`), {
   // const currentUser = collection(db, 'users', `${user.substring(0,user.indexOf('@'))}`,'tweets',`${date}`)
-  await setDoc(doc(db, 'users', `${user.email}`,'tweets',`${date}`), {
+  await setDoc(doc(db, 'users', `${user.email}`,'tweets',`${date.getTime()}`), {
   text: text,
   media: url,
   user: user.email.substring(0,user.email.indexOf('@')),
   displayName: user.displayName,
   email: user.email,
-  date: date,
+  date: date.toString(),
   likes:0 ,
 
   });
