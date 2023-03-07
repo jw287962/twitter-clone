@@ -134,6 +134,15 @@ button>span:hover{
   border-radius: 50%;
 }
 
+/* Links Profile */
+.tweetuser>a{
+  color: grey;
+}
+.tweetuser>a>h2{
+  color: grey;
+  font-size: 15px;
+}
+
 /* media queries */
 
 @media (max-width: 900px) {

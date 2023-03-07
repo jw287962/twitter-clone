@@ -82,7 +82,7 @@ const Middle = (props) => {
        
       return(
         
-          <Tweet key={tweet.user +tweet.date.substring(10,24)}text={tweet.text} user={tweet.user} media ={tweet.media} date = {tweet.date}></Tweet>
+          <Tweet key={tweet.user +tweet.date.substring(10,24)}text={tweet.text} user={tweet.user} media ={tweet.media} date = {tweet.date} login={login}></Tweet>
         )
         })}
     {<div id={!loadingData? 'hidden': 'loader'} > </div>}

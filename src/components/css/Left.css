@@ -21,7 +21,7 @@
   position: fixed;
 }
 
-.userNav>ul>li{
+.leftNavLink{
   /* display: grid;
   grid-template-columns: 20px 100px;
   scale: 1.2; */
@@ -32,6 +32,21 @@
   gap: 15px;
 }
 
+.mainNavList>a{
+  text-decoration: none;
+  color: black;
+}
+.leftNavLink:hover{
+  background-color: lightblue;
+  border-radius: 20px;
+  padding-left: 5px;
+  border: 7px solid lightblue;
+  color: white;
+}
+.leftNavLink>span{
+  background-color: unset;
+  color: black;
+}
 h3{
 margin: 0px;
 font-weight: 400;
@@ -50,10 +65,23 @@ font-weight: 400;
   filter: brightness(50%);
 }
 @media (max-width: 1000px) {
-.userNav>ul>li>h3{
+  .leftNavLink:hover{
+    background-color: unset;
+    border-radius: 0px;
+    padding-left:  0px;
+    border: unset;
+  }
+  .leftNavLink>span:hover{
+    background-color: lightblue;
+    border-radius: 50%;
+    border: 7px solid lightblue;
+    color: white;
+  }
+  
+  .leftNavLink>h3{
   display: none;
 }
-.userNav>ul>li{
+.leftNavLink{
   margin: 25px 0px;
 }
 .userNav{
