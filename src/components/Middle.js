@@ -16,13 +16,18 @@ const Middle = (props) => {
     }
 
   const {login} = props;
-  useEffect(() => {
-    console.log(tweetsData);
-    if(tweetsData.length <=loadLimiter){
-      // querySnapshotUpdate();
-        console.log('query data again NO')
-      queryData(tweetsData,setTweetsData,setLoadingData);
+  useEffect(  () => {
+    async function queryTweetData(){
+        if(tweetsData.length <=loadLimiter){
+          // querySnapshotUpdate();
+            console.log('query data again NO')
+         const holderData = await queryData(tweetsData,setTweetsData,setLoadingData);
+      //  console.log(holderData);
+        setLoadingData(false);
+      }
     }
+    queryTweetData();
+
   },[loadLimiter])
 
 
@@ -49,14 +54,18 @@ const Middle = (props) => {
  useEffect(() => {
     document.addEventListener('scroll',isBottom);
 
-  if(tweetsDataSliced.length !== loadLimiter){
+console.log(loadingData)
+  if(tweetsDataSliced.length !== loadLimiter && !loadingData ){
     console.log('slice data');
     // querySnapshotUpdate();
-      setTweetsDataSliced(tweetsData.slice(0,loadLimiter));
+    console.log(tweetsData);
+    const arrayHolder = tweetsData.slice(0,loadLimiter)
+      setTweetsDataSliced(arrayHolder);
+      console.log(arrayHolder,loadLimiter,tweetsData);
   }
 
 
- },[tweetsData,loadLimiter])
+ },[tweetsData,loadLimiter,loadingData])
 
  useEffect(()=> {
   console.log(props.login);

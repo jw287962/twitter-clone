@@ -150,17 +150,17 @@ async function addUserFirebase(){
 
   const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const user = getAuth().currentUser;
+    const user = await getAuth().currentUser;
     const date = Date();
   // Add a new document in collection "cities"
-    await setDoc(doc(db, 'users', user), {
+    await setDoc(doc(db, 'users', user.email), {
     user: user.email,
     date: date,
     displayName: user.displayName,
-    age: undefined,
-    nickname: undefined,
-    background: undefined,
-    profilepic: undefined,
+    birthdate: '00/00/0000',
+    name: user.displayName,
+    background: 'unset image',
+    profilepic: 'no profile pic',
   });
 }
 async function getUserData(searchParam = auth.currentUser.email,setLoadingData,setUser){
@@ -207,32 +207,27 @@ async function queryData(tweetsData,setTweetsData,setLoadingData){
   const allUsers =  query(collection(db,'users'));
   const allUserSnapshot = await getDocs(allUsers);
   // prob better when more users, to change to followers or something instead of all users or if users > 30
-  const usersArray = [];
-   allUserSnapshot.forEach((doc) => {
-      usersArray.push(doc.data());
-   })
+  // const usersArray = [];
   const newArray = [];
 
-   usersArray.forEach(async element => {
-    console.log(element);
-            const q = query(collection(db, 'users',element.user,'tweets'));
+   const data =allUserSnapshot.forEach(async (doc) => {
+      // usersArray.push(doc.data());
+      console.log(doc.data(),"users")
+      const q = query(collection(db, 'users',doc.data().user,'tweets'));
           
-        // const docSnap = await getDoc(docRef);
-        const tweetsSnapshot = await getDocs(q);
-        console.log(tweetsSnapshot)
-        // return querySapshot;
-        tweetsSnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
-          // console.log(doc.id, " => ", doc.data());
-
-          newArray.push(doc.data());
-        });
-    console.log(newArray);
-    setTweetsData(newArray)
-
-    setLoadingData(false);
-
+      // const docSnap = await getDoc(docRef);
+      const tweetsSnapshot = await getDocs(q);
+      console.log(tweetsSnapshot)
+      // return querySapshot;
+       await tweetsSnapshot.forEach( (doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        // console.log(doc.id, " => ", doc.data())
+        console.log(doc.data());
+         newArray.push(doc.data());
+   })
+    setTweetsData(newArray.concat([])); 
    });
+   
 }
 
 export { signInPopUp,signOutUser,getUserAuth, addTweetFireBase,uploadImage,queryData, addUserFirebase, getUserData};
