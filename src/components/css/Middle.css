@@ -61,6 +61,12 @@ display: none;
 
 
 /* TWEETS  */
+.tweet>a{
+  width: 90%;
+  text-decoration: none;
+  display:block;
+  color: black;
+}
 .tweet{
   background-color: white;
   width: 100%;
@@ -72,23 +78,32 @@ display: none;
   align-items: center;
   position: relative;
 }
+.tweet:hover{
+  background-color: rgb(245, 245, 245);
+}
 h2{
   padding: 0px;
   margin: 0px;
   font-size: 20px;
 }
-.tweet>.tweetuser{
-  width: 90%;
+.tweet>a>.tweetuser{
   align-items: center;
   justify-content: space-between;
 }
-.tweet>img{
+.tweet>a>img{
   margin: 5px 0px;
   border-radius: 20px;
   border: 1px solid grey;
 }
-.tweet>span{
+.tweet>a{
+  display: flex;
+  flex-direction: column;
+}
+.tweet>a>span{
   width: 80%;
+  display: block;
+  padding: 0px 20px;
+
   text-align: left;
 }
 
@@ -96,9 +111,9 @@ h2{
   position: relative;
   display: flex;
   margin: 2px;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  width: 60%;
+  width: 95%;
 }
 .tweetbutton{
   padding: 0px;
@@ -152,6 +167,13 @@ button>span:hover{
   font-size: 15px;
 }
 
+
+/* PROFILE PIC */
+.profilePic{
+  border-radius: 50%;
+  vertical-align:middle;  
+  margin-right: 10px;
+}
 /* media queries */
 
 @media (max-width: 900px) {

@@ -139,6 +139,7 @@ async function addTweetFireBase(text,url){
   user: user.email.substring(0,user.email.indexOf('@')),
   displayName: user.displayName,
   email: user.email,
+  profilePic: user.photoURL,
   date: date.toString(),
   likes:0 ,
 
@@ -160,7 +161,7 @@ async function addUserFirebase(){
     birthdate: '00/00/0000',
     name: user.displayName,
     background: 'unset image',
-    profilepic: 'no profile pic',
+    profilepic: user.photoURL,
   });
 }
 async function getUserData(searchParam = auth.currentUser.email,setLoadingData,setUser){
