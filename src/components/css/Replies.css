@@ -11,6 +11,7 @@ padding: 15px;
   padding-left: 10px;
   width: 95%;
   margin: 10px;
+
 }
 
 .replyContainer{
@@ -34,4 +35,11 @@ padding: 15px;
 .reply>div{
   align-items: center;
     justify-content: space-between;
+}
+
+
+@media (max-width: 600px) {
+.tweet{
+  padding-top: 50px;
+}
 }
