@@ -124,7 +124,6 @@ const MainTweet = (prop) => {
               <Tweets key={tweet.user+tweet.date.substring(10,24)} text={tweet.text} displayName ={tweet.displayName} email ={tweet.email}user={tweet.user} media ={tweet.media} date = {tweet.date} login={login} profilePic={tweet.profilePic}></Tweets>
 
               <form className="tweetform" id="replyform">
-        <h3>Hi, {login.displayName.substring(0,login.displayName.indexOf(' '))}</h3>
         <textarea name="tweet" form="replyform" value={userTweetText} onChange={textAreaInput}></textarea>
         <label htmlFor="media"></label>
         <img className="mediaInput" src={media.load} width="250"></img>

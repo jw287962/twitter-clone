@@ -150,7 +150,7 @@ async function addTweetFireBase(text,url){
 
 }
 function makeDatewithMS(dateString,date){
- return dateString.substring(0,dateString.indexOf('GMT')-1) + ':' + date.getMilliseconds()+ ' ' + dateString.substring(dateString.indexOf('GMT'))
+ return dateString.substring(0,dateString.indexOf('GMT')-1) + '.' + date.getMilliseconds()+ ' ' + dateString.substring(dateString.indexOf('GMT'))
 }
 async function addUserFirebase(){
 

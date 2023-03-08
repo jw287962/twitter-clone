@@ -2,6 +2,7 @@
 import React,{useState,useEffect} from "react";
 import { Markup } from 'interweave';
 import { Link } from "react-router-dom";
+import moment from "moment";
 const Tweet = (props) => {
 
       const {text,user,media,date,email,displayName,profilePic} = props;
@@ -9,11 +10,17 @@ const Tweet = (props) => {
       const {login} = props
       const [dateNumber,setDateNumber] = useState(undefined);
 useEffect(()=>{
-      const tweetDate = new Date(date);
-      const currentTime = new Date();
-      console.log(tweetDate.getTime());
-      console.log(currentTime.getTime());
-      setDateNumber(new Date(date).getTime());
+       function getDate(){
+            // const dateObject = new Date(date);
+            console.log(date);
+            const convertmmddyy = date.substring(0,date.indexOf('2023')+4)
+            var firstDate = moment(convertmmddyy).format('YYYY-MM-DD');
+            console.log(firstDate+date.substring(date.indexOf(2023)+4,date.indexOf('GMT')));
+            const dateObj = new Date(firstDate+date.substring(date.indexOf(2023)+4,date.indexOf('GMT')-1));
+             setDateNumber(dateObj.getTime());
+      }
+      getDate();
+    
 })
 
 
