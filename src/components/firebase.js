@@ -126,7 +126,7 @@ function uploadImage(img){
 }
 
 async function addTweetFireBase(text,url){
-
+  if(!text) return ;
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const user = getAuth().currentUser;
@@ -193,6 +193,7 @@ async function getUserData(searchParam = auth.currentUser.email,setLoadingData,s
 
 // if user clicks  a tweet, should load replies  and be able to reply with new form from (addReplyFirebase)
 async function addReplyFirebase(textData,textID,tweetUser,downloadURL = ""){
+  if(!textData) return ;
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const user = auth.currentUser;
@@ -269,6 +270,25 @@ async function queryTweetSingle(tweetUser,tweetIDDate,setTweet){
   setTweet(data.data());
 }
 
+async function queryContinuousReply(tweetUser,textID,replyID){
+  const allReplies =  query(collection(db,'users',tweetUser,'tweets',textID,'replies',replyID));
+  const allRepliesSnapshot = await getDocs(allReplies);
+const array = [];
+  allRepliesSnapshot.forEach(async (doc) => {
+        array.push(doc.data());
+
+
+})
+}
+async function addContinuousReply(reply,tweetUser,textID,replyID){
+
+  const date = new Date();
+  const data = await setDoc(doc(db, 'users', `${tweetUser}`,'tweets',textID, 'replies', replyID), {
+   reply: {reply}
+},{merge:true});
+
+}
+
 export { signInPopUp,signOutUser,getUserAuth, addTweetFireBase,
   uploadImage,queryData, addUserFirebase, addReplyFirebase,queryReplyFirebase,
-  getUserData, queryTweetSingle};
+  getUserData, queryTweetSingle,queryContinuousReply,addContinuousReply};

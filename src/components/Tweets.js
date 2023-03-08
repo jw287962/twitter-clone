@@ -12,10 +12,8 @@ const Tweet = (props) => {
 useEffect(()=>{
        function getDate(){
             // const dateObject = new Date(date);
-            console.log(date);
             const convertmmddyy = date.substring(0,date.indexOf('2023')+4)
             var firstDate = moment(convertmmddyy).format('YYYY-MM-DD');
-            console.log(firstDate+date.substring(date.indexOf(2023)+4,date.indexOf('GMT')));
             const dateObj = new Date(firstDate+date.substring(date.indexOf(2023)+4,date.indexOf('GMT')-1));
              setDateNumber(dateObj.getTime());
       }

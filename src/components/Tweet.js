@@ -22,7 +22,6 @@ const Tweet = (props) => {
  
 
 useEffect(()=>{
-      console.log(data.state);
 
 console.log(login);
 })

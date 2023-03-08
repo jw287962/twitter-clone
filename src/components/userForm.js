@@ -61,7 +61,6 @@ if(media){
 
 
   useEffect(() => {
-    console.log(getAuth().currentUser)
   })
   if(!login){
     return(
@@ -76,7 +75,7 @@ if(media){
   return (
     <form className="tweetform" id="userform">
       <h3>Hi, {login.displayName.substring(0,login.displayName.indexOf(' '))}</h3>
-      <textarea name="tweet" form="userform" value={userTweetText} onChange={textAreaInput}></textarea>
+      <textarea name="tweet" form="userform" value={userTweetText} onChange={textAreaInput} required="required" minLength="1"></textarea>
       <label htmlFor="media"></label>
       <img className="mediaInput" src={media.load} width="250"></img>
 

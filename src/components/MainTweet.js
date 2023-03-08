@@ -4,9 +4,11 @@ import Tweets from "./Tweets";
 import { Link } from "react-router-dom";
 import { uploadImage,addReplyFirebase,queryTweetSingle,queryReplyFirebase} from "./firebase";
 import { useLocation } from "react-router-dom";
+import ReplyForm from "./ReplyForm";
 import Reply from "./Reply";
 import {getDownloadURL} from "firebase/storage";
 const MainTweet = (prop) => {
+  const [toggleFormHidden,setToggleFormHidden] =useState(true);
 
   let data = useLocation();
   const [tweetUser] = useState(data.pathname.substring(7)); 
@@ -20,7 +22,27 @@ const MainTweet = (prop) => {
   const [media,setMedia] = useState('');
 
   const [replies,setReplies] = useState([]);
+  const [currentReply,setCurrentReply] =useState([]);
 
+  // REMOVE REPLY FORM IF VISIBLE
+  const removeForm = (e) => {
+    console.log(toggleFormHidden, 'remove form condition');
+    if(!toggleFormHidden){
+      console.log('remove form')
+      setToggleFormHidden(true);
+
+    }
+
+      }
+  useEffect(() => {
+//     if(!toggleFormHidden)
+// else{
+// }
+    return () => {
+    }
+  },[toggleFormHidden])
+
+  // QUERY TWEET
   useEffect(()=>{
     if(!prop.tweet && !tweet){
       queryTweetSingle(tweetUser,tweetID,setTweet);
@@ -124,7 +146,7 @@ const MainTweet = (prop) => {
               <Tweets key={tweet.user+tweet.date.substring(10,24)} text={tweet.text} displayName ={tweet.displayName} email ={tweet.email}user={tweet.user} media ={tweet.media} date = {tweet.date} login={login} profilePic={tweet.profilePic}></Tweets>
 
               <form className="tweetform" id="replyform">
-        <textarea name="tweet" form="replyform" value={userTweetText} onChange={textAreaInput}></textarea>
+        <textarea name="tweet" form="replyform" value={userTweetText} onChange={textAreaInput} required="required" minLength="1"></textarea>
         <label htmlFor="media"></label>
         <img className="mediaInput" src={media.load} width="250"></img>
 
@@ -137,15 +159,20 @@ const MainTweet = (prop) => {
     
         <input type="submit" value="Reply" onClick={processReplyData} ></input>
       </form>
-
           <div className="replyContainer">
             {replies.map((reply)=> {
               return(
-                  <Reply key={reply.name+reply.date} {...reply}></Reply>
+                  <Reply key={reply.name+reply.date} reply={reply} 
+                   toggleFormHidden={toggleFormHidden}  removeForm={removeForm}
+                   setToggleFormHidden={setToggleFormHidden} setCurrentReply={setCurrentReply}></Reply>
               )
             })
           }
           </div>
+      <ReplyForm currentReply={currentReply} toggleFormHidden={toggleFormHidden} setToggleFormHidden={setToggleFormHidden}></ReplyForm>
+
+
+
 
         </main>
   )
