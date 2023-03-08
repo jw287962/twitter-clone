@@ -61,8 +61,8 @@ z-index: 99;
   z-index: 99;
 }
 
-@media (max-width: 600px) {
-.tweet{
-  padding-top: 50px;
+@media (max-width: 500px) {
+.content{
+  margin-top: 40px;
 }
 }

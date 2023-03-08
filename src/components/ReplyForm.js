@@ -1,17 +1,18 @@
 import { useState,useEffect } from "react";
-import {uploadImage,getDownloadURL } from "./firebase";
+import {uploadImage,getDownloadURL ,addContinuousReply} from "./firebase";
 import { useLocation } from "react-router-dom";
 import Tweets from "./Tweets";
 const ReplyForm = (prop) =>{
 // get tweetID and user of original tweet
-  const {login,processFormData,toggleFormHidden,setToggleFormHidden} = prop;
+  const {login,toggleFormHidden,setToggleFormHidden,tweet} = prop;
+
   const {currentReply} = prop;
   // ,user,text,date,displayName,media,profilePic
   // const {tweet} =prop;
   const [userTweetText,setUserTweetText] = useState('');
   const [mediaReply,setMediaReply] = useState('');
 
-    
+    const [newReplyData,setNewReplyData] =useState({});
   const [replies,setReplies] = useState([]);
   const toggleFileInput = (e) => {
     const fileInput = document.querySelector('#media');
@@ -20,6 +21,7 @@ const ReplyForm = (prop) =>{
 
 
   useEffect(()=>{
+  console.log(login);
     
     console.log(prop);
     return() =>{
@@ -31,7 +33,7 @@ const ReplyForm = (prop) =>{
   }
  
       
-  const handleFileInput = (e) => {
+const handleFileInput = (e) => {
     // e.preventDefault();
     // console.log(this.readFile(e.target.value)) 
     const reader = new FileReader();
@@ -46,13 +48,29 @@ const ReplyForm = (prop) =>{
     console.log(e.target.files);
       reader.readAsDataURL(e.target.files[0]);
   }
+
 const removeForm= (e)=>{
-  console.log(e);
-  setToggleFormHidden(true);
-  e.stopPropagation()
+    console.log(e);
+    setToggleFormHidden(true);
+    e.stopPropagation()
 }
   
-if(!currentReply){
+const processFormData = (e) => {
+e.preventDefault();
+const date = new Date();
+const dateString = date.toString();
+const dateData = makeDatewithMS(dateString,date)
+// will need to fix when query replies and to make sure i am updating the correct part within.
+const holder = {user:login.email, displayName:login.displayName,profilePic: login.photoURL,date:dateData, text:userTweetText,reply: ''}
+  // tweet.date is a string right now
+    addContinuousReply(holder,tweet.email,tweet.date,currentReply.date);
+  // async function addContinuousReply(reply,tweetUser,textID,replyID){
+    // const data = await setDoc(doc(db, 'users', `${tweetUser}`,'tweets',textID, 'replies', replyID), {
+}
+function makeDatewithMS(dateString,date){
+  return dateString.substring(0,dateString.indexOf('GMT')-1) + '.' + date.getMilliseconds()+ ' ' + dateString.substring(dateString.indexOf('GMT'))
+ }
+if(!currentReply.user){
   return(
     <div>
     <button className={toggleFormHidden?"hidden":"fullscreen"}onClick={removeForm} type="button"></button>
@@ -68,7 +86,7 @@ if(!currentReply){
                 <input onChange={handleFileInput} type="file" id="media" name="media" accept="image/png, image/jpeg, video/*, gif/*" ></input>
             </div>
         </div>
-        <input type="submit" value="Reply" onClick={processFormData} ></input>
+        {/* <input type="submit" value="Reply" onClick={processFormData} ></input> */}
       </form>
     </div>
   )

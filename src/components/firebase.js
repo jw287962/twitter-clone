@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
+import moment from "moment";
 import { signOut } from "firebase/auth";
 import { getStorage, ref,uploadBytesResumable,uploadBytes , getDownloadURL} from "firebase/storage";
 import { getFirestore,doc, setDoc ,getDoc, getDocs, collection, query,where,} from "firebase/firestore";
@@ -270,23 +270,32 @@ async function queryTweetSingle(tweetUser,tweetIDDate,setTweet){
   setTweet(data.data());
 }
 
-async function queryContinuousReply(tweetUser,textID,replyID){
-  const allReplies =  query(collection(db,'users',tweetUser,'tweets',textID,'replies',replyID));
-  const allRepliesSnapshot = await getDocs(allReplies);
-const array = [];
-  allRepliesSnapshot.forEach(async (doc) => {
-        array.push(doc.data());
+async function queryContinuousReply(tweetUser,textID,replyID,setReplyData,setQueryReply){
 
+  const replies =  query(doc(db,'users',tweetUser,'tweets',textID,'replies',getDate(replyID)));
+  const allRepliesSnapshot = await getDoc(replies);
 
-})
+  setReplyData(allRepliesSnapshot.data());
+  setQueryReply(true);
+
 }
-async function addContinuousReply(reply,tweetUser,textID,replyID){
 
-  const date = new Date();
-  const data = await setDoc(doc(db, 'users', `${tweetUser}`,'tweets',textID, 'replies', replyID), {
-   reply: {reply}
+async function addContinuousReply(reply,tweetUser,textID,replyID){
+  const date = new Date;
+  
+  console.log(reply);
+  const data = await setDoc(doc(db, 'users', `${tweetUser}`,'tweets',getDate(textID), 'replies', getDate(replyID)), {
+   reply
 },{merge:true});
 
+}
+
+function getDate(date){
+  // const dateObject = new Date(date);
+  const convertmmddyy = date.substring(0,date.indexOf('2023')+4)
+  var firstDate = moment(convertmmddyy).format('YYYY-MM-DD');
+  const dateObj = new Date(firstDate+date.substring(date.indexOf(2023)+4,date.indexOf('GMT')-1));
+  return `${dateObj.getTime()}`;
 }
 
 export { signInPopUp,signOutUser,getUserAuth, addTweetFireBase,

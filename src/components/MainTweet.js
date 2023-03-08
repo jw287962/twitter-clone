@@ -162,14 +162,14 @@ const MainTweet = (prop) => {
           <div className="replyContainer">
             {replies.map((reply)=> {
               return(
-                  <Reply key={reply.name+reply.date} reply={reply} 
+                  <Reply login={login} key={reply.name+reply.date} reply={reply} 
                    toggleFormHidden={toggleFormHidden}  removeForm={removeForm}
                    setToggleFormHidden={setToggleFormHidden} setCurrentReply={setCurrentReply}></Reply>
               )
             })
           }
           </div>
-      <ReplyForm currentReply={currentReply} toggleFormHidden={toggleFormHidden} setToggleFormHidden={setToggleFormHidden}></ReplyForm>
+      <ReplyForm login={login}currentReply={currentReply} tweet={tweet} toggleFormHidden={toggleFormHidden} setToggleFormHidden={setToggleFormHidden}></ReplyForm>
 
 
 
