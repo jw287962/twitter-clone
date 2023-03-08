@@ -7,8 +7,13 @@ const Tweet = (props) => {
       const {text,user,media,date,email,displayName,profilePic} = props;
       const [origText,setNewText] = useState(text);
       const {login} = props
-      const [dateNumber] = useState(new Date(date));
+      const [dateNumber,setDateNumber] = useState(undefined);
 useEffect(()=>{
+      const tweetDate = new Date(date);
+      const currentTime = new Date();
+      console.log(tweetDate.getTime());
+      console.log(currentTime.getTime());
+      setDateNumber(new Date(date).getTime());
 })
 
 
@@ -17,7 +22,8 @@ useEffect(()=>{
             return(
       <div className="tweet">
             <Link to={{
-                        pathname: `/tweet/${user}/${dateNumber.getTime()}`,
+                           pathname: `/tweet/${email}`,
+                           search:`${dateNumber}`,
                         }}
                         state={{ tweet: props,login: login,} }>
             <div className="flexrow tweetuser">
@@ -37,7 +43,8 @@ useEffect(()=>{
               <img src={media} ></img>
               <div className="tweetbuttons">
               <Link to={{
-                        pathname: `/tweet/${user}/${dateNumber.getTime()}`,
+                        pathname: `/tweet/${email}`,
+                        search:`${dateNumber}`,
                         }}
                         state={{ tweet: props,login: login,} }>
                   <button className="tweetbutton"><span className="material-icons">chat_bubble</span></button>
@@ -52,7 +59,8 @@ useEffect(()=>{
   return (
       <div className="tweet">
                 <Link to={{
-                        pathname: `/tweet/${user}/${dateNumber.getTime()}`,
+                               pathname: `/tweet/${email}`,
+                               search:`${dateNumber}`,
                         }}
                         state={{ tweet: props,login: login,} }>
                   <div className="flexrow tweetuser">
@@ -69,7 +77,8 @@ useEffect(()=>{
             <Markup content = {origText}></Markup>
             <div className="tweetbuttons">
                   <Link to={{
-                        pathname: `/tweet/${user}/${dateNumber.getTime()}`,
+                       pathname: `/tweet/${email}`,
+                       search:`${dateNumber}`,
                         }}
                         state={{ tweet: props,login: login,} }>
                   <button className="tweetbutton"><span className="material-icons">chat_bubble</span></button>

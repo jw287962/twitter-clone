@@ -9,8 +9,16 @@ import UserProfile from "./UserProfile";
 import { useLocation } from "react-router";
 const Tweet = (props) => {
       let data = useLocation();
-      const {login} = data.state;
+      const [login,setLogin] = useState(null);
 
+      useEffect(() => {
+        
+        const user = localStorage.getItem('user');
+          if(user){
+            setLogin(JSON.parse(user));
+           
+          }
+      },[])
  
 
 useEffect(()=>{
@@ -22,7 +30,7 @@ console.log(login);
 return (
       <div className="flexrow">
                   <Left login={login}></Left> 
-            <MainTweet login={login} tweet = {data.state.tweet}></MainTweet>
+            <MainTweet login={login} ></MainTweet>
             <Right login={login} ></Right>
        </div>
   )

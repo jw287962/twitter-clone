@@ -130,6 +130,7 @@ async function addTweetFireBase(text,url){
   const user = getAuth().currentUser;
 
   const date = new Date();
+  const dateString = date.toString();
 // Add a new document in collection jasonwong28798
 // await setDoc(doc(db, user.substring(0,user.indexOf('@')), `tweet${date}`), {
   // const currentUser = collection(db, 'users', `${user.substring(0,user.indexOf('@'))}`,'tweets',`${date}`)
@@ -140,7 +141,7 @@ async function addTweetFireBase(text,url){
   displayName: user.displayName,
   email: user.email,
   profilePic: user.photoURL,
-  date: date.toString(),
+  date: dateString.substring(0,dateString.indexOf('GMT')-1) + ':' + date.getMilliseconds()+ ' ' + dateString.substring(dateString.indexOf('GMT')),
   likes:0 ,
 
   });
@@ -188,7 +189,24 @@ async function getUserData(searchParam = auth.currentUser.email,setLoadingData,s
 
 // if user clicks  a tweet, should load replies  and be able to reply with new form from (addReplyFirebase)
 function addReplyFirebase(){
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const user = getAuth().currentUser;
 
+  const date = new Date();
+// Add a new document in collection jasonwong28798
+// await setDoc(doc(db, user.substring(0,user.indexOf('@')), `tweet${date}`), {
+//   await setDoc(doc(db, 'users', `${user.email}`,'tweets',`${date.getTime()}`), {
+//   text: text,
+//   media: url,
+//   user: user.email.substring(0,user.email.indexOf('@')),
+//   displayName: user.displayName,
+//   email: user.email,
+//   profilePic: user.photoURL,
+//   date: date.toString(),
+//   likes:0 ,
+
+// })
 }
 
 function queryReplyFirebase(){
@@ -231,4 +249,18 @@ async function queryData(tweetsData,setTweetsData,setLoadingData){
    
 }
 
-export { signInPopUp,signOutUser,getUserAuth, addTweetFireBase,uploadImage,queryData, addUserFirebase, getUserData};
+async function queryTweetSingle(tweetUser,tweetIDDate,setTweet){
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  console.log(tweetUser);
+  const user =  query(doc(db,'users',tweetUser,'tweets',tweetIDDate));
+  const allUserSnapshot = await getDoc(user);
+  // prob better when more users, to change to followers or something instead of all users or if users > 30
+  const data = allUserSnapshot;
+  console.log(data);
+  setTweet(data.data());
+}
+
+export { signInPopUp,signOutUser,getUserAuth, addTweetFireBase,
+  uploadImage,queryData, addUserFirebase, addReplyFirebase,queryReplyFirebase,
+  getUserData, queryTweetSingle};
