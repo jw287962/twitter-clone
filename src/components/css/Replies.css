@@ -1,0 +1,33 @@
+
+
+#replyform{
+border-bottom: 1px solid black;
+margin-bottom: 10px;
+width: 100%;
+padding: 15px;
+}
+.reply{
+  border-bottom: 1px solid grey;
+  padding-left: 10px;
+  width: 95%;
+  margin: 10px;
+}
+
+.replyContainer{
+  padding-left: 10px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.reply>div>h2 {
+  color: black;
+  font-size: 15px;
+}
+.reply>div>h2>span {
+  color: grey;
+  font-size: 12px;
+}
+.reply>div{
+  align-items: center;
+    justify-content: space-between;
+}

@@ -48,7 +48,7 @@ display: none;
 }
 
 
-#userform>input[type="submit"]{
+.tweetform>input[type="submit"]{
   background-color: white;
   background-color: lightblue;
   border: none;

@@ -11,16 +11,13 @@ const Middle = (props) => {
     const [loadLimiter, setLoadLimiter] = useState(5);
     const [loadingData, setLoadingData] = useState(false);
     
-    const addFiveLimit = () => {
-      setLoadLimiter(loadLimiter+5);
-    }
+ 
 
   const {login} = props;
   useEffect(  () => {
     async function queryTweetData(){
         if(tweetsData.length <=loadLimiter){
           // querySnapshotUpdate();
-            console.log('query data again NO')
          const holderData = await queryData(tweetsData,setTweetsData,setLoadingData);
       //  console.log(holderData);
         setLoadingData(false);
@@ -30,7 +27,9 @@ const Middle = (props) => {
 
   },[loadLimiter])
 
-
+  const addFiveLimit = () => {
+    setLoadLimiter(loadLimiter+5);
+  }
   function isBottom(e) {
   
     if(tweetsData.length <= loadLimiter){
@@ -64,7 +63,7 @@ console.log(loadingData)
       console.log(arrayHolder,loadLimiter,tweetsData);
   }
 
-
+  return () => document.removeEventListener("keyup", isBottom);
  },[tweetsData,loadLimiter,loadingData])
 
  useEffect(()=> {

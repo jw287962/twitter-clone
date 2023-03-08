@@ -18,6 +18,8 @@ const firebaseConfig = {
 };
 const user = initializeApp(firebaseConfig);
 const auth = getAuth();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
  function signInPopUp(){
   const provider = new GoogleAuthProvider();
@@ -141,13 +143,15 @@ async function addTweetFireBase(text,url){
   displayName: user.displayName,
   email: user.email,
   profilePic: user.photoURL,
-  date: dateString.substring(0,dateString.indexOf('GMT')-1) + ':' + date.getMilliseconds()+ ' ' + dateString.substring(dateString.indexOf('GMT')),
+  date: makeDatewithMS(dateString,date),
   likes:0 ,
 
   });
 
 }
-
+function makeDatewithMS(dateString,date){
+ return dateString.substring(0,dateString.indexOf('GMT')-1) + ':' + date.getMilliseconds()+ ' ' + dateString.substring(dateString.indexOf('GMT'))
+}
 async function addUserFirebase(){
 
   const app = initializeApp(firebaseConfig);
@@ -188,31 +192,38 @@ async function getUserData(searchParam = auth.currentUser.email,setLoadingData,s
 }
 
 // if user clicks  a tweet, should load replies  and be able to reply with new form from (addReplyFirebase)
-function addReplyFirebase(){
+async function addReplyFirebase(textData,textID,downloadURL = ""){
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-  const user = getAuth().currentUser;
+  const user = auth.currentUser;
 
   const date = new Date();
+  const dateString = date.toString();
 // Add a new document in collection jasonwong28798
 // await setDoc(doc(db, user.substring(0,user.indexOf('@')), `tweet${date}`), {
-//   await setDoc(doc(db, 'users', `${user.email}`,'tweets',`${date.getTime()}`), {
-//   text: text,
-//   media: url,
-//   user: user.email.substring(0,user.email.indexOf('@')),
-//   displayName: user.displayName,
-//   email: user.email,
-//   profilePic: user.photoURL,
-//   date: date.toString(),
-//   likes:0 ,
-
-// })
+  const data = await setDoc(doc(db, 'users', `${user.email}`,'tweets',textID, 'replies', `${date.getTime()}`), {
+    user: user.email,
+    date: makeDatewithMS(dateString,date),
+    displayName: user.displayName,
+    profilePic: user.photoURL,
+    text: textData,
+    media: downloadURL,
+});
 }
 
-function queryReplyFirebase(){
-  
-}
+async function queryReplyFirebase(tweetUser,textID,setReplies,setLoadingData){
+  setLoadingData(true);
+  const allReplies =  query(collection(db,'users',tweetUser,'tweets',textID,'replies'));
+  const allRepliesSnapshot = await getDocs(allReplies);
+const array = [];
+  allRepliesSnapshot.forEach(async (doc) => {
+        array.push(doc.data());
 
+setReplies(array);
+
+})
+console.log(array);
+}
 
   // add seconds instad of just minte in data collection name and query by date or something
 
@@ -250,14 +261,10 @@ async function queryData(tweetsData,setTweetsData,setLoadingData){
 }
 
 async function queryTweetSingle(tweetUser,tweetIDDate,setTweet){
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  console.log(tweetUser);
   const user =  query(doc(db,'users',tweetUser,'tweets',tweetIDDate));
   const allUserSnapshot = await getDoc(user);
   // prob better when more users, to change to followers or something instead of all users or if users > 30
   const data = allUserSnapshot;
-  console.log(data);
   setTweet(data.data());
 }
 
