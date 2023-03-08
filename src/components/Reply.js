@@ -1,17 +1,20 @@
 import { Markup } from "interweave";
 import './css/Replies.css'
+import { useEffect } from "react";
 
 const Reply = (props) => {
-  const {profilepic,date,media,user,displayName,text} = props;
+  const {profilePic,date,media,user,displayName,text} = props;
 
-
+  useEffect(()=>{
+    console.log(profilePic)
+  })
 
   return (
     <div className="reply">
     
       <div className="flexrow tweetuser">
      
-           <h2><img className="profilePic"src={profilepic} height='25px'></img>{displayName} <span>@{user.substring(0,user.indexOf('@'))} </span></h2>
+           <h2><img className="profilePic"src={profilePic} height='25px'></img>{displayName} <span>@{user.substring(0,user.indexOf('@'))} </span></h2>
      
       <p>{date.substring(date.indexOf(' '),21)}</p>
             </div>

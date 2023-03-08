@@ -192,16 +192,17 @@ async function getUserData(searchParam = auth.currentUser.email,setLoadingData,s
 }
 
 // if user clicks  a tweet, should load replies  and be able to reply with new form from (addReplyFirebase)
-async function addReplyFirebase(textData,textID,downloadURL = ""){
+async function addReplyFirebase(textData,textID,tweetUser,downloadURL = ""){
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const user = auth.currentUser;
+
 
   const date = new Date();
   const dateString = date.toString();
 // Add a new document in collection jasonwong28798
 // await setDoc(doc(db, user.substring(0,user.indexOf('@')), `tweet${date}`), {
-  const data = await setDoc(doc(db, 'users', `${user.email}`,'tweets',textID, 'replies', `${date.getTime()}`), {
+  const data = await setDoc(doc(db, 'users', `${tweetUser}`,'tweets',textID, 'replies', `${date.getTime()}`), {
     user: user.email,
     date: makeDatewithMS(dateString,date),
     displayName: user.displayName,

@@ -98,11 +98,11 @@ const MainTweet = (prop) => {
       const uploadTask = uploadImage(media);
       // NEED TO CHANGE TO ADDREPLY
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        addReplyFirebase(userTweetText,tweetID,downloadURL) 
+        addReplyFirebase(userTweetText,tweetID,tweetUser,downloadURL) 
       });
     }
     else{
-      addReplyFirebase(userTweetText,tweetID);
+      addReplyFirebase(userTweetText,tweetID,tweetUser);
     }
     
     setUserTweetText('');
@@ -141,9 +141,7 @@ const MainTweet = (prop) => {
 
           <div className="replyContainer">
             {replies.map((reply)=> {
-              console.log(reply);
               return(
-            
                   <Reply key={reply.name+reply.date} {...reply}></Reply>
               )
             })
