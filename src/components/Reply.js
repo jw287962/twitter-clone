@@ -9,6 +9,7 @@ const Reply = (props) => {
     console.log(profilePic)
   })
 
+  // NEED TO STORE OBJECTS INSIDE REPLY IE: const obj = {reply: {text: 'hi', reply: {text: "newb"}, reply1: {}}};
   return (
     <div className="reply">
     
