@@ -213,8 +213,10 @@ button>span:hover{
     }
   }
   @media (max-width: 600px) {
+    #userform{
+      padding-top: 50px;
+    }
     
- 
     .content{
     outline: none;
     border: 1px solid black;
