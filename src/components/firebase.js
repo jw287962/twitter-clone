@@ -274,15 +274,16 @@ async function queryContinuousReply(tweetUser,textID,replyID,setReplyData,setQue
 
   const replies =  query(doc(db,'users',tweetUser,'tweets',textID,'replies',getDate(replyID)));
   const allRepliesSnapshot = await getDoc(replies);
-
-  setReplyData(allRepliesSnapshot.data());
+console.log(allRepliesSnapshot.data());
+await   setReplyData(allRepliesSnapshot.data());
   setQueryReply(true);
 
 }
 
 async function addContinuousReply(reply,tweetUser,textID,replyID){
   const date = new Date;
-  
+    console.log(textID);
+    console.log(replyID);
   console.log(reply);
   const data = await setDoc(doc(db, 'users', `${tweetUser}`,'tweets',getDate(textID), 'replies', getDate(replyID)), {
    reply

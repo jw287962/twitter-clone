@@ -5,24 +5,31 @@ import { Link } from "react-router-dom";
 import { uploadImage,addReplyFirebase,queryTweetSingle,queryReplyFirebase} from "./firebase";
 import { useLocation } from "react-router-dom";
 import ReplyForm from "./ReplyForm";
+import MiniReplyForm from "./MiniReplyForm";
 import Reply from "./Reply";
 import {getDownloadURL} from "firebase/storage";
 const MainTweet = (prop) => {
   const [toggleFormHidden,setToggleFormHidden] =useState(true);
+  const [toggleReplyFormHidden,setToggleReplyFormHidden] =useState(true);
 
+  const [replyMiniText,setReplyMiniText] = useState('');
+  const [replySecondMiniText,setReplySecondMiniText] = useState('');
   let data = useLocation();
   const [tweetUser] = useState(data.pathname.substring(7)); 
   const [tweetID] = useState(data.search.substring(1));
   const [tweet,setTweet] = useState(undefined);
   const [loadingData, setLoadingData] = useState(false);
   const [loadLimiter, setLoadLimiter] = useState(5);
-
+  const [newReplyData,setNewReplyData] =useState('');
   const {login} = prop;
   const [userTweetText,setUserTweetText] = useState('');
   const [media,setMedia] = useState('');
 
   const [replies,setReplies] = useState([]);
   const [currentReply,setCurrentReply] =useState([]);
+  const [currentMiniReply,setCurrentMiniReply] =useState([]);
+
+    const [currentReplyData,setCurrentReplyData] = useState('');
 
   // REMOVE REPLY FORM IF VISIBLE
   const removeForm = (e) => {
@@ -163,15 +170,29 @@ const MainTweet = (prop) => {
             {replies.map((reply)=> {
               return(
                   <Reply login={login} key={reply.name+reply.date} reply={reply} 
-                   toggleFormHidden={toggleFormHidden}  removeForm={removeForm}
-                   setToggleFormHidden={setToggleFormHidden} setCurrentReply={setCurrentReply}></Reply>
+                   toggleFormHidden={toggleFormHidden}   replySecondMiniText={replySecondMiniText} setReplySecondMiniText={setReplySecondMiniText}
+                   setToggleFormHidden={setToggleFormHidden} currentMiniReply={currentMiniReply}setCurrentMiniReply={setCurrentMiniReply}
+                   toggleReplyFormHidden={toggleReplyFormHidden} setToggleReplyFormHidden={setToggleReplyFormHidden} 
+                   setCurrentReply={setCurrentReply} replyMiniText={replyMiniText}
+                   newReplyData={newReplyData}setNewReplyData={setNewReplyData}
+                   setCurrentReplyData={setCurrentReplyData}></Reply>
               )
             })
           }
           </div>
-      <ReplyForm login={login}currentReply={currentReply} tweet={tweet} toggleFormHidden={toggleFormHidden} setToggleFormHidden={setToggleFormHidden}></ReplyForm>
+      <ReplyForm login={login}currentReply={currentReply} tweet={tweet} 
+      toggleFormHidden={toggleFormHidden} setToggleFormHidden={setToggleFormHidden} 
+      replyMiniText={replyMiniText} setReplyMiniText={setReplyMiniText}
+     ></ReplyForm>
 
-
+    <MiniReplyForm login={login}currentReply={currentReply}currentMiniReply={currentMiniReply}setCurrentMiniReply={setCurrentMiniReply} tweet={tweet} 
+      toggleFormHidden={toggleReplyFormHidden} setToggleFormHidden={setToggleReplyFormHidden} 
+      replyMiniText={replySecondMiniText} setReplyMiniText={setReplySecondMiniText}
+      newReplyData={newReplyData}setNewReplyData={setNewReplyData}
+      setCurrentReplyData={setCurrentReplyData} currentReplyData={currentReplyData}
+ ></MiniReplyForm>
+ {/*   setCurrentReplyData={setCurrentReplyData} is for the .reply objects */}
+{/* after setting new reply data . i need to update reply with new reply */}
 
 
         </main>

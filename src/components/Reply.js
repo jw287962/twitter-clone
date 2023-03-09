@@ -6,13 +6,16 @@ import { useLocation } from "react-router-dom";
 import {addContinuousReply,queryContinuousReply } from "./firebase";
 import MiniReply from "./MiniReply";
 const Reply = (props) => {
-  const {login,reply,setToggleFormHidden,removeForm,setCurrentReply} = props;
+  const {login,reply,setToggleFormHidden,setCurrentReply,replyMiniText,setNewReplyData,
+    setToggleReplyFormHidden,toggleReplyFormHidden,replySecondMiniText,setReplySecondMiniText,
+    newReplyData,currentMiniReply,setCurrentMiniReply,setCurrentReplyData} = props;
   let data = useLocation();
 // profilePic,date,media,user,displayName,text,
-  const [replyData,setReplyData] =useState(undefined);
   const [queryReply,setQueryReply] =useState(false);
 const [replyArrayHolder,setReplyArrayHolder] = useState([]);
 
+
+const [replyData,setReplyData] =useState(undefined);
 const handleInternalReply = (e) => {
     const replyDiv = e.target.parentElement.parentElement.parentElement
     setToggleFormHidden(false);
@@ -22,23 +25,29 @@ const handleInternalReply = (e) => {
 }
 useEffect(()=>{
   if(!replyData && !queryReply){
-    queryContinuousReply(data.pathname.substring(7),data.search.substring(1),reply.date,setReplyData,setQueryReply)
+    queryReplies();
+  
+}
+ function queryReplies(){
+   queryContinuousReply(data.pathname.substring(7),data.search.substring(1),reply.date,setReplyData,setQueryReply)
 }
 },[replyData])
 
 useEffect(() => {
   if(queryReply){
-  var replyDataHolder = replyData;
-  const array = [];
-  while(replyDataHolder.reply){
-    
-    array.push(replyDataHolder.reply);
-    replyDataHolder = replyDataHolder.reply;
-  }
-  console.log(array);
-  setReplyArrayHolder(array.concat([]));
-  setQueryReply(false);
-}
+ 
+    console.log(replyData);
+        var replyDataHolder = replyData;
+        const array = [];
+        while(replyDataHolder.reply){
+          
+          array.push(replyDataHolder.reply);
+          replyDataHolder = replyDataHolder.reply;
+        }
+        console.log(array);
+        setReplyArrayHolder(array.concat([]));
+        setQueryReply(false);
+      }
 
 },[queryReply])
 
@@ -66,7 +75,11 @@ useEffect(() => {
         <div>
         {replyArrayHolder.map((tweet)=>{
           console.log(tweet);
-          return(<MiniReply key={tweet.user+tweet} reply={tweet}></MiniReply>)
+        
+          return(<MiniReply replyMiniText={replySecondMiniText} key={tweet.user+tweet} setCurrentReply={setCurrentReply}
+            reply={tweet} setToggleFormHidden={setToggleReplyFormHidden} replyData={replyData} login={login}
+            newReplyData={newReplyData} setNewReplyData={setNewReplyData} currentMiniReply={currentMiniReply}setCurrentMiniReply={setCurrentMiniReply}
+            setCurrentReplyData={setCurrentReplyData}></MiniReply>)
         })}
         </div>
 
