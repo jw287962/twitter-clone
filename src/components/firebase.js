@@ -283,7 +283,7 @@ await   setReplyData(allRepliesSnapshot.data());
 async function addContinuousReply(reply,tweetUser,textID,replyID){
   const date = new Date;
     console.log(textID);
-    console.log(replyID);
+    console.log(getDate(replyID));
   console.log(reply);
   const data = await setDoc(doc(db, 'users', `${tweetUser}`,'tweets',getDate(textID), 'replies', getDate(replyID)), {
    reply
