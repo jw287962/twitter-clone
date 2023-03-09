@@ -162,8 +162,10 @@ if(!currentMiniReply.user){
       <button  onClick={removeForm} type="button">X</button>
 
     {/* <Tweets key={currentReply.user+currentReply.date.substring(10,24)} text={currentReply.text} displayName ={currentReply.displayName} email ={currentReply.user}user={currentReply.user} media ={currentReply.media} date = {currentReply.date} login={login} profilePic={currentReply.profilePic}></Tweets> */}
-    <Tweets key={currentMiniReply.user+currentMiniReply.date.substring(10,24)} text={currentMiniReply.text} displayName ={currentMiniReply.displayName} email ={currentMiniReply.user}user={currentMiniReply.user} media ={currentMiniReply.media} date = {currentMiniReply.date} login={login} profilePic={currentMiniReply.profilePic}></Tweets>
-        <textarea name="tweet" form="userform" value={replyMiniText} onChange={textAreaInput} required="required" minLength="1"></textarea>
+    <div className="formTweetVisual">
+      <Tweets key={currentMiniReply.user+currentMiniReply.date.substring(10,24)} text={currentMiniReply.text} displayName ={currentMiniReply.displayName} email ={currentMiniReply.user}user={currentMiniReply.user} media ={currentMiniReply.media} date = {currentMiniReply.date} login={login} profilePic={currentMiniReply.profilePic}></Tweets>
+    </div>
+        <textarea placeholder="TWEET YOUR REPLY!"name="tweet" form="userform" value={replyMiniText} onChange={textAreaInput} required="required" minLength="1" ></textarea>
         <label htmlFor="miniMedia"></label>
         <img className="mediaInput" src={mediaReply.load} width="250"></img>
         <div className="flexcol">

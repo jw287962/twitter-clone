@@ -48,7 +48,7 @@ display: none;
 }
 
 
-.tweetform>input[type="submit"]{
+.tweetform>input[type="submit"],.minireply>input[type="submit"]{
   background-color: white;
   background-color: lightblue;
   border: none;
@@ -141,8 +141,8 @@ button>span{
 }
 /* button  */
 .tweetform>.flexcol>.material-icons:hover{
-  background-color: lightblue;
-  border: 5px solid rgb(156, 207, 224);
+  background-color: rgb(217, 245, 255);
+  border: 5px solid rgb(223, 247, 255);
   border-radius: 50%;
   color: black;
 }
@@ -203,7 +203,7 @@ button>span:hover{
     .searchNav{
       display: none;
      }
-    .tweet,form{
+    .content>.tweet,.content>form{
       min-width: 95%;
     }
     .userNav{
