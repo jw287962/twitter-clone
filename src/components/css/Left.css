@@ -62,6 +62,8 @@ font-weight: 400;
 }
 .darkness{
   filter: brightness(50%);
+  -webkit-filter: brightness(50%);
+
 }
 @media (max-width: 1000px) {
   .leftNavLink:hover{
@@ -134,6 +136,7 @@ visibility: hidden;
   }
   .content{
     padding-top: 10px;
+    height: 100%;
 
   }
   
