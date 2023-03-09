@@ -142,7 +142,7 @@ if(!currentMiniReply.user){
       <button  onClick={removeForm} type="button">X</button>
 
 
-        <textarea name="tweet" form="userform" value={replyMiniText} onChange={textAreaInput} required="required" minLength="1"></textarea>
+        <textarea placeholder="TWEET YOUR REPLY!" name="tweet" form="userform" value={replyMiniText} onChange={textAreaInput} required="required" minLength="1"></textarea>
         <label htmlFor="media"></label>
         <img className="mediaInput" src={mediaReply.load} width="250"></img>
         <div className="flexcol">

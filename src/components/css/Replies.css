@@ -2,12 +2,11 @@
 /* primary replies */
 #replyform{
 border-bottom: 1px solid black;
-margin-bottom: 10px;
 width: 100%;
 padding: 15px;
 }
 .replyContainer{
-  background-color: unset;
+  background-color: white;
 }
 .replyContainer>.reply{
   border-bottom: 1px solid grey;
@@ -19,8 +18,6 @@ padding: 15px;
 }
 .reply>div>.reply{
   border-top: 1px dotted grey;
-
-
 }
 
 .replyContainer{
@@ -47,7 +44,8 @@ padding: 15px;
 }
 
 /* all secondary replies */
-.minireply{
+ .minireply{
+    background-color: white;
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -57,8 +55,11 @@ padding: 15px;
   align-items: center;
   justify-content: center;
   border-radius: 20px;
-}
+  min-height: fit-content;
 
+}
+.minireply>.tweet{
+}
 /* for reply filter */
 .fullscreen{
   position: fixed;
@@ -84,7 +85,6 @@ padding: 15px;
 }
 .minireply>.tweet,.minireply>textarea{
   box-sizing: border-box;
-  height: 100px;
   width: 100%;
   padding: 10px 30px;
 }

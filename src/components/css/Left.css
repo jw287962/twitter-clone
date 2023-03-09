@@ -61,8 +61,8 @@ font-weight: 400;
   visibility: hidden;
 }
 .darkness{
-  filter: brightness(50%);
-  -webkit-filter: brightness(50%);
+  filter: contrast(10%);
+  /* -webkit-filter: brightness(50%); */
 
 }
 @media (max-width: 1000px) {
