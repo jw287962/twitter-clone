@@ -116,7 +116,7 @@ visibility: hidden;
       background-color: white;
       border-right: 1px solid black;
     }
-    .userNav>ul>li>h3{
+    .userNav>ul>li>h3,.userNav>ul>a>li>h3{
       display: block;
     }
    
