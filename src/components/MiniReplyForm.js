@@ -57,19 +57,19 @@ const removeForm= (e)=>{
     e.stopPropagation()
 }
   
-const processFormData = (e) => {
+const processReplyFormData = (e) => {
 e.preventDefault();
 makeNewReplyData();
 
 const date = new Date();
 const dateString = date.toString();
 const dateData = makeDatewithMS(dateString,date)
-console.log(newReplyData);
+console.log(currentReplyData);
 // will need to fix when query replies and to make sure i am updating the correct part within.
-const holder = {user:login.email, displayName:login.displayName,profilePic: 
-  login.photoURL,date:dateData, text:replyMiniText,reply:newReplyData}
+const holder = currentMiniReply
   // tweet.date is a string right now
-    addContinuousReply(holder,tweet.email,tweet.date,currentReply.date);
+  console.log(tweet, 'HUH?')
+    addContinuousReply(holder,tweet.email,tweet.date,currentReplyData.date);
     setNewReplyData('');
     setReplyMiniText('');
   // async function addContinuousReply(reply,tweetUser,textID,replyID){
@@ -81,11 +81,11 @@ const makeNewReplyData = (e) => {
   // const replyDiv = e.target.parentElement.parentElement.parentElement
   setToggleFormHidden(false);
   // query reply 
-  let replyDataHolder = currentReplyData;
+  let replyDataHolder = currentMiniReply;
   const array = [];
   let string ='reply';
   let i = 0;
-  console.log(currentReplyData);
+  console.log(currentMiniReply);
   // if(currentMiniReply==='') return;
   
   while(replyDataHolder.reply){
@@ -93,11 +93,11 @@ const makeNewReplyData = (e) => {
     // array.push(replyDataHolder.reply);
     replyDataHolder = replyDataHolder.reply;
   }
-  console.log(i , currentReplyData);
+  console.log(i , currentMiniReply);
 
-  looper(currentReplyData);
-  console.log(currentReplyData);
-  setNewReplyData(currentReplyData);
+  looper(currentMiniReply);
+  console.log(currentMiniReply);
+  setNewReplyData(currentMiniReply);
 }
 
 
@@ -114,7 +114,8 @@ const looper = (replyDataFunc) => {
         const date = new Date();
   const dateString = date.toString();
   const dateData = makeDatewithMS(dateString,date)
-        const holder = {user:login.email, displayName:login.displayName,profilePic: login.photoURL,date:dateData, text:replyMiniText,reply:""}
+        const holder = {user:login.email, displayName:login.displayName,
+          profilePic: login.photoURL,date:dateData, text:replyMiniText,reply:""}
         replyDataFunc.reply = holder;
         console.log(replyDataFunc);
      }else
@@ -170,7 +171,7 @@ if(!currentMiniReply.user){
                 <input onChange={handleFileInput} type="file" id="miniMedia" name="media" accept="image/png, image/jpeg, video/*, gif/*" ></input>
             </div>
         </div>
-        <input type="submit" value="Reply" onClick={processFormData} ></input>
+        <input type="submit" value="Reply" onClick={processReplyFormData} ></input>
       </form>
     </div>
   )
