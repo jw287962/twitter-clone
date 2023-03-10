@@ -5,7 +5,7 @@ import {getDownloadURL} from "firebase/storage";
 import { getAuth } from "firebase/auth";
 const Form = (props) => {
 
-  const {login} = props;
+  const {login,signInUser} = props;
 
   const [userTweetText,setUserTweetText] = useState('');
   const [media,setMedia] = useState('');
@@ -66,6 +66,7 @@ if(media){
     return(
       <form id="userform">
       <h3>Please Login</h3>
+      <button className="user" onClick={signInUser}><span className="material-icons">person</span></button>
       <textarea name="tweet" form="userform"></textarea>
     
     </form>

@@ -13,7 +13,7 @@ const Middle = (props) => {
     
  
 
-  const {login} = props;
+  const {login,signInUser} = props;
   useEffect(  () => {
     async function queryTweetData(){
         if(tweetsData.length <=loadLimiter){
@@ -85,7 +85,7 @@ console.log(loadingData)
 // }
   return (
     <main className="content">
-      <Form login={login}></Form>
+      <Form login={login} signInUser={signInUser}></Form>
       {/* text,user,media,date */}
       {tweetsDataSliced.map((tweet) => {
       return(
