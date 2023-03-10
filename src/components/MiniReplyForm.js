@@ -136,7 +136,7 @@ function makeDatewithMS(dateString,date){
  }
 if(!currentMiniReply.user){
   return(
-    <div>
+    <div className="minireplycontainerform">
     <button className={toggleFormHidden?"hidden":"fullscreen"}onClick={removeForm} type="button"></button>
       <form className={toggleFormHidden?"hidden":"minireply"}>
       <button  onClick={removeForm} type="button">X</button>

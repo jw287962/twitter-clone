@@ -117,6 +117,9 @@ padding: 15px;
 .content{
   margin-top: 40px;
 }
+.minireply{
+  width: 98%;
+}
 .minireply,.formTweetVisual>.tweet{
 
   left:1%;
@@ -127,4 +130,35 @@ padding: 15px;
   padding: 10px;
 
 }
+
+/* for mini replies ... secondary replies */
+.replyContainer{
+width: fit-content;
+}
+}
+@media (max-width: 500px) {
+  :root{
+    --width99: 99%
+  }
+  .fullscreen{
+    width: 100%;
+    padding: 0px;
+  }
+  .content{
+      width: var(--width99);
+  }
+  .minireply{
+width: var(--width99);
+  }
+  .minireply,.formTweetVisual>.tweet{
+
+    left:0%;
+    width: 100%;
+  }
+  .minireplycontainerform,.replyformContainer{
+    width: 100vw;
+  }
+  .minireply>.tweet{
+    padding: 0px;
+  }
 }

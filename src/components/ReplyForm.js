@@ -94,7 +94,7 @@ if(!currentReply.user){
   )
 }else
   return (
-    <div>
+    <div className="replyformContainer">
     <button className={toggleFormHidden?"hidden":"fullscreen"}onClick={removeForm} type="button"></button>
       <form className={toggleFormHidden?"hidden":"minireply"}>
       <button  onClick={removeForm} type="button">X</button>

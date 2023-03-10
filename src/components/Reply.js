@@ -73,7 +73,7 @@ useEffect(() => {
      <button className="tweetbutton"><span className="material-icons">share</span></button>
       
      </div>
-        <div>
+        <div className="replyContainer">
         {replyArrayHolder.map((tweet)=>{
           console.log(tweet);
         
