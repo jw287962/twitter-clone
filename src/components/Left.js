@@ -1,10 +1,9 @@
 import React,{useState,useEffect} from "react";
 import './css/Left.css'
 import 'material-icons/iconfont/material-icons.css';
-import { signInPopUp,getUserAuth,addUserFirebase} from "./firebase";
 import { Link } from "react-router-dom";
 const Left = (props) => {
-  const {setLogin,login} = props;
+  const {setLogin,login,signInUser} = props;
   const [menu, setMenu] = useState(true);
 const [viewport,setViewport] = useState(window.innerWidth)
 
@@ -36,17 +35,7 @@ const [viewport,setViewport] = useState(window.innerWidth)
     setViewport(window.innerWidth);
   }
 
-  async function signInUser(){
-    if(login == null){
-      const signedIn = signInPopUp()
-      signedIn.then(()=>  {
-          setLogin(getUserAuth().currentUser) 
-          localStorage.setItem('user',JSON.stringify(getUserAuth().currentUser));
-          addUserFirebase();
-    
-        });
-    }
- }
+ 
 
  const toggleMenu = () => {
   const nav = document.querySelector('.userNav');

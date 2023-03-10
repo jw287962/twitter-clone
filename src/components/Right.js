@@ -1,24 +1,13 @@
 import React,{useState,useEffect} from "react";
 import './css/Right.css'
-import { signInPopUp,getUserAuth,addUserFirebase} from "./firebase";
 
 import 'material-icons/iconfont/material-icons.css';
 
 const Right = (props) => {
 
-  const {setLogin,login} = props;
+  const {setLogin,login,signInUser} = props;
 
- async function signInUser(){
-  const signedIn = signInPopUp()
-  console.log(signedIn);
-  signedIn.then(()=>  {
-      setLogin(getUserAuth().currentUser) 
-      localStorage.setItem('user',JSON.stringify(getUserAuth().currentUser));
-      addUserFirebase();
 
-    });
-
-}
 const signOutUser = () => {
   setLogin(null);
   localStorage.setItem('user','');

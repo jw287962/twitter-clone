@@ -20,13 +20,16 @@
 .userNav>button{
   position: fixed;
 }
-
+.userNav>ul>a{
+  width: 100%;
+}
 .leftNavLink{
+  box-sizing: content-box;
   /* display: grid;
   grid-template-columns: 20px 100px;
   scale: 1.2; */
   display: flex;
-  flex-shrink: 1;
+  /* flex-shrink: 1; */
   text-align: left;
   margin: 20px 10px;
   gap: 15px;
@@ -38,6 +41,7 @@
 }
 .leftNavLink:hover{
   background-color: lightblue;
+
   border-radius: 20px;
   padding-left: 5px;
   border: 7px solid lightblue;
