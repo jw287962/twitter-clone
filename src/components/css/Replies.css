@@ -8,10 +8,11 @@ padding: 15px;
 .replyContainer{
   background-color: white;
 }
-.replyContainer>.reply{
-  border-bottom: 1px solid grey;
+main>.replyContainer>.reply{
+  border-bottom: 2px solid grey;
 }
 .reply{
+  
   padding-left: 10px;
   width: 95%;
   margin: 10px;
@@ -21,7 +22,6 @@ padding: 15px;
 }
 
 .replyContainer{
-  padding-left: 10px;
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -132,11 +132,12 @@ padding: 15px;
 }
 
 /* for mini replies ... secondary replies */
-.replyContainer{
-width: fit-content;
-}
+
 }
 @media (max-width: 500px) {
+
+  .tweet,.reply{
+  }
   :root{
     --width99: 99%
   }

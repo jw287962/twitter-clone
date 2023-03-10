@@ -222,8 +222,8 @@ button>span:hover{
     border: 1px solid black;
     border-right: none;
     border-top: none;
-      max-width: 90%;
-        min-width: 450px;
+      max-width: 100%;
+        min-width: 390px;
     }
    
     }
