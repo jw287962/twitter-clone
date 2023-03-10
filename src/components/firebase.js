@@ -271,10 +271,11 @@ async function queryTweetSingle(tweetUser,tweetIDDate,setTweet){
 }
 
 async function queryContinuousReply(tweetUser,textID,replyID,setReplyData,setQueryReply){
-
+  
   const replies =  query(doc(db,'users',tweetUser,'tweets',textID,'replies',getDate(replyID)));
   const allRepliesSnapshot = await getDoc(replies);
 console.log(allRepliesSnapshot.data());
+
 await   setReplyData(allRepliesSnapshot.data());
   setQueryReply(true);
 

@@ -16,8 +16,8 @@ const [replyArrayHolder,setReplyArrayHolder] = useState([]);
 
 
 const [replyData,setReplyData] =useState(undefined);
-const handleInternalReply = (e) => {
-    const replyDiv = e.target.parentElement.parentElement.parentElement
+const handleInternalReply = () => {
+    // const replyDiv = e.target.parentElement.parentElement.parentElement
     setToggleFormHidden(false);
     // query reply 
    
@@ -39,6 +39,7 @@ useEffect(() => {
     console.log(replyData);
         var replyDataHolder = replyData;
         const array = [];
+        if(!replyDataHolder)return;
         while(replyDataHolder.reply){
           
           array.push(replyDataHolder.reply);
@@ -76,7 +77,7 @@ useEffect(() => {
         {replyArrayHolder.map((tweet)=>{
           console.log(tweet);
         
-          return(<MiniReply replyMiniText={replySecondMiniText} key={tweet.user+tweet} setCurrentReply={setCurrentReply}
+          return(<MiniReply replyMiniText={replySecondMiniText} key={tweet.user+tweet.date} setCurrentReply={setCurrentReply}
             reply={tweet} setToggleFormHidden={setToggleReplyFormHidden} replyData={replyData} login={login}
             newReplyData={newReplyData} setNewReplyData={setNewReplyData} currentMiniReply={currentMiniReply}setCurrentMiniReply={setCurrentMiniReply}
             setCurrentReplyData={setCurrentReplyData}></MiniReply>)
