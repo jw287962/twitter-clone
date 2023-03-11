@@ -10,8 +10,8 @@ function makeDatewithMS(dateString,date){
  }
 
 const MiniReply = (props) => {
-  const {login,reply,removeForm,setCurrentReply,replyData,replyMiniText
-    ,setToggleFormHidden,setCurrentMiniReply,currentMiniReply,setCurrentReplyData} = props;
+  const {login,reply,removeForm,setCurrentReply,replyData,replyMiniText,setArrayReplyNum
+    ,setToggleFormHidden,setCurrentMiniReply,setCurrentReplyData,replyNum} = props;
   let data = useLocation();
 // profilePic,date,media,user,displayName,text,
   // const [newReplyData,setNewReplyData] = useState(props.replyData);
@@ -19,9 +19,13 @@ const MiniReply = (props) => {
 
 const handleInternalReply = (e) => {
   const replyDiv = e.target.parentElement.parentElement.parentElement
+  setArrayReplyNum(replyNum);
+  console.log(replyDiv)
   setToggleFormHidden(false);
   // query reply 
  console.log(replyData)
+
+//  current secondary reply data and first reply data
   setCurrentMiniReply(reply);
   setCurrentReplyData(replyData);
 }
@@ -30,7 +34,7 @@ useEffect(() => {
  
 },[replyMiniText])
   return (
-    <div className="reply" >
+    <div className="reply" key-num={replyNum} >
     
       <div className="flexrow tweetuser">
      

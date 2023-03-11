@@ -28,6 +28,7 @@ const MainTweet = (prop) => {
   const [replies,setReplies] = useState([]);
   const [currentReply,setCurrentReply] =useState([]);
   const [currentMiniReply,setCurrentMiniReply] =useState([]);
+  const [arrayReplyNum, setArrayReplyNum] = useState(0);
 
     const [currentReplyData,setCurrentReplyData] = useState('');
 
@@ -169,7 +170,7 @@ const MainTweet = (prop) => {
           <div className="replyContainer">
             {replies.map((reply)=> {
               return(
-                  <Reply login={login} key={reply.name+reply.date} reply={reply} 
+                  <Reply setArrayReplyNum= {setArrayReplyNum}login={login} key={reply.name+reply.date} reply={reply} 
                    toggleFormHidden={toggleFormHidden}   replySecondMiniText={replySecondMiniText} setReplySecondMiniText={setReplySecondMiniText}
                    setToggleFormHidden={setToggleFormHidden} currentMiniReply={currentMiniReply}setCurrentMiniReply={setCurrentMiniReply}
                    toggleReplyFormHidden={toggleReplyFormHidden} setToggleReplyFormHidden={setToggleReplyFormHidden} 
@@ -185,7 +186,7 @@ const MainTweet = (prop) => {
       replyMiniText={replyMiniText} setReplyMiniText={setReplyMiniText}
      ></ReplyForm>
 
-    <MiniReplyForm login={login}currentReply={currentReply}currentMiniReply={currentMiniReply}setCurrentMiniReply={setCurrentMiniReply} tweet={tweet} 
+    <MiniReplyForm arrayReplyNum={arrayReplyNum} login={login}currentReply={currentReply}currentMiniReply={currentMiniReply}setCurrentMiniReply={setCurrentMiniReply} tweet={tweet} 
       toggleFormHidden={toggleReplyFormHidden} setToggleFormHidden={setToggleReplyFormHidden} 
       replyMiniText={replySecondMiniText} setReplyMiniText={setReplySecondMiniText}
       newReplyData={newReplyData}setNewReplyData={setNewReplyData}

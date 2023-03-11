@@ -8,7 +8,7 @@ import MiniReply from "./MiniReply";
 const Reply = (props) => {
   const {login,reply,setToggleFormHidden,setCurrentReply,replyMiniText,setNewReplyData,
     setToggleReplyFormHidden,toggleReplyFormHidden,replySecondMiniText,setReplySecondMiniText,
-    newReplyData,currentMiniReply,setCurrentMiniReply,setCurrentReplyData} = props;
+    newReplyData,currentMiniReply,setCurrentMiniReply,setCurrentReplyData,setArrayReplyNum} = props;
   let data = useLocation();
 // profilePic,date,media,user,displayName,text,
   const [queryReply,setQueryReply] =useState(false);
@@ -73,10 +73,10 @@ useEffect(() => {
       
      </div>
         <div className="replyContainer">
-        {replyArrayHolder.map((tweet)=>{
+        {replyArrayHolder.map((tweet,i)=>{
           console.log(tweet);
-        
-          return(<MiniReply replyMiniText={replySecondMiniText} key={tweet.user+tweet.date} setCurrentReply={setCurrentReply}
+          
+          return(<MiniReply setArrayReplyNum={setArrayReplyNum} replyNum={i++} replyMiniText={replySecondMiniText} key={tweet.user+tweet.date} setCurrentReply={setCurrentReply}
             reply={tweet} setToggleFormHidden={setToggleReplyFormHidden} replyData={replyData} login={login}
             newReplyData={newReplyData} setNewReplyData={setNewReplyData} currentMiniReply={currentMiniReply}setCurrentMiniReply={setCurrentMiniReply}
             setCurrentReplyData={setCurrentReplyData}></MiniReply>)

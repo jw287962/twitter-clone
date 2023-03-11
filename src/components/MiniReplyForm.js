@@ -1,11 +1,12 @@
 import { useState,useEffect } from "react";
-import {uploadImage,getDownloadURL ,addContinuousReply,queryContinuousReply} from "./firebase";
+import {uploadImage,getDownloadURL ,addContinuousReply,addMiniReplies} from "./firebase";
 import { useLocation } from "react-router-dom";
 import Tweets from "./Tweets";
 const MiniReplyForm = (prop) =>{
 // get tweetID and user of original tweet
   const {login,toggleFormHidden,setToggleFormHidden,tweet,setReplyMiniText,replyMiniText,newReplyData,setNewReplyData
-    ,setCurrentMiniReply,currentMiniReply,replyData,setCurrentReplyData,currentReplyData} = prop;
+    ,setCurrentMiniReply,currentMiniReply,replyData,setCurrentReplyData,currentReplyData,
+      arrayReplyNum} = prop;
 
   const {currentReply} = prop;
   // ,user,text,date,displayName,media,profilePic
@@ -23,9 +24,9 @@ const MiniReplyForm = (prop) =>{
 
 
   useEffect(()=>{
-  console.log(currentMiniReply);
+  // console.log(currentMiniReply);
     
-    console.log(prop);
+  //   console.log(prop);
     return() =>{
     }
   })
@@ -66,15 +67,15 @@ const dateString = date.toString();
 const dateData = makeDatewithMS(dateString,date)
 console.log(currentReplyData);
 // query the array and push a new arrayZ?
-await queryContinuousReply(tweet.email,tweet.date,currentReplyData.date,setReplyArrayData)
 
 console.log(replyArrayData);
 
 // push new reply data.
 const holder = currentMiniReply
   // tweet.date is a string right now
-  console.log(tweet, 'HUH?')
-    addContinuousReply(holder,tweet.email,tweet.date,currentReplyData.date);
+await addMiniReplies(tweet.email,tweet.date,currentReplyData.date,arrayReplyNum,holder);
+
+    // addContinuousReply(holder,tweet.email,tweet.date,currentReplyData.date);
     setNewReplyData('');
     setReplyMiniText('');
     
@@ -87,19 +88,6 @@ const makeNewReplyData = (e) => {
   // const replyDiv = e.target.parentElement.parentElement.parentElement
   setToggleFormHidden(false);
   // query reply 
-  let replyDataHolder = currentMiniReply;
-  const array = [];
-  let string ='reply';
-  let i = 0;
-  console.log(currentMiniReply);
-  // if(currentMiniReply==='') return;
-  
-  while(replyDataHolder.reply){
-    i++;
-    // array.push(replyDataHolder.reply);
-    replyDataHolder = replyDataHolder.reply;
-  }
-  console.log(i , currentMiniReply);
 
   looper(currentMiniReply);
   console.log(currentMiniReply);

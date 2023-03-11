@@ -285,28 +285,36 @@ await   setReplyData(allRepliesSnapshot.data());
 if(setQueryReply)
   setQueryReply(true);
 }
-// will need a query before changign data and a query for outputting replies
-async function addSecondaryReply(holder,tweetUser,textID,replyID,setReplyData){
-  console.log(getDate(textID));
-  console.log(getDate(replyID));
+
+async function addMiniReplies(tweetUser,textID,replyID,arrayReplyNum,holder){
+  // console.log(textID);
   const replies =  query(doc(db,'users',tweetUser,'tweets',getDate(textID),'replies',getDate(replyID)));
   const allRepliesSnapshot = await getDoc(replies);
 console.log(allRepliesSnapshot.data());
 const originalReply = allRepliesSnapshot.data();
-console.log(originalReply);
+
+const orignalReplyArrayData = originalReply.reply;
+orignalReplyArrayData.splice(arrayReplyNum,0,holder);
+// need to chnage to array of replies objects
+console.log(holder);
+console.log(orignalReplyArrayData);
+addContinuousReply(orignalReplyArrayData,tweetUser,textID,replyID);
+}
+
+// will need a query before changign data and a query for outputting replies
+async function addSecondaryReply(holder,tweetUser,textID,replyID,setReplyData){
+  const replies =  query(doc(db,'users',tweetUser,'tweets',getDate(textID),'replies',getDate(replyID)));
+  const allRepliesSnapshot = await getDoc(replies);
+const originalReply = allRepliesSnapshot.data();
 originalReply.reply.push(holder);
-console.log(originalReply);
 // need to chnage to array of replies objects
 await   setReplyData(originalReply.reply.concat([]));
 addContinuousReply(originalReply.reply,tweetUser,textID,replyID)
-
-
 }
 
 // change to just for arrays of one reply
 async function addContinuousReply(reply,tweetUser,textID,replyID){
   const date = new Date;
-    console.log(textID);
     console.log(getDate(replyID));
   console.log(reply);
   // the reply will hold an array 
@@ -325,5 +333,5 @@ function getDate(date){
 }
 
 export { signInPopUp,signOutUser,getUserAuth, addTweetFireBase,
-  uploadImage,queryData, addUserFirebase, addReplyFirebase,queryReplyFirebase,
+  uploadImage,queryData, addUserFirebase, addReplyFirebase,queryReplyFirebase,addMiniReplies,
   getUserData, queryTweetSingle,queryContinuousReply,addContinuousReply,addSecondaryReply};
