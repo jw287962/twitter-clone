@@ -294,7 +294,7 @@ console.log(allRepliesSnapshot.data());
 const originalReply = allRepliesSnapshot.data();
 
 const orignalReplyArrayData = originalReply.reply;
-orignalReplyArrayData.splice(arrayReplyNum,0,holder);
+orignalReplyArrayData.splice(arrayReplyNum,1,holder);
 // need to chnage to array of replies objects
 console.log(holder);
 console.log(orignalReplyArrayData);

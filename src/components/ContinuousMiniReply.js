@@ -4,13 +4,12 @@ import { useEffect,useState } from "react";
 import MiniReplyForm from './MiniReplyForm'
 import { useLocation } from "react-router-dom";
 import {addContinuousReply,queryContinuousReply } from "./firebase";
-import ContinuousMiniReply from "./ContinuousMiniReply";
 import Tweets from './Tweet.js'
 function makeDatewithMS(dateString,date){
   return dateString.substring(0,dateString.indexOf('GMT')-1) + '.' + date.getMilliseconds()+ ' ' + dateString.substring(dateString.indexOf('GMT'))
  }
 
-const MiniReply = (props) => {
+const ContinuousMiniReply = (props) => {
   const {login,reply,removeForm,setCurrentReply,replyData,replyMiniText,setArrayReplyNum
     ,setToggleFormHidden,setCurrentMiniReply,setCurrentReplyData,replyNum} = props;
   let data = useLocation();
@@ -36,32 +35,16 @@ useEffect(() => {
 },[replyMiniText])
 
 useEffect(() => {
-  if(replyData && replyData.reply && replyData.reply.length !== 0){
+//   if(replyData && replyData.reply && replyData.reply.length !== 0){
  
-      let replyDataHolder = replyData.reply[0];
-const array = [];
-    // will be an arry of reply objects instead
-    console.log(replyDataHolder);
-        if(!replyDataHolder)return;
-        while(replyDataHolder.reply){
-            // if( Array.isArray(replyDataHolder.reply)){
-            //   array.push(replyDataHolder.reply[0]);
-            //   replyDataHolder = replyDataHolder.reply[0];
-            // }
+//       let replyDataHolder = reply;
+// const array = [];
+//     // will be an arry of reply objects instead
 
-            // 
-        if(replyDataHolder.reply !== ''){
-            array.push(replyDataHolder.reply);
-            replyDataHolder = replyDataHolder.reply;
-          }else{
-            replyDataHolder = replyDataHolder.reply;
-          }
-       
-        }
-        setReplyArrayHolder(array.concat([]));
-      }
+//       }
 
 },[])
+
   return (
     <div className="reply" key-num={replyNum} >
     
@@ -80,17 +63,9 @@ const array = [];
        <button className="tweetbutton"><span className="material-icons">share</span></button>
         
        </div>
-       {replyArrayHolder.map((tweet,i)=>{
-          console.log(tweet)
-          return(<ContinuousMiniReply setArrayReplyNum={setArrayReplyNum} replyNum={i++}  key={tweet.user+tweet.date} setCurrentReply={setCurrentReply}
-            reply={tweet}  replyData={replyData} login={login}
-setCurrentMiniReply={setCurrentMiniReply}
-            setCurrentReplyData={setCurrentReplyData}></ContinuousMiniReply>)
-            // replyMiniText={replySecondMiniText} setToggleFormHidden={setToggleReplyFormHidden} newReplyData={newReplyData} setNewReplyData={setNewReplyData}              currentMiniReply={currentMiniReply}
-        })}
 
     </div>
   )
 }
 
-export default MiniReply;
+export default ContinuousMiniReply;
