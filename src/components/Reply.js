@@ -34,19 +34,18 @@ useEffect(()=>{
 },[replyData])
 
 useEffect(() => {
-  if(queryReply){
+  if(queryReply && replyData && replyData.reply && replyData.reply.length !== 0){
  
+
+    // will be an arry of reply objects instead
     console.log(replyData);
-        var replyDataHolder = replyData;
-        const array = [];
-        if(!replyDataHolder)return;
-        while(replyDataHolder.reply){
+        // if(!replyDataHolder)return;
+        // while(replyDataHolder.reply){
           
-          array.push(replyDataHolder.reply);
-          replyDataHolder = replyDataHolder.reply;
-        }
-        console.log(array);
-        setReplyArrayHolder(array.concat([]));
+        //   array.push(replyDataHolder.reply);
+        //   replyDataHolder = replyDataHolder.reply;
+        // }
+        setReplyArrayHolder(replyData.reply.concat([]));
         setQueryReply(false);
       }
 

@@ -150,6 +150,8 @@ async function addTweetFireBase(text,url){
 
 }
 function makeDatewithMS(dateString,date){
+  if(date.getMilliseconds() <= 99)
+  return dateString.substring(0,dateString.indexOf('GMT')-1) + '.0' + date.getMilliseconds()+ ' ' + dateString.substring(dateString.indexOf('GMT'))
  return dateString.substring(0,dateString.indexOf('GMT')-1) + '.' + date.getMilliseconds()+ ' ' + dateString.substring(dateString.indexOf('GMT'))
 }
 async function addUserFirebase(){
@@ -210,6 +212,7 @@ async function addReplyFirebase(textData,textID,tweetUser,downloadURL = ""){
     profilePic: user.photoURL,
     text: textData,
     media: downloadURL,
+    reply: [],
 });
 }
 
@@ -271,23 +274,44 @@ async function queryTweetSingle(tweetUser,tweetIDDate,setTweet){
 }
 
 async function queryContinuousReply(tweetUser,textID,replyID,setReplyData,setQueryReply){
-  
+  console.log(textID);
   const replies =  query(doc(db,'users',tweetUser,'tweets',textID,'replies',getDate(replyID)));
   const allRepliesSnapshot = await getDoc(replies);
 console.log(allRepliesSnapshot.data());
 
+// need to chnage to array of replies objects
 await   setReplyData(allRepliesSnapshot.data());
+
+if(setQueryReply)
   setQueryReply(true);
+}
+// will need a query before changign data and a query for outputting replies
+async function addSecondaryReply(holder,tweetUser,textID,replyID,setReplyData){
+  console.log(getDate(textID));
+  console.log(getDate(replyID));
+  const replies =  query(doc(db,'users',tweetUser,'tweets',getDate(textID),'replies',getDate(replyID)));
+  const allRepliesSnapshot = await getDoc(replies);
+console.log(allRepliesSnapshot.data());
+const originalReply = allRepliesSnapshot.data();
+console.log(originalReply);
+originalReply.reply.push(holder);
+console.log(originalReply);
+// need to chnage to array of replies objects
+await   setReplyData(originalReply.reply.concat([]));
+addContinuousReply(originalReply.reply,tweetUser,textID,replyID)
+
 
 }
 
+// change to just for arrays of one reply
 async function addContinuousReply(reply,tweetUser,textID,replyID){
   const date = new Date;
     console.log(textID);
     console.log(getDate(replyID));
   console.log(reply);
+  // the reply will hold an array 
   const data = await setDoc(doc(db, 'users', `${tweetUser}`,'tweets',getDate(textID), 'replies', getDate(replyID)), {
-   reply
+    reply : reply
 },{merge:true});
 
 }
@@ -302,4 +326,4 @@ function getDate(date){
 
 export { signInPopUp,signOutUser,getUserAuth, addTweetFireBase,
   uploadImage,queryData, addUserFirebase, addReplyFirebase,queryReplyFirebase,
-  getUserData, queryTweetSingle,queryContinuousReply,addContinuousReply};
+  getUserData, queryTweetSingle,queryContinuousReply,addContinuousReply,addSecondaryReply};

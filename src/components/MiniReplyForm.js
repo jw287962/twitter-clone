@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import {uploadImage,getDownloadURL ,addContinuousReply} from "./firebase";
+import {uploadImage,getDownloadURL ,addContinuousReply,queryContinuousReply} from "./firebase";
 import { useLocation } from "react-router-dom";
 import Tweets from "./Tweets";
 const MiniReplyForm = (prop) =>{
@@ -15,7 +15,7 @@ const MiniReplyForm = (prop) =>{
 
 
     // const [newReplyData,setNewReplyData] =useState('');
-  const [replies,setReplies] = useState([]);
+  const [replyArrayData,setReplyArrayData] = useState([]);
   const toggleFileInput = (e) => {
     const fileInput = document.querySelector('#media');
     fileInput.click();
@@ -57,7 +57,7 @@ const removeForm= (e)=>{
     e.stopPropagation()
 }
   
-const processReplyFormData = (e) => {
+ const processReplyFormData = async (e) => {
 e.preventDefault();
 makeNewReplyData();
 
@@ -65,13 +65,19 @@ const date = new Date();
 const dateString = date.toString();
 const dateData = makeDatewithMS(dateString,date)
 console.log(currentReplyData);
-// will need to fix when query replies and to make sure i am updating the correct part within.
+// query the array and push a new arrayZ?
+await queryContinuousReply(tweet.email,tweet.date,currentReplyData.date,setReplyArrayData)
+
+console.log(replyArrayData);
+
+// push new reply data.
 const holder = currentMiniReply
   // tweet.date is a string right now
   console.log(tweet, 'HUH?')
     addContinuousReply(holder,tweet.email,tweet.date,currentReplyData.date);
     setNewReplyData('');
     setReplyMiniText('');
+    
   // async function addContinuousReply(reply,tweetUser,textID,replyID){
     // const data = await setDoc(doc(db, 'users', `${tweetUser}`,'tweets',textID, 'replies', replyID), {
 }
