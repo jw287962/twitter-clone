@@ -20,11 +20,12 @@ const MiniReply = (props) => {
 const [replyArrayHolder,setReplyArrayHolder] = useState([]);
 const handleInternalReply = (e) => {
   const replyDiv = e.target.parentElement.parentElement.parentElement
-  setArrayReplyNum(replyNum);
   console.log(replyDiv)
   setToggleFormHidden(false);
   // query reply 
  console.log(replyData)
+setArrayReplyNum(replyNum);
+
 
 //  current secondary reply data and first reply data
   setCurrentMiniReply(reply);
@@ -36,34 +37,37 @@ useEffect(() => {
 },[replyMiniText])
 
 useEffect(() => {
-  if(replyData && replyData.reply && replyData.reply.length !== 0){
+  console.log(reply);
+//   if(replyData && replyData.reply && replyData.reply.length !== 0){
  
-      let replyDataHolder = replyData.reply[0];
-const array = [];
-    // will be an arry of reply objects instead
-    console.log(replyDataHolder);
-        if(!replyDataHolder)return;
-        while(replyDataHolder.reply){
-            // if( Array.isArray(replyDataHolder.reply)){
-            //   array.push(replyDataHolder.reply[0]);
-            //   replyDataHolder = replyDataHolder.reply[0];
-            // }
+//       let replyDataHolder = replyData.reply[0];
+// const array = [];
+//     // will be an arry of reply objects instead
+//     console.log(replyDataHolder);
+//         if(!replyDataHolder)return;
+//         while(replyDataHolder.reply){
+//             // if( Array.isArray(replyDataHolder.reply)){
+//             //   array.push(replyDataHolder.reply[0]);
+//             //   replyDataHolder = replyDataHolder.reply[0];
+//             // }
 
-            // 
-        if(replyDataHolder.reply !== ''){
-            array.push(replyDataHolder.reply);
-            replyDataHolder = replyDataHolder.reply;
-          }else{
-            replyDataHolder = replyDataHolder.reply;
-          }
+//             // 
+//         if(replyDataHolder.reply !== ''){
+//             array.push(replyDataHolder.reply);
+//             replyDataHolder = replyDataHolder.reply;
+//           }else{
+//             replyDataHolder = replyDataHolder.reply;
+//           }
        
-        }
-        setReplyArrayHolder(array.concat([]));
-      }
+//         }
+//         setReplyArrayHolder(array.concat([]));
+//       }
 
 },[])
+const string = replyNum+',';
+
   return (
-    <div className="reply" key-num={replyNum} >
+    <div className="reply" key-num={replyNum} >Test
     
       <div className="flexrow tweetuser">
      
@@ -80,9 +84,13 @@ const array = [];
        <button className="tweetbutton"><span className="material-icons">share</span></button>
         
        </div>
-       {replyArrayHolder.map((tweet,i)=>{
+       {reply.reply.map((tweet,i)=>{
+        if(!tweet){
+          return null;
+        }
           console.log(tweet)
-          return(<ContinuousMiniReply setArrayReplyNum={setArrayReplyNum} replyNum={i++}  key={tweet.user+tweet.date} setCurrentReply={setCurrentReply}
+          // arrayPosHolder.slice(arrayPosHolder.length,1,replyNum);
+          return(<ContinuousMiniReply setArrayReplyNum={setArrayReplyNum} replyNum={string+i}  key={tweet.user+tweet.date} setCurrentReply={setCurrentReply}
             reply={tweet}  replyData={replyData} login={login}
 setCurrentMiniReply={setCurrentMiniReply}
             setCurrentReplyData={setCurrentReplyData}></ContinuousMiniReply>)

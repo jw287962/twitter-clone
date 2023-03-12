@@ -286,26 +286,39 @@ if(setQueryReply)
   setQueryReply(true);
 }
 
+// all deeper replies
+// USES ARRAYREPLYNUM TO FIGURE OUT WHICH ARRAY TO CHANGE. need to add a new reply array at the number 
 async function addMiniReplies(tweetUser,textID,replyID,arrayReplyNum,holder){
+  console.log(arrayReplyNum);
+  console.log(holder);
   // console.log(textID);
   const replies =  query(doc(db,'users',tweetUser,'tweets',getDate(textID),'replies',getDate(replyID)));
   const allRepliesSnapshot = await getDoc(replies);
 console.log(allRepliesSnapshot.data());
 const originalReply = allRepliesSnapshot.data();
-
+// DO THIS FOR ONLY STRING LENGHT OF 1 (JUST NUMBER):  
 const orignalReplyArrayData = originalReply.reply;
-orignalReplyArrayData.splice(arrayReplyNum,1,holder);
+console.log(typeof arrayReplyNum)
+if(typeof arrayReplyNum == "number"){
+  console.log(arrayReplyNum,'is an umber')
+  orignalReplyArrayData.splice(arrayReplyNum,1,holder);
+
+}
 // need to chnage to array of replies objects
 console.log(holder);
 console.log(orignalReplyArrayData);
 addContinuousReply(orignalReplyArrayData,tweetUser,textID,replyID);
 }
 
+// first reply
 // will need a query before changign data and a query for outputting replies
 async function addSecondaryReply(holder,tweetUser,textID,replyID,setReplyData){
   const replies =  query(doc(db,'users',tweetUser,'tweets',getDate(textID),'replies',getDate(replyID)));
   const allRepliesSnapshot = await getDoc(replies);
-const originalReply = allRepliesSnapshot.data();
+const originalReply = await allRepliesSnapshot.data();
+console.log(originalReply)
+holder.arrayPosition = originalReply.reply.length;
+console.log(holder);
 originalReply.reply.push(holder);
 // need to chnage to array of replies objects
 await   setReplyData(originalReply.reply.concat([]));

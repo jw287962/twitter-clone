@@ -60,17 +60,14 @@ const removeForm= (e)=>{
   
  const processReplyFormData = async (e) => {
 e.preventDefault();
-makeNewReplyData();
+await makeNewReplyData();
 
-const date = new Date();
-const dateString = date.toString();
-const dateData = makeDatewithMS(dateString,date)
-console.log(currentReplyData);
+
 // query the array and push a new arrayZ?
 
 console.log(replyArrayData);
 
-// push new reply data.
+// push new reply data.   //is this array ?
 const holder = currentMiniReply
   // tweet.date is a string right now
 await addMiniReplies(tweet.email,tweet.date,currentReplyData.date,arrayReplyNum,holder);
@@ -84,42 +81,46 @@ await addMiniReplies(tweet.email,tweet.date,currentReplyData.date,arrayReplyNum,
 }
 
 const makeNewReplyData = (e) => {
+  console.log(currentMiniReply);
   // setCurrentReply(reply);
   // const replyDiv = e.target.parentElement.parentElement.parentElement
+        const date = new Date();
+  const dateString = date.toString();
+  const dateData = makeDatewithMS(dateString,date)
+  const holder = {user:login.email, displayName:login.displayName,
+            profilePic: login.photoURL,date:dateData, text:replyMiniText,reply:[],arrayPosition:currentMiniReply.arrayPosition+','+currentMiniReply.reply.length}
   setToggleFormHidden(false);
   // query reply 
-
-  looper(currentMiniReply);
+  currentMiniReply.reply.push(holder);
+  // looper(currentMiniReply);
   console.log(currentMiniReply);
   setNewReplyData(currentMiniReply);
 }
 
 
 const looper = (replyDataFunc) => {
-  console.log('loop')
-  console.log(replyDataFunc);
+  // console.log('loop')
+  // console.log(replyDataFunc);
   
-  for(const key in replyDataFunc){
-    if(key === 'reply'){
-      console.log(replyDataFunc['reply']);
-     if(replyDataFunc['reply'] === ''){
+  // for(const key in replyDataFunc){
+  //   if(key === 'reply'){
+  //     console.log(replyDataFunc['reply']);
+  //    if(replyDataFunc['reply'] === ''){
  
    
-        const date = new Date();
-  const dateString = date.toString();
-  const dateData = makeDatewithMS(dateString,date)
-        const holder = {user:login.email, displayName:login.displayName,
-          profilePic: login.photoURL,date:dateData, text:replyMiniText,reply:""}
-        replyDataFunc.reply = holder;
-        console.log(replyDataFunc);
-     }else
-      looper(replyDataFunc['reply']);
+  //       const date = new Date();
+  // const dateString = date.toString();
+  // const dateData = makeDatewithMS(dateString,date)
+  //       const holder = {user:login.email, displayName:login.displayName,
+  //         profilePic: login.photoURL,date:dateData, text:replyMiniText,reply:""}
+  //       replyDataFunc.reply = holder;
+  //       console.log(replyDataFunc);
+  //    }else
+  //     looper(replyDataFunc['reply']);
 
-    }else 
-    if(key === 'date'|| key === 'displayName' || key === 'media' || key === 'profilePic' || key === 'text' || key === 'user'){}
-    
-
-  }
+  //   }else 
+  //   if(key === 'date'|| key === 'displayName' || key === 'media' || key === 'profilePic' || key === 'text' || key === 'user'){}
+  // }
 
   
   console.log(currentReplyData);

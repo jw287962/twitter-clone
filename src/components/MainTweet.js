@@ -181,7 +181,7 @@ const MainTweet = (prop) => {
             })
           }
           </div>
-      <ReplyForm login={login}currentReply={currentReply} tweet={tweet} 
+      <ReplyForm  arrayReplyNum={arrayReplyNum} login={login}currentReply={currentReply} tweet={tweet} 
       toggleFormHidden={toggleFormHidden} setToggleFormHidden={setToggleFormHidden} 
       replyMiniText={replyMiniText} setReplyMiniText={setReplyMiniText}
      ></ReplyForm>

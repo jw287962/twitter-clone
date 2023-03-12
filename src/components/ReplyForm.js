@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import Tweets from "./Tweets";
 const ReplyForm = (prop) =>{
 // get tweetID and user of original tweet
-  const {login,toggleFormHidden,setToggleFormHidden,tweet,setReplyMiniText,replyMiniText} = prop;
+  const {login,toggleFormHidden,setToggleFormHidden,tweet,setReplyMiniText,replyMiniText,arrayReplyNum} = prop;
 
   const {currentReply} = prop;
   // ,user,text,date,displayName,media,profilePic
@@ -65,7 +65,7 @@ const dateData = makeDatewithMS(dateString,date)
 console.log(replyArrayData);
 // will need to fix when query replies and to make sure i am updating the correct part within.
 const holder = {user:login.email, displayName:login.displayName,profilePic: 
-  login.photoURL,date:dateData, text:replyMiniText,reply:''}
+  login.photoURL,date:dateData, text:replyMiniText, reply:[]} //arrayPosition:
 
   console.log(currentReply);
 

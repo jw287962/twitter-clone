@@ -19,8 +19,8 @@ const ContinuousMiniReply = (props) => {
 const [replyArrayHolder,setReplyArrayHolder] = useState([]);
 const handleInternalReply = (e) => {
   const replyDiv = e.target.parentElement.parentElement.parentElement
-  setArrayReplyNum(replyNum);
-  console.log(replyDiv)
+  setArrayReplyNum(replyNum);  //will be like 1,2,3,5
+   console.log(replyDiv)
   setToggleFormHidden(false);
   // query reply 
  console.log(replyData)
