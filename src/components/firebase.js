@@ -302,12 +302,27 @@ console.log(typeof arrayReplyNum)
 if(typeof arrayReplyNum == "number"){
   console.log(arrayReplyNum,'is an umber')
   orignalReplyArrayData.splice(arrayReplyNum,1,holder);
-
+  addContinuousReply(orignalReplyArrayData,tweetUser,textID,replyID);
 }
+else {
+  const newArray = arrayReplyNum.split(',');
+  console.log(newArray);
+  var arrayHolder =  originalReply;
+  while(newArray.length != 0){
+    const number = Number(newArray.splice(0,1));
+    console.log(number);
+    arrayHolder = arrayHolder.reply[number];
+    console.log(arrayHolder);
+  }
+  // arrayHolder
+  console.log(arrayHolder.reply.push(holder));
+  addContinuousReply(orignalReplyArrayData,tweetUser,textID,replyID);
+}
+
 // need to chnage to array of replies objects
 console.log(holder);
 console.log(orignalReplyArrayData);
-addContinuousReply(orignalReplyArrayData,tweetUser,textID,replyID);
+
 }
 
 // first reply

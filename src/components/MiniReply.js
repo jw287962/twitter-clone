@@ -33,7 +33,6 @@ setArrayReplyNum(replyNum);
 }
 useEffect(() => {
 
- 
 },[replyMiniText])
 
 useEffect(() => {
@@ -67,7 +66,7 @@ useEffect(() => {
 const string = replyNum+',';
 
   return (
-    <div className="reply" key-num={replyNum} >Test
+    <div className="reply" key-num={replyNum} >first reply
     
       <div className="flexrow tweetuser">
      
@@ -92,7 +91,7 @@ const string = replyNum+',';
           // arrayPosHolder.slice(arrayPosHolder.length,1,replyNum);
           return(<ContinuousMiniReply setArrayReplyNum={setArrayReplyNum} replyNum={string+i}  key={tweet.user+tweet.date} setCurrentReply={setCurrentReply}
             reply={tweet}  replyData={replyData} login={login}
-setCurrentMiniReply={setCurrentMiniReply}
+setCurrentMiniReply={setCurrentMiniReply} setToggleFormHidden={setToggleFormHidden}
             setCurrentReplyData={setCurrentReplyData}></ContinuousMiniReply>)
             // replyMiniText={replySecondMiniText} setToggleFormHidden={setToggleReplyFormHidden} newReplyData={newReplyData} setNewReplyData={setNewReplyData}              currentMiniReply={currentMiniReply}
         })}

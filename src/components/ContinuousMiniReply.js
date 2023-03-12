@@ -18,6 +18,7 @@ const ContinuousMiniReply = (props) => {
 
 const [replyArrayHolder,setReplyArrayHolder] = useState([]);
 const handleInternalReply = (e) => {
+  console.log(replyNum);
   const replyDiv = e.target.parentElement.parentElement.parentElement
   setArrayReplyNum(replyNum);  //will be like 1,2,3,5
    console.log(replyDiv)
@@ -44,7 +45,8 @@ useEffect(() => {
 //       }
 
 },[])
-
+const string = replyNum+',';
+console.log(reply);
   return (
     <div className="reply" key-num={replyNum} >
     
@@ -63,6 +65,18 @@ useEffect(() => {
        <button className="tweetbutton"><span className="material-icons">share</span></button>
         
        </div>
+       {reply.reply.map((tweet,i)=>{
+        if(!tweet){
+          return null;
+        }
+          console.log(tweet)
+          // arrayPosHolder.slice(arrayPosHolder.length,1,replyNum);
+          return(<ContinuousMiniReply setArrayReplyNum={setArrayReplyNum} replyNum={string+i}  key={tweet.user+tweet.date} setCurrentReply={setCurrentReply}
+            reply={tweet}  replyData={replyData} login={login}
+setCurrentMiniReply={setCurrentMiniReply} setToggleFormHidden={setToggleFormHidden}
+            setCurrentReplyData={setCurrentReplyData}></ContinuousMiniReply>)
+            // replyMiniText={replySecondMiniText} setToggleFormHidden={setToggleReplyFormHidden} newReplyData={newReplyData} setNewReplyData={setNewReplyData}              currentMiniReply={currentMiniReply}
+        })}
 
     </div>
   )
