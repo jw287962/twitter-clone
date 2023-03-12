@@ -66,7 +66,7 @@ useEffect(() => {
 const string = replyNum+',';
 
   return (
-    <div className="reply" key-num={replyNum} >first reply
+    <div className="reply" key-num={replyNum} >
     
       <div className="flexrow tweetuser">
      
