@@ -54,6 +54,10 @@ h3{
 margin: 0px;
 font-weight: 400;
 }
+.navLink{
+  overflow: hidden;
+  color: black;
+}
 .user,.menu{
   display: none;
   background-color: unset;
@@ -112,7 +116,7 @@ font-weight: 400;
   .userNav{
     position: fixed;
 visibility: hidden;
-    z-index: 99;
+    z-index: 1;
     background-color: white;
     }
     ul{
@@ -156,5 +160,4 @@ visibility: hidden;
 
 .widthTrans{
   width: 0px;
-
 }

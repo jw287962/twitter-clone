@@ -41,8 +41,12 @@ const [viewport,setViewport] = useState(window.innerWidth)
   const nav = document.querySelector('.userNav');
   const main = document.querySelector('main');
   const mainNav = document.querySelector('.mainNavList');
+  const navLink = document.querySelector('.navLink');
+  const navLinks = document.querySelector('.leftNavLink');
 
   !menu ? mainNav.classList.add('widthTrans'): mainNav.classList.remove('widthTrans');
+  !menu ? navLink.classList.add('widthTrans'): navLink.classList.remove('widthTrans');
+  !menu ? navLinks.classList.add('widthTrans'): navLinks.classList.remove('widthTrans');
 
   menu ? main.classList.add('darkness'): main.classList.remove('darkness');
   menu ?  nav.style.visibility = 'visible' : nav.style.visibility = 'hidden' ;
@@ -58,13 +62,13 @@ const [viewport,setViewport] = useState(window.innerWidth)
             // search: `?${props.login.email}`
         }}
         >
-        <li className="leftNavLink">    <span className="material-icons">home</span> <h3>Home</h3></li>
+        <li className="leftNavLink">    <span className="material-icons">home</span> <h3 className="navLink">Home</h3></li>
         </Link>
           
-          <li className="leftNavLink"> <span className="material-icons">search</span> <h3>Explore</h3></li>
-          <li className="leftNavLink"> <span className="material-icons">circle_notifications</span> <h3>Notifications</h3></li>
-          <li className="leftNavLink"> <span className="material-icons">message</span> <h3>Messages</h3></li>
-          <li className="leftNavLink"> <span className="material-icons">bookmark</span><h3>Bookmarks</h3></li>
+          <li className="leftNavLink"> <span className="material-icons">search</span> <h3 className="navLink" >Explore</h3></li>
+          <li className="leftNavLink"> <span className="material-icons">circle_notifications</span> <h3 className="navLink">Notifications</h3></li>
+          <li className="leftNavLink"> <span className="material-icons">message</span> <h3 className="navLink">Messages</h3></li>
+          <li className="leftNavLink"> <span className="material-icons">bookmark</span><h3 className="navLink">Bookmarks</h3></li>
           
           <Link to={{           pathname: "/profile",
                         }}
