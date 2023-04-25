@@ -1,21 +1,22 @@
-Twitter Clone: Ongoing Project 
+## Twitter Clone: Ongoing Project
 
-- Ending up making comments like reddit, since it seemed harder
-    - maybe i will try to do tweets, but it sounds like just like nodes connected to each other. so a reply would be a tweet, but also a reply and they will all connect to each other, albeit with more specifics needed.
+- Supports Infinite Comments using Array Data structure. (works like reddit comments)
+- I would use Nodes/Tree structure like my Knight Travails project if I wanted it to work like Twitter,
+  I think it would work if a tweet can contain tweets as nodes, and so on, and each tweet, would also exist as a separate tweet that would be accessible without entering any node, but a tweet, will have nodes to represent the connection between them as a reply. This way, you can access a reply as a regular tweet just like twitter.
 
+## REFACTOR
 
+- Before implementing new features, and If I set aside sometime on this project,
+- I need to refactor my code first.
 
 # HOSTED ON FIREBASE
+
 make sure to run build first
 use firebase deploy to deploy after setting it up
 https://twitter-clone-33714.web.app/
 
-
-
-
-
-
 ### DEFAULT###
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
