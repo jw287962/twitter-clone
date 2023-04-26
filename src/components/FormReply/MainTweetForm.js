@@ -1,42 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "material-icons/iconfont/material-icons.css";
 import { uploadImage, addTweetFireBase } from "../firebase";
 import { getDownloadURL } from "firebase/storage";
 import { getAuth } from "firebase/auth";
+import { UserContext } from "../../Router";
+
+import TweetHandlerWrapper from "../TweetPage/HOCReplyFormHandler";
 const Form = (props) => {
-  const { login, signInUser } = props;
+  const user = useContext(UserContext);
 
-  const [userTweetText, setUserTweetText] = useState("");
-  const [media, setMedia] = useState("");
-
-  const toggleFileInput = (e) => {
-    const fileInput = document.querySelector("#media");
-    fileInput.click();
-  };
-
-  const textAreaInput = (e) => {
-    setUserTweetText(e.target.value);
-  };
-
-  const handleFileInput = (e) => {
-    // e.preventDefault();
-    // console.log(this.readFile(e.target.value))
-    const reader = new FileReader();
-    console.log(e.target.files);
-    reader.addEventListener("load", () => {
-      const holder = reader.result;
-      const imgURL = URL.createObjectURL(e.target.files[0]);
-      setMedia({
-        file: e.target.files[0],
-        name: e.target.files[0].name,
-        load: imgURL,
-      });
-      // setMedia(reader.result);
-    });
-    console.log(e.target.files);
-
-    reader.readAsDataURL(e.target.files[0]);
-  };
+  const {
+    signInUser,
+    media,
+    toggleFileInput,
+    userTweetText,
+    setUserTweetText,
+    setMedia,
+    textAreaInput,
+    handleFileInput,
+  } = props;
+  const { login } = user;
 
   const processTweetData = (e) => {
     e.preventDefault();
@@ -107,4 +90,4 @@ const Form = (props) => {
   );
 };
 
-export default Form;
+export default TweetHandlerWrapper(Form);

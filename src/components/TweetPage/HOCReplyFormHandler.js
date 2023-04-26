@@ -34,6 +34,7 @@ const TweetHandlerWrapper = (OriginalComponent) => {
 
       reader.readAsDataURL(e.target.files[0]);
     };
+
     return (
       <OriginalComponent
         media={media}

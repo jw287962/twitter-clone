@@ -1,4 +1,4 @@
-import TweetHandlerWrapper from "./HigherOrderTweetFunctions";
+import TweetHandlerWrapper from "./HOCReplyFormHandler";
 
 import React, { useState, useEffect } from "react";
 import Tweets from "../Tweets";
