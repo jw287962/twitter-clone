@@ -1,26 +1,25 @@
-:root{
+:root {
   --userTweetInputWidth: 400px;
   --border: 1px solid grey;
 }
 
-main{
+main {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   overflow: hidden;
   align-items: center;
   box-sizing: border-box;
   flex-grow: 1;
-min-height: 100vh;
+  min-height: 100vh;
   border-left: var(--border);
   border-right: var(--border);
-
 }
-.content{
-  min-width: 550px
+.content {
+  min-width: 550px;
 }
 /* top form section */
-.tweetform{
+.tweetform {
   margin: 0px 0px;
   padding: 40px;
   display: flex;
@@ -30,25 +29,23 @@ min-height: 100vh;
   min-width: 90%;
   background-color: white;
 }
-textarea{
+textarea {
   min-height: 50px;
   min-width: 80%;
 }
 
 /* for img file picker */
 input[type="file"] {
-display: none;
+  display: none;
 }
 
-
-
 /* right side button */
-.searchNav>div>button{
+.searchNav > div > button {
   width: 100px;
 }
 
-
-.tweetform>input[type="submit"],.minireply>input[type="submit"]{
+.tweetform > input[type="submit"],
+.minireply > input[type="submit"] {
   background-color: white;
   background-color: lightblue;
   border: none;
@@ -56,18 +53,16 @@ display: none;
   padding: 5px 10px;
   font-weight: bolder;
   width: 100px;
-
 }
-
 
 /* TWEETS  */
-.tweet>a{
+.tweet > a {
   width: 90%;
   text-decoration: none;
-  display:block;
+  display: block;
   color: black;
 }
-.tweet{
+.tweet {
   background-color: white;
   width: 100%;
   padding: 10px;
@@ -78,28 +73,28 @@ display: none;
   align-items: center;
   position: relative;
 }
-.tweet:hover{
+.tweet:hover {
   background-color: rgb(245, 245, 245);
 }
-h2{
+h2 {
   padding: 0px;
   margin: 0px;
   font-size: 20px;
 }
-.tweet>a>.tweetuser{
+.tweet > a > .tweetuser {
   align-items: center;
   justify-content: space-between;
 }
-.tweet>a>img{
+.tweet > a > img {
   margin: 5px 0px;
   border-radius: 20px;
   border: 1px solid grey;
 }
-.tweet>a{
+.tweet > a {
   display: flex;
   flex-direction: column;
 }
-.tweet>a>span{
+.tweet > a > span {
   width: 80%;
   display: block;
   padding: 0px 20px;
@@ -107,7 +102,7 @@ h2{
   text-align: left;
 }
 
-.tweetbuttons{
+.tweetbuttons {
   position: relative;
   display: flex;
   margin: 2px;
@@ -115,139 +110,132 @@ h2{
   align-items: center;
   width: 95%;
 }
-.tweetbutton{
+.tweetbutton {
   padding: 0px;
   margin: 0px;
   width: 20px;
   background-color: unset;
   height: 100%;
-  
 }
-.tweetbutton>.material-icons{
+.tweetbutton > .material-icons {
   font-size: 20px;
   color: black;
 }
-.tweetbutton>span{
+.tweetbutton > span {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-button>span{
+button > span {
   width: 30px;
   height: 30px;
 }
-.userhandle{
-  
+.userhandle {
 }
 /* button  */
-.tweetform>.flexcol>.material-icons:hover{
+.tweetform > .flexcol > .material-icons:hover {
   background-color: rgb(217, 245, 255);
   border: 5px solid rgb(223, 247, 255);
   border-radius: 50%;
   color: black;
 }
-.material-icons:hover{
+.material-icons:hover {
   color: rgb(255, 255, 255);
- 
 }
-button>span:hover{
+button > span:hover {
   background-color: rgb(132, 191, 211);
   border-radius: 50%;
 }
 
 /* Links Profile */
-.tweetuser>a{
+.tweetuser > a {
   text-decoration: none;
 }
-.userhandle{
+.userhandle {
   color: grey;
 }
-.tweetuser>a>h2{
+.tweetuser > a > h2 {
   color: black;
   font-size: 15px;
 }
 
-
 /* PROFILE PIC */
-.profilePic{
+.profilePic {
   border-radius: 50%;
-  vertical-align:middle;  
+  vertical-align: middle;
   margin-right: 10px;
 }
 /* media queries */
 
 @media (max-width: 900px) {
-  textarea{
+  textarea {
     min-width: 70%;
   }
-  .content{
+  .content {
     /* align-items: flex-start; */
   }
- 
-  .content>form{
+
+  .content > form {
     width: var(--userTweetInputWidth);
     display: flex;
     flex-direction: column;
-    min-width:  var(--userTweetInputWidth);
+    min-width: var(--userTweetInputWidth);
   }
-  
+}
+
+@media (max-width: 800px) {
+  :root {
+    --userTweetInputWidth: clamp(450px, 90%, 100%);
+  }
+  main {
+    border-right: 1px solid black;
+  }
+  .searchNav {
+    display: none;
+  }
+  .content > .tweet,
+  .content > form {
+    min-width: 95%;
+  }
+  .userNav {
+    flex-grow: unset;
+    flex-shrink: unset;
+    width: 50px;
+  }
+}
+@media (max-width: 600px) {
+  #userform {
+    padding-top: 50px;
   }
 
-  @media (max-width: 800px) {
-    :root{
-      --userTweetInputWidth: clamp(450px,90%,100%);
-    }
-    main{
-      border-right: 1px solid black;
-    }
-    .searchNav{
-      display: none;
-     }
-    .content>.tweet,.content>form{
-      min-width: 95%;
-    }
-    .userNav{
-      flex-grow: unset;
-      flex-shrink: unset;
-      width: 50px;
-    }
-  }
-  @media (max-width: 600px) {
-    #userform{
-      padding-top: 50px;
-    }
-    
-    .content{
+  .content {
     outline: none;
     border: 1px solid black;
     border-right: none;
     border-top: none;
-      max-width: 100%;
-        min-width: 390px;
-    }
-   
-    }
+    max-width: 100%;
+    min-width: 390px;
+  }
+}
 
-    #loader{
-       /* display: flex;
+#loader {
+  /* display: flex;
        justify-content: center;
        align-items: center;
         */
-      border: 1rem solid black;
-      border-radius: 50%;
-      border-top: 1rem solid white;
-      width: 3rem;
-      height: 3rem;
-      animation: spin 2s linear infinite
-    }
-    /* keyframe */
-    @keyframes spin {
-      0% {
-          transform: rotate(0deg);
-      }
-      100% {
-          transform: rotate(360deg);
-      }
-  
+  border: 1rem solid black;
+  border-radius: 50%;
+  border-top: 1rem solid white;
+  width: 3rem;
+  height: 3rem;
+  animation: spin 2s linear infinite;
+}
+/* keyframe */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  
+  100% {
+    transform: rotate(360deg);
+  }
+}

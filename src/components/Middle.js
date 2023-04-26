@@ -1,46 +1,51 @@
-import React,{useState,useEffect} from "react";
-import './css/Middle.css'
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "../Router";
+import "./css/Middle.css";
 import Tweets from "./Tweets";
-import Form from "./userForm";
-import { getUserAuth,queryData } from "./firebase";
+import Form from "./FormReply/MainTweetForm";
+import { getUserAuth, queryData } from "./firebase";
 
 const Middle = (props) => {
+  const user = useContext(UserContext);
 
-    const [tweetsData,setTweetsData] = useState([]);
-    const [tweetsDataSliced,setTweetsDataSliced] = useState([]);
-    const [loadLimiter, setLoadLimiter] = useState(5);
-    const [loadingData, setLoadingData] = useState(false);
-    
- 
+  const [tweetsData, setTweetsData] = useState([]);
+  const [tweetsDataSliced, setTweetsDataSliced] = useState([]);
+  const [loadLimiter, setLoadLimiter] = useState(5);
+  const [loadingData, setLoadingData] = useState(false);
 
-  const {login,signInUser} = props;
-  useEffect(  () => {
-    async function queryTweetData(){
-        if(tweetsData.length <=loadLimiter){
-          // querySnapshotUpdate();
-         const holderData = await queryData(tweetsData,setTweetsData,setLoadingData);
-      //  console.log(holderData);
+  const { login, signInUser } = user;
+  useEffect(() => {
+    async function queryTweetData() {
+      if (tweetsData.length <= loadLimiter) {
+        // querySnapshotUpdate();
+        const holderData = await queryData(
+          tweetsData,
+          setTweetsData,
+          setLoadingData
+        );
+        //  console.log(holderData);
         setLoadingData(false);
       }
     }
     queryTweetData();
-
-  },[loadLimiter])
+  }, [loadLimiter]);
 
   const addFiveLimit = () => {
-    setLoadLimiter(loadLimiter+5);
-  }
+    setLoadLimiter(loadLimiter + 5);
+  };
   function isBottom(e) {
-  
-    if(tweetsData.length <= loadLimiter){
+    if (tweetsData.length <= loadLimiter) {
       return;
     }
-    if(window.innerHeight*2 >= document.body.scrollHeight){
-      if(Math.abs(document.body.scrollHeight-  window.innerHeight- window.pageYOffset) <=8){
+    if (window.innerHeight * 2 >= document.body.scrollHeight) {
+      if (
+        Math.abs(
+          document.body.scrollHeight - window.innerHeight - window.pageYOffset
+        ) <= 8
+      ) {
         addFiveLimit();
       }
-    }
-   else if( window.pageYOffset >= window.innerHeight){
+    } else if (window.pageYOffset >= window.innerHeight) {
       addFiveLimit();
     }
     // console.log(document.body.scrollHeight,  'scrollehight of body');
@@ -48,54 +53,62 @@ const Middle = (props) => {
     // console.log(window.outerHeight, ' outerheight, ')
 
     // console.log(window.pageYOffset);
-
   }
- useEffect(() => {
-    document.addEventListener('scroll',isBottom);
+  useEffect(() => {
+    document.addEventListener("scroll", isBottom);
 
-console.log(loadingData)
-  if(tweetsDataSliced.length !== loadLimiter && !loadingData ){
-    console.log('slice data');
-    // querySnapshotUpdate();
-    console.log(tweetsData);
-    const arrayHolder = tweetsData.slice(0,loadLimiter)
+    console.log(loadingData);
+    if (tweetsDataSliced.length !== loadLimiter && !loadingData) {
+      console.log("slice data");
+      // querySnapshotUpdate();
+      console.log(tweetsData);
+      const arrayHolder = tweetsData.slice(0, loadLimiter);
       setTweetsDataSliced(arrayHolder);
-      console.log(arrayHolder,loadLimiter,tweetsData);
-  }
+      console.log(arrayHolder, loadLimiter, tweetsData);
+    }
 
-  return () => document.removeEventListener("keyup", isBottom);
- },[tweetsData,loadLimiter,loadingData])
+    return () => document.removeEventListener("keyup", isBottom);
+  }, [tweetsData, loadLimiter, loadingData]);
 
- useEffect(()=> {
-  console.log(props.login);
+  useEffect(() => {
+    console.log(props.login);
+  });
+  // async function querySnapshotUpdate(){
+  //   const querySnapshot = await queryData(tweetsData,setTweetsData);
+  //   const newArray = [];
 
- },)
-// async function querySnapshotUpdate(){
-//   const querySnapshot = await queryData(tweetsData,setTweetsData);
-//   const newArray = [];
-  
-//   querySnapshot.forEach((doc) => {
-//     // doc.data() is never undefined for query doc snapshots
-//     console.log(doc.id, " => ", doc.data());
-//     const array = [doc.data()];
-//     setTweetsData(tweetsData.concat(array[0]))
+  //   querySnapshot.forEach((doc) => {
+  //     // doc.data() is never undefined for query doc snapshots
+  //     console.log(doc.id, " => ", doc.data());
+  //     const array = [doc.data()];
+  //     setTweetsData(tweetsData.concat(array[0]))
 
-//   });
+  //   });
 
-// }
+  // }
   return (
     <main className="content">
       <Form login={login} signInUser={signInUser}></Form>
       {/* text,user,media,date */}
       {tweetsDataSliced.map((tweet) => {
-      return(
-        // 
-          <Tweets key={tweet.user+tweet.date.substring(10,24)}text={tweet.text} displayName ={tweet.displayName} email ={tweet.email}user={tweet.user} media ={tweet.media} date = {tweet.date} login={login} profilePic={tweet.profilePic}></Tweets>
-        )
-        })}
-    {<div id={!loadingData? 'hidden': 'loader'} > </div>}
+        return (
+          //
+          <Tweets
+            key={tweet.user + tweet.date.substring(10, 24)}
+            text={tweet.text}
+            displayName={tweet.displayName}
+            email={tweet.email}
+            user={tweet.user}
+            media={tweet.media}
+            date={tweet.date}
+            login={login}
+            profilePic={tweet.profilePic}
+          ></Tweets>
+        );
+      })}
+      {<div id={!loadingData ? "hidden" : "loader"}> </div>}
     </main>
-  )
-}
+  );
+};
 
-export default Middle; 
+export default Middle;

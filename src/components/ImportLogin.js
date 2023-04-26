@@ -1,16 +1,11 @@
-
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 
-
-const ImportLogin = (Component,props) => {
+const ImportLogin = (Component, props) => {
   let data = useLocation();
-  const {login,search} = data.state;
+  const { login, search } = data.state;
 
-  return(
+  return <Component login={data.state.login} {...props}></Component>;
+};
 
-    <Component login={data.state.login} {...props}></Component>
-  )
-}
-
-export default ImportLogin; 
+export default ImportLogin;
