@@ -62,6 +62,10 @@ input[type="file"] {
   display: block;
   color: black;
 }
+.tweet > a > img {
+  max-width: 99%;
+  max-width: 800px;
+}
 .tweet {
   background-color: white;
   width: 100%;
@@ -166,7 +170,11 @@ button > span:hover {
   margin-right: 10px;
 }
 /* media queries */
-
+@media (max-width: 1000px) {
+  .tweet > a > img {
+    max-width: 600px;
+  }
+}
 @media (max-width: 900px) {
   textarea {
     min-width: 70%;
@@ -180,6 +188,9 @@ button > span:hover {
     display: flex;
     flex-direction: column;
     min-width: var(--userTweetInputWidth);
+  }
+  .searchNav {
+    display: none;
   }
 }
 
