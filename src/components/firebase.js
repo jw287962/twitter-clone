@@ -362,17 +362,18 @@ async function addMiniReplies(
   // DO THIS FOR ONLY STRING LENGHT OF 1 (JUST NUMBER):
   const orignalReplyArrayData = originalReply.reply;
   if (typeof arrayReplyNum == "number") {
+    console.log("here");
     orignalReplyArrayData.splice(arrayReplyNum, 1, holder);
     addContinuousReply(orignalReplyArrayData, tweetUser, textID, replyID);
   } else {
     const newArray = arrayReplyNum.split(",");
+    console.log(newArray);
     var arrayHolder = originalReply;
     while (newArray.length != 0) {
       const number = Number(newArray.splice(0, 1));
       arrayHolder = arrayHolder.reply[number];
     }
-    // arrayHolder
-    // console.log(arrayHolder.reply.push(holder));
+    arrayHolder.reply.push(holder);
     addContinuousReply(orignalReplyArrayData, tweetUser, textID, replyID);
   }
 
@@ -416,7 +417,6 @@ async function addSecondaryReply(
 async function addContinuousReply(reply, tweetUser, textID, replyID) {
   const date = new Date();
 
-  // the reply will hold an array
   const data = await setDoc(
     doc(
       db,
