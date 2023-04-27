@@ -104,12 +104,6 @@ const ReplyForm = (prop) => {
       currentReply.date,
       setReplyArrayData
     );
-    // replyArrayData.push(holder);
-    // tweet.date is a string right now
-    // addContinuousReply(replyArrayData,tweet.email,tweet.date,currentReply.date);
-    // setNewReplyData('');
-    // async function addContinuousReply(reply,tweetUser,textID,replyID){
-    // const data = await setDoc(doc(db, 'users', `${tweetUser}`,'tweets',textID, 'replies', replyID), {
   };
   function makeDatewithMS(dateString, date) {
     return (
