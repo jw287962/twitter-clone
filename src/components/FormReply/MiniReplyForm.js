@@ -35,6 +35,7 @@ const MiniReplyForm = (prop) => {
   const toggleFileInput = (e) => {
     e.preventDefault();
     const fileInput = document.querySelector("#media");
+    console.log(fileInput);
     fileInput.click();
   };
 

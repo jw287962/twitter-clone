@@ -30,7 +30,9 @@ const ReplyForm = (prop) => {
   const [replyArrayData, setReplyArrayData] = useState([]);
   const toggleFileInput = (e) => {
     e.preventDefault();
-    const fileInput = document.querySelector("#media");
+    const fileInput = e.target.nextSibling;
+    console.log(e.target);
+
     fileInput.click();
   };
 
@@ -157,16 +159,17 @@ const ReplyForm = (prop) => {
         <label htmlFor="media"></label>
         <img className="mediaInput" src={mediaReply.load} width="250"></img>
         <div className="flexcol flexcenterxy">
-          <button onClick={toggleFileInput} className="material-icons">
+          <span onClick={toggleFileInput} className="material-icons">
             image
-            <input
-              onChange={handleFileInput}
-              type="file"
-              id="media"
-              name="media"
-              accept="image/png, image/jpeg, video/*, gif/*"
-            ></input>
-          </button>
+          </span>
+          <input
+            onChange={handleFileInput}
+            type="file"
+            id="media"
+            name="media"
+            accept="image/png, image/jpeg, video/*, gif/*"
+          ></input>
+          <span className="imageFile">{mediaReply.name}</span>
         </div>
         <input type="submit" value="Reply" onClick={processFormData}></input>
       </form>

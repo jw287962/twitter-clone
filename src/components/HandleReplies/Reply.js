@@ -66,10 +66,10 @@ const Reply = (props) => {
       setQueryReply(false);
     }
   }, [queryReply]);
-  console.log(reply);
+  // console.log(reply);
   // NEED TO STORE OBJECTS INSIDE REPLY IE: const obj = {reply: {text: 'hi', reply: {text: "newb"}, reply1: {}}};
   if (replyArrayHolder) {
-    console.log(replyArrayHolder);
+    // console.log(replyArrayHolder);
     return (
       <div className="reply">
         <div className="flexrow tweetuser">

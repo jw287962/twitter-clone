@@ -44,7 +44,6 @@ main > .replyContainer > .reply {
 .minireply {
   background-color: white;
   position: absolute;
-
   display: flex;
   flex-direction: column;
   left: 50%;
@@ -109,10 +108,14 @@ main > .replyContainer > .reply {
   padding: 7px;
   color: black;
 }
-
 .minireply > .tweet > a > img {
   max-width: 600px;
 }
+.minireply > div > button > .imageFile {
+  z-index: 100;
+  color: black;
+}
+
 /* for REPLY.js  */
 .replyTextData {
   display: flex;
