@@ -34,3 +34,10 @@ body {
 .App-link {
   color: #61dafb;
 }
+
+/* HELPER CSS */
+
+.flexcenterxy {
+  justify-content: center;
+  align-items: center;
+}

@@ -1,11 +1,11 @@
 import { Markup } from "interweave";
 import "../css/Replies.css";
 import { useEffect, useState } from "react";
-import MiniReplyForm from "../FormReply/MiniReplyForm";
+// import MiniReplyForm from "../FormReply/MiniReplyForm";
 import { useLocation } from "react-router-dom";
-import { addContinuousReply, queryContinuousReply } from "../firebase";
-import ContinuousMiniReply from "./ContinuousMiniReply";
-import Tweets from "../TweetPage/TweetPage";
+// import { addContinuousReply, queryContinuousReply } from "../firebase";
+// import ContinuousMiniReply from "./ContinuousMiniReply";
+// import Tweets from "../TweetPage/TweetPage";
 function makeDatewithMS(dateString, date) {
   return (
     dateString.substring(0, dateString.indexOf("GMT") - 1) +
@@ -109,7 +109,7 @@ const MiniReply = (props) => {
         // console.log(tweet);
         // arrayPosHolder.slice(arrayPosHolder.length,1,replyNum);
         return (
-          <ContinuousMiniReply
+          <MiniReply
             setArrayReplyNum={setArrayReplyNum}
             replyNum={string + i}
             key={tweet.user + tweet.date}
@@ -120,7 +120,7 @@ const MiniReply = (props) => {
             setCurrentMiniReply={setCurrentMiniReply}
             setToggleFormHidden={setToggleFormHidden}
             setCurrentReplyData={setCurrentReplyData}
-          ></ContinuousMiniReply>
+          ></MiniReply>
         );
         // replyMiniText={replySecondMiniText} setToggleFormHidden={setToggleReplyFormHidden} newReplyData={newReplyData} setNewReplyData={setNewReplyData}              currentMiniReply={currentMiniReply}
       })}

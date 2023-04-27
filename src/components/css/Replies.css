@@ -43,11 +43,13 @@ main > .replyContainer > .reply {
 /* all secondary replies */
 .minireply {
   background-color: white;
-  position: fixed;
+  position: absolute;
+
   display: flex;
   flex-direction: column;
-  top: 25%;
-  left: 25%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   z-index: 50;
   align-items: center;
   justify-content: center;
@@ -58,24 +60,32 @@ main > .replyContainer > .reply {
 /* for reply filter */
 .modalbackground {
   position: fixed;
-  background-color: rgb(55 65 81);
+  background-color: rgba(58, 64, 75, 0.6);
   z-index: 99;
   inset: 0px;
 }
 
 /* FORM width */
-.minireply > textarea {
+.minireply > div {
+  width: 100%;
+}
+.minireply > div > textarea {
   font-size: large;
   font-weight: 600;
-  border: none;
-  outline: none;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  width: 92%;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  height: 80px;
+  margin: 10px;
 }
-.minireply > .tweet,
-.minireply > textarea {
+.minireply > .tweet {
   box-sizing: border-box;
   width: 100%;
-  padding: 10px 30px;
+  padding: 10px;
 }
+
 .tweet {
   padding: 0px;
 }
@@ -91,6 +101,7 @@ main > .replyContainer > .reply {
 }
 .minireply > .flexcol > .material-icons {
   color: black;
+  background-color: unset;
 }
 .minireply > .flexcol > .material-icons:hover {
   border-radius: 50%;
@@ -99,6 +110,9 @@ main > .replyContainer > .reply {
   color: black;
 }
 
+.minireply > .tweet > a > img {
+  max-width: 600px;
+}
 /* for REPLY.js  */
 .replyTextData {
   display: flex;

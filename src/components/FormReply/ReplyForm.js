@@ -29,6 +29,7 @@ const ReplyForm = (prop) => {
 
   const [replyArrayData, setReplyArrayData] = useState([]);
   const toggleFileInput = (e) => {
+    e.preventDefault();
     const fileInput = document.querySelector("#media");
     fileInput.click();
   };
@@ -64,9 +65,8 @@ const ReplyForm = (prop) => {
   };
 
   const removeForm = (e) => {
-    console.log(e);
-    setToggleFormHidden(true);
     e.stopPropagation();
+    if (e.target.tagName === "DIV") setToggleFormHidden(true);
   };
 
   const processFormData = async (e) => {
@@ -143,19 +143,21 @@ const ReplyForm = (prop) => {
             profilePic={currentReply.profilePic}
           ></Tweets>
         )}
-        <textarea
-          placeholder="TWEET YOUR REPLY!"
-          name="tweet"
-          form="userform"
-          value={replyMiniText}
-          onChange={textAreaInput}
-          required="required"
-          minLength="1"
-        ></textarea>
+        <div className="flexcol flexcenterxy">
+          <textarea
+            placeholder="TWEET YOUR REPLY!"
+            name="tweet"
+            form="userform"
+            value={replyMiniText}
+            onChange={textAreaInput}
+            required="required"
+            minLength="1"
+          ></textarea>
+        </div>
         <label htmlFor="media"></label>
         <img className="mediaInput" src={mediaReply.load} width="250"></img>
-        <div className="flexcol">
-          <div onClick={toggleFileInput} className="material-icons">
+        <div className="flexcol flexcenterxy">
+          <button onClick={toggleFileInput} className="material-icons">
             image
             <input
               onChange={handleFileInput}
@@ -164,7 +166,7 @@ const ReplyForm = (prop) => {
               name="media"
               accept="image/png, image/jpeg, video/*, gif/*"
             ></input>
-          </div>
+          </button>
         </div>
         <input type="submit" value="Reply" onClick={processFormData}></input>
       </form>
