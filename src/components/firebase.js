@@ -388,7 +388,8 @@ async function addSecondaryReply(
   tweetUser,
   textID,
   replyID,
-  setReplyData
+  setReplyData,
+  downloadURL = ""
 ) {
   const replies = query(
     doc(

@@ -1,8 +1,15 @@
 ## Twitter Clone: Ongoing Project
 
-- Supports Infinite Comments using Array Data structure. (works like reddit comments)
+- Supports Infinite Comments/Replies using Array Data structure. (works like reddit comments)
 - I would use Nodes/Tree structure like my Knight Travails project if I wanted it to work like Twitter,
   I think it would work if a tweet can contain tweets as nodes, and so on, and each tweet, would also exist as a separate tweet that would be accessible without entering any node, but a tweet, will have nodes to represent the connection between them as a reply. This way, you can access a reply as a regular tweet just like twitter.
+
+- supports only IMAGE medias for now (Hosted on Firebase)
+- Authentication is done through Firebase (google sign-in);
+
+## NAV
+
+- Only supports Home and Profile
 
 ## REFACTOR
 

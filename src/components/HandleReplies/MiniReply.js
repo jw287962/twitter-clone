@@ -88,7 +88,10 @@ const MiniReply = (props) => {
         <p>{reply.date.substring(reply.date.indexOf(" "), 21)}</p>
       </div>
 
-      <Markup content={reply.text}></Markup>
+      <div className="replyTextData ">
+        <Markup content={reply.text}></Markup>
+        {reply.media && <img src={reply.media} className="replyImage"></img>}
+      </div>
       <div className="tweetbuttons">
         <button className="tweetbutton">
           <span className="material-icons" onClick={handleInternalReply}>

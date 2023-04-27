@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import {
   uploadImage,
-  getDownloadURL,
   addContinuousReply,
   addSecondaryReply,
 } from "../firebase";
+import { getDownloadURL } from "firebase/storage";
 import { useLocation } from "react-router-dom";
 import Tweets from "../Tweets";
 
@@ -68,7 +68,7 @@ const ReplyForm = (prop) => {
 
   const removeForm = (e) => {
     e.stopPropagation();
-    console.log(e.target.className);
+    // console.log(e.target.className);
     if (
       e.target.className === "modalbackground" ||
       e.target.className === "removeForm"
@@ -81,11 +81,11 @@ const ReplyForm = (prop) => {
     const date = new Date();
     const dateString = date.toString();
     const dateData = makeDatewithMS(dateString, date);
-    // console.log(newReplyData);
+
     // query the array and push a new arrayZ?
 
     console.log(replyArrayData);
-    // will need to fix when query replies and to make sure i am updating the correct part within.
+
     const holder = {
       user: login.email,
       displayName: login.displayName,
@@ -96,15 +96,30 @@ const ReplyForm = (prop) => {
     }; //arrayPosition:
 
     console.log(currentReply);
-
-    const data = await addSecondaryReply(
-      holder,
-      tweet.email,
-      tweet.date,
-      currentReply.date,
-      setReplyArrayData
-    );
+    if (mediaReply) {
+      const uploadTask = uploadImage(mediaReply);
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        holder.media = downloadURL;
+        console.log("finish upload");
+        addSecondaryReply(
+          holder,
+          tweet.email,
+          tweet.date,
+          currentReply.date,
+          setReplyArrayData
+        );
+      });
+    } else {
+      const data = await addSecondaryReply(
+        holder,
+        tweet.email,
+        tweet.date,
+        currentReply.date,
+        setReplyArrayData
+      );
+    }
   };
+
   function makeDatewithMS(dateString, date) {
     return (
       dateString.substring(0, dateString.indexOf("GMT") - 1) +

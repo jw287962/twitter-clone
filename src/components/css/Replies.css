@@ -39,6 +39,10 @@ main > .replyContainer > .reply {
   align-items: center;
   justify-content: space-between;
 }
+.reply > img {
+  max-width: 500px;
+  max-height: 200px;
+}
 
 /* all secondary replies */
 .minireply {
@@ -121,6 +125,7 @@ main > .replyContainer > .reply {
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-height: 500px;
 }
 .replyTextData > * {
   width: 98%;
