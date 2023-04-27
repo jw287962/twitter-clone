@@ -3,7 +3,7 @@
 - Supports Infinite Comments/Replies using Array Data structure. (works like reddit comments)
 - I would use Nodes/Tree structure like my Knight Travails project if I wanted it to work like Twitter,
   I think it would work if a tweet can contain tweets as nodes, and so on, and each tweet, would also exist as a separate tweet that would be accessible without entering any node, but a tweet, will have nodes to represent the connection between them as a reply (if needed). This way, you can access a reply as a regular tweet just like twitter, while also allowing for two or more tweets to function as a parent and child if necessary.
-  ### Image
+  ### `Image`
 - supports only IMAGE medias for now (Hosted on Firebase)
 
 ### `auth`
