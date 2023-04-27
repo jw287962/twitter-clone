@@ -118,7 +118,20 @@ main > .replyContainer > .reply {
 .replyImage {
   height: 100%;
 }
+.replyTextData > img {
+  max-width: 800px;
+}
+@media (max-width: 1000px) {
+  .replyTextData > img {
+    max-width: 1000px;
+  }
+}
 
+@media (max-width: 800px) {
+  .replyTextData > img {
+    max-width: 800px;
+  }
+}
 /*  */
 @media (max-width: 700px) {
   .content {

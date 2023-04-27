@@ -103,7 +103,9 @@ const Middle = (props) => {
             date={tweet.date}
             login={login}
             profilePic={tweet.profilePic}
-          ></Tweets>
+          >
+            TEST
+          </Tweets>
         );
       })}
       {<div id={!loadingData ? "hidden" : "loader"}> </div>}
