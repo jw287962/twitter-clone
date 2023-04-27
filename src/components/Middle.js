@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../Router";
 import "./css/Middle.css";
 import Tweets from "./Tweets";
-import Form from "./FormReply/MainTweetForm";
+import MainTweetForm from "./FormReply/MainTweetForm";
 import { getUserAuth, queryData } from "./firebase";
 
 const Middle = (props) => {
@@ -88,7 +88,7 @@ const Middle = (props) => {
   // }
   return (
     <main className="content">
-      <Form login={login} signInUser={signInUser}></Form>
+      <MainTweetForm login={login} signInUser={signInUser}></MainTweetForm>
       {/* text,user,media,date */}
       {tweetsDataSliced.map((tweet) => {
         return (
