@@ -127,100 +127,100 @@ const MainTweet = (prop) => {
         {<div id={!loadingData ? "hidden" : "loader"}> </div>}
       </main>
     );
-  } else {
-    return (
-      <main className="content">
-        <Tweets
-          key={tweet.user + tweet.date.substring(10, 24)}
-          text={tweet.text}
-          displayName={tweet.displayName}
-          email={tweet.email}
-          user={tweet.user}
-          media={tweet.media}
-          date={tweet.date}
-          login={login}
-          profilePic={tweet.profilePic}
-        ></Tweets>
-
-        <form className="tweetform" id="replyform">
-          <textarea
-            placeholder="TWEET YOUR REPLY!"
-            name="tweet"
-            form="replyform"
-            value={userTweetText}
-            onChange={textAreaInput}
-            required="required"
-            minLength="1"
-          ></textarea>
-          <label htmlFor="media"></label>
-          <img className="mediaInput" src={media.load} width="250"></img>
-
-          <div className="flexcol">
-            <div onClick={toggleFileInput} className="material-icons">
-              image
-              <input
-                onChange={handleFileInput}
-                type="file"
-                id="media"
-                name="media"
-                accept="image/png, image/jpeg, video/*, gif/*"
-              ></input>
-            </div>
-          </div>
-
-          <input type="submit" value="Reply" onClick={processReplyData}></input>
-        </form>
-        <div className="replyContainer">
-          {replies.map((reply) => {
-            return (
-              <Reply
-                setArrayReplyNum={setArrayReplyNum}
-                login={login}
-                key={reply.name + reply.date}
-                reply={reply}
-                toggleFormHidden={toggleFormHidden}
-                replySecondMiniText={replySecondMiniText}
-                setToggleFormHidden={setToggleFormHidden}
-                currentMiniReply={currentMiniReply}
-                setCurrentMiniReply={setCurrentMiniReply}
-                setToggleReplyFormHidden={setToggleReplyFormHidden}
-                setCurrentReply={setCurrentReply}
-                newReplyData={newReplyData}
-                setNewReplyData={setNewReplyData}
-                setCurrentReplyData={setCurrentReplyData}
-              ></Reply>
-            );
-          })}
-        </div>
-        <ReplyForm
-          arrayReplyNum={arrayReplyNum}
-          login={login}
-          currentReply={currentReply}
-          tweet={tweet}
-          toggleFormHidden={toggleFormHidden}
-          setToggleFormHidden={setToggleFormHidden}
-          replyMiniText={replyMiniText}
-          setReplyMiniText={setReplyMiniText}
-        ></ReplyForm>
-
-        <MiniReplyForm
-          arrayReplyNum={arrayReplyNum}
-          login={login}
-          currentReply={currentReply}
-          currentMiniReply={currentMiniReply}
-          tweet={tweet}
-          toggleFormHidden={toggleReplyFormHidden}
-          setToggleFormHidden={setToggleReplyFormHidden}
-          replyMiniText={replySecondMiniText}
-          setReplyMiniText={setReplySecondMiniText}
-          setNewReplyData={setNewReplyData}
-          currentReplyData={currentReplyData}
-        ></MiniReplyForm>
-        {/*   setCurrentReplyData={setCurrentReplyData} is for the .reply objects */}
-        {/* after setting new reply data . i need to update reply with new reply */}
-      </main>
-    );
   }
+
+  return (
+    <main className="content">
+      <Tweets
+        key={tweet.user + tweet.date.substring(10, 24)}
+        text={tweet.text}
+        displayName={tweet.displayName}
+        email={tweet.email}
+        user={tweet.user}
+        media={tweet.media}
+        date={tweet.date}
+        login={login}
+        profilePic={tweet.profilePic}
+      ></Tweets>
+
+      <form className="tweetform" id="replyform">
+        <textarea
+          placeholder="TWEET YOUR REPLY!"
+          name="tweet"
+          form="replyform"
+          value={userTweetText}
+          onChange={textAreaInput}
+          required="required"
+          minLength="1"
+        ></textarea>
+        <label htmlFor="media"></label>
+        <img className="mediaInput" src={media.load} width="250"></img>
+
+        <div className="flexcol">
+          <div onClick={toggleFileInput} className="material-icons">
+            image
+            <input
+              onChange={handleFileInput}
+              type="file"
+              id="media"
+              name="media"
+              accept="image/png, image/jpeg, video/*, gif/*"
+            ></input>
+          </div>
+        </div>
+
+        <input type="submit" value="Reply" onClick={processReplyData}></input>
+      </form>
+      <div className="replyContainer">
+        {replies.map((reply) => {
+          return (
+            <Reply
+              setArrayReplyNum={setArrayReplyNum}
+              login={login}
+              key={reply.name + reply.date}
+              reply={reply}
+              toggleFormHidden={toggleFormHidden}
+              replySecondMiniText={replySecondMiniText}
+              setToggleFormHidden={setToggleFormHidden}
+              currentMiniReply={currentMiniReply}
+              setCurrentMiniReply={setCurrentMiniReply}
+              setToggleReplyFormHidden={setToggleReplyFormHidden}
+              setCurrentReply={setCurrentReply}
+              newReplyData={newReplyData}
+              setNewReplyData={setNewReplyData}
+              setCurrentReplyData={setCurrentReplyData}
+            ></Reply>
+          );
+        })}
+      </div>
+      <ReplyForm
+        arrayReplyNum={arrayReplyNum}
+        login={login}
+        currentReply={currentReply}
+        tweet={tweet}
+        toggleFormHidden={toggleFormHidden}
+        setToggleFormHidden={setToggleFormHidden}
+        replyMiniText={replyMiniText}
+        setReplyMiniText={setReplyMiniText}
+      ></ReplyForm>
+
+      <MiniReplyForm
+        arrayReplyNum={arrayReplyNum}
+        login={login}
+        currentReply={currentReply}
+        currentMiniReply={currentMiniReply}
+        tweet={tweet}
+        toggleFormHidden={toggleReplyFormHidden}
+        setToggleFormHidden={setToggleReplyFormHidden}
+        replyMiniText={replySecondMiniText}
+        setReplyMiniText={setReplySecondMiniText}
+        setNewReplyData={setNewReplyData}
+        currentReplyData={currentReplyData}
+      ></MiniReplyForm>
+      {/*   setCurrentReplyData={setCurrentReplyData} is for the .reply objects */}
+      {/* after setting new reply data . i need to update reply with new reply */}
+    </main>
+  );
 };
 
 export default TweetHandlerWrapper(MainTweet);

@@ -68,45 +68,45 @@ const Reply = (props) => {
   }, [queryReply]);
   // console.log(reply);
   // NEED TO STORE OBJECTS INSIDE REPLY IE: const obj = {reply: {text: 'hi', reply: {text: "newb"}, reply1: {}}};
-  if (replyArrayHolder) {
-    // console.log(replyArrayHolder);
-    return (
-      <div className="reply">
-        <div className="flexrow tweetuser">
-          <h2>
-            <img
-              className="profilePic"
-              src={reply.profilePic}
-              height="25px"
-            ></img>
-            {reply.displayName}{" "}
-            <span>@{reply.user.substring(0, reply.user.indexOf("@"))} </span>
-          </h2>
+  // console.log(replyArrayHolder);
+  return (
+    <div className="reply">
+      <div className="flexrow tweetuser">
+        <h2>
+          <img
+            className="profilePic"
+            src={reply.profilePic}
+            height="25px"
+          ></img>
+          {reply.displayName}{" "}
+          <span>@{reply.user.substring(0, reply.user.indexOf("@"))} </span>
+        </h2>
 
-          <p>{reply.date.substring(reply.date.indexOf(" "), 21)}</p>
-        </div>
+        <p>{reply.date.substring(reply.date.indexOf(" "), 21)}</p>
+      </div>
 
-        <div className="replyTextData">
-          <Markup content={reply.text}></Markup>
-          {reply.media && (
-            <img src={reply.media} className="replyImage" height={100}></img>
-          )}
-        </div>
-        <div className="tweetbuttons">
-          <button className="tweetbutton">
-            <span className="material-icons" onClick={handleInternalReply}>
-              chat_bubble
-            </span>
-          </button>
-          <button className="tweetbutton">
-            <span className="material-icons">favorite</span>
-          </button>
-          <button className="tweetbutton">
-            <span className="material-icons">share</span>
-          </button>
-        </div>
-        <div className="replyContainer">
-          {replyArrayHolder.map((tweet, i) => {
+      <div className="replyTextData">
+        <Markup content={reply.text}></Markup>
+        {reply.media && (
+          <img src={reply.media} className="replyImage" height={100}></img>
+        )}
+      </div>
+      <div className="tweetbuttons">
+        <button className="tweetbutton">
+          <span className="material-icons" onClick={handleInternalReply}>
+            chat_bubble
+          </span>
+        </button>
+        <button className="tweetbutton">
+          <span className="material-icons">favorite</span>
+        </button>
+        <button className="tweetbutton">
+          <span className="material-icons">share</span>
+        </button>
+      </div>
+      <div className="replyContainer">
+        {replyArrayHolder &&
+          replyArrayHolder.map((tweet, i) => {
             // console.log(tweet);
 
             return (
@@ -128,42 +128,9 @@ const Reply = (props) => {
               ></MiniReply>
             );
           })}
-        </div>
       </div>
-    );
-  } else
-    return (
-      <div className="reply">
-        <div className="flexrow tweetuser">
-          <h2>
-            <img
-              className="profilePic"
-              src={reply.profilePic}
-              height="25px"
-            ></img>
-            {reply.displayName}{" "}
-            <span>@{reply.user.substring(0, reply.user.indexOf("@"))} </span>
-          </h2>
-          {reply.media && <img src={reply.media} className=""></img>}
-          <p>{reply.date.substring(reply.date.indexOf(" "), 21)}</p>
-        </div>
-
-        <Markup content={reply.text}></Markup>
-        <div className="tweetbuttons">
-          <button className="tweetbutton">
-            <span className="material-icons" onClick={handleInternalReply}>
-              chat_bubble
-            </span>
-          </button>
-          <button className="tweetbutton">
-            <span className="material-icons">favorite</span>
-          </button>
-          <button className="tweetbutton">
-            <span className="material-icons">share</span>
-          </button>
-        </div>
-      </div>
-    );
+    </div>
+  );
 };
 
 export default Reply;

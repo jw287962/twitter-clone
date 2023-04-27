@@ -1,7 +1,7 @@
 import { Markup } from "interweave";
 import "../css/Replies.css";
 import { useEffect, useState } from "react";
-// import MiniReplyForm from "../FormReply/MiniReplyForm";
+import MiniReplyForm from "../FormReply/MiniReplyForm";
 import { useLocation } from "react-router-dom";
 // import { addContinuousReply, queryContinuousReply } from "../firebase";
 // import ContinuousMiniReply from "./ContinuousMiniReply";

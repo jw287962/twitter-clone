@@ -34,8 +34,7 @@ const MiniReplyForm = (prop) => {
   const [replyArrayData, setReplyArrayData] = useState([]);
   const toggleFileInput = (e) => {
     e.preventDefault();
-    const fileInput = document.querySelector("#media");
-    console.log(fileInput);
+    const fileInput = e.target.nextSibling;
     fileInput.click();
   };
 
@@ -70,7 +69,11 @@ const MiniReplyForm = (prop) => {
   };
 
   const removeForm = (e) => {
-    if (e.target.tagName === "DIV") setToggleFormHidden(true);
+    if (
+      e.target.className === "modalbackground" ||
+      e.target.className === "removeForm"
+    )
+      setToggleFormHidden(true);
   };
 
   const processReplyFormData = async (e) => {
@@ -167,13 +170,8 @@ const MiniReplyForm = (prop) => {
       onClick={removeForm}
       className={toggleFormHidden ? "hidden" : "modalbackground"}
     >
-      {/* <button
-        className={toggleFormHidden ? "hidden" : "fullscreen"}
-        onClick={removeForm}
-        type="button"
-      ></button> */}
       <form className={toggleFormHidden ? "hidden" : "minireply"}>
-        <button onClick={removeForm} type="button">
+        <button onClick={removeForm} type="button" className="removeForm">
           X
         </button>
 
@@ -210,16 +208,17 @@ const MiniReplyForm = (prop) => {
         <label htmlFor="miniMedia"></label>
         <img className="mediaInput" src={mediaReply.load} width="250"></img>
         <div className="flexcol flexcenterxy">
-          <button onClick={toggleFileInput} className="material-icons">
+          <span onClick={toggleFileInput} className="material-icons">
             image
-            <input
-              onChange={handleFileInput}
-              type="file"
-              id="miniMedia"
-              name="media"
-              accept="image/png, image/jpeg, video/*, gif/*"
-            ></input>
-          </button>
+          </span>
+          <input
+            onChange={handleFileInput}
+            type="file"
+            id="miniMedia"
+            name="media"
+            accept="image/png, image/jpeg, video/*, gif/*"
+          ></input>
+          <span>{mediaReply.name}</span>
         </div>
         <input
           type="submit"
