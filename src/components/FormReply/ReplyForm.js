@@ -68,7 +68,12 @@ const ReplyForm = (prop) => {
 
   const removeForm = (e) => {
     e.stopPropagation();
-    if (e.target.tagName === "DIV") setToggleFormHidden(true);
+    console.log(e.target.className);
+    if (
+      e.target.className === "modalbackground" ||
+      e.target.className === "removeForm"
+    )
+      setToggleFormHidden(true);
   };
 
   const processFormData = async (e) => {
@@ -122,13 +127,8 @@ const ReplyForm = (prop) => {
       onClick={removeForm}
       className={toggleFormHidden ? "hidden" : "modalbackground"}
     >
-      {/* <button
-          className={toggleFormHidden ? "hidden" : "fullscreen"}
-          onClick={removeForm}
-          type="button"
-        ></button> */}
       <form className={toggleFormHidden ? "hidden" : "minireply"}>
-        <button onClick={removeForm} type="button">
+        <button onClick={removeForm} type="button" className="removeForm">
           X
         </button>
 
