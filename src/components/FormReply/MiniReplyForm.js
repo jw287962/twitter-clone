@@ -163,7 +163,7 @@ const MiniReplyForm = (prop) => {
   }
   if (!currentMiniReply.user) {
     return (
-      <div className="minireplycontainerform">
+      <div className="modalBackground">
         <button
           className={toggleFormHidden ? "hidden" : "fullscreen"}
           onClick={removeForm}
@@ -203,7 +203,7 @@ const MiniReplyForm = (prop) => {
     );
   } else
     return (
-      <div>
+      <div className="modalBackground">
         <button
           className={toggleFormHidden ? "hidden" : "fullscreen"}
           onClick={removeForm}

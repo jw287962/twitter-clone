@@ -113,59 +113,24 @@ const ReplyForm = (prop) => {
       dateString.substring(dateString.indexOf("GMT"))
     );
   }
-  if (!currentReply.user) {
-    return (
-      <div>
-        <button
+
+  console.log(currentReply);
+  return (
+    <div
+      onClick={removeForm}
+      className={toggleFormHidden ? "hidden" : "modalbackground"}
+    >
+      {/* <button
           className={toggleFormHidden ? "hidden" : "fullscreen"}
           onClick={removeForm}
           type="button"
-        ></button>
-        <form className={toggleFormHidden ? "hidden" : "minireply"}>
-          <button onClick={removeForm} type="button">
-            X
-          </button>
+        ></button> */}
+      <form className={toggleFormHidden ? "hidden" : "minireply"}>
+        <button onClick={removeForm} type="button">
+          X
+        </button>
 
-          <textarea
-            placeholder="TWEET YOUR REPLY!"
-            name="tweet"
-            form="userform"
-            value={replyMiniText}
-            onChange={textAreaInput}
-            required="required"
-            minLength="1"
-          ></textarea>
-          <label htmlFor="media"></label>
-          <img className="mediaInput" src={mediaReply.load} width="250"></img>
-          <div className="flexcol">
-            <div onClick={toggleFileInput} className="material-icons">
-              image
-              <input
-                onChange={handleFileInput}
-                type="file"
-                id="media"
-                name="media"
-                accept="image/png, image/jpeg, video/*, gif/*"
-              ></input>
-            </div>
-          </div>
-          {/* <input type="submit" value="Reply" onClick={processFormData} ></input> */}
-        </form>
-      </div>
-    );
-  } else
-    return (
-      <div className="replyformContainer">
-        <button
-          className={toggleFormHidden ? "hidden" : "fullscreen"}
-          onClick={removeForm}
-          type="button"
-        ></button>
-        <form className={toggleFormHidden ? "hidden" : "minireply"}>
-          <button onClick={removeForm} type="button">
-            X
-          </button>
-
+        {currentReply.user && (
           <Tweets
             key={currentReply.user + currentReply.date.substring(10, 24)}
             text={currentReply.text}
@@ -177,34 +142,34 @@ const ReplyForm = (prop) => {
             login={login}
             profilePic={currentReply.profilePic}
           ></Tweets>
-
-          <textarea
-            placeholder="TWEET YOUR REPLY!"
-            name="tweet"
-            form="userform"
-            value={replyMiniText}
-            onChange={textAreaInput}
-            required="required"
-            minLength="1"
-          ></textarea>
-          <label htmlFor="media"></label>
-          <img className="mediaInput" src={mediaReply.load} width="250"></img>
-          <div className="flexcol">
-            <div onClick={toggleFileInput} className="material-icons">
-              image
-              <input
-                onChange={handleFileInput}
-                type="file"
-                id="media"
-                name="media"
-                accept="image/png, image/jpeg, video/*, gif/*"
-              ></input>
-            </div>
+        )}
+        <textarea
+          placeholder="TWEET YOUR REPLY!"
+          name="tweet"
+          form="userform"
+          value={replyMiniText}
+          onChange={textAreaInput}
+          required="required"
+          minLength="1"
+        ></textarea>
+        <label htmlFor="media"></label>
+        <img className="mediaInput" src={mediaReply.load} width="250"></img>
+        <div className="flexcol">
+          <div onClick={toggleFileInput} className="material-icons">
+            image
+            <input
+              onChange={handleFileInput}
+              type="file"
+              id="media"
+              name="media"
+              accept="image/png, image/jpeg, video/*, gif/*"
+            ></input>
           </div>
-          <input type="submit" value="Reply" onClick={processFormData}></input>
-        </form>
-      </div>
-    );
+        </div>
+        <input type="submit" value="Reply" onClick={processFormData}></input>
+      </form>
+    </div>
+  );
 };
 
 export default ReplyForm;

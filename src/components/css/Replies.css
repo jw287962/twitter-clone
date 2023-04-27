@@ -48,28 +48,21 @@ main > .replyContainer > .reply {
   flex-direction: column;
   top: 25%;
   left: 25%;
-  z-index: 99;
+  z-index: 50;
   align-items: center;
   justify-content: center;
   border-radius: 20px;
   min-height: fit-content;
 }
-.minireply > .tweet {
-}
+
 /* for reply filter */
-.fullscreen {
+.modalbackground {
   position: fixed;
-  width: 100vw;
-  height: 100vh;
-  left: 0px;
-  top: 0px;
-  background-color: black;
-  margin: 0px;
+  background-color: rgb(55 65 81);
   z-index: 99;
-  filter: brightness(50%);
-  opacity: 80%;
-  border-radius: none;
+  inset: 0px;
 }
+
 /* FORM width */
 .minireply > textarea {
   font-size: large;
