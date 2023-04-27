@@ -39,7 +39,6 @@ const MainTweet = (prop) => {
     handleFileInput,
   } = prop;
 
-  console.log(prop);
   // FOR THE REPLY TO A REPLY HANDLING
   const [replyMiniText, setReplyMiniText] = useState("");
   const [replySecondMiniText, setReplySecondMiniText] = useState("");
@@ -157,16 +156,16 @@ const MainTweet = (prop) => {
         <img className="mediaInput" src={media.load} width="250"></img>
 
         <div className="flexcol">
-          <div onClick={toggleFileInput} className="material-icons">
+          <span onClick={toggleFileInput} className="material-icons">
             image
-            <input
-              onChange={handleFileInput}
-              type="file"
-              id="media"
-              name="media"
-              accept="image/png, image/jpeg, video/*, gif/*"
-            ></input>
-          </div>
+          </span>
+          <input
+            onChange={handleFileInput}
+            type="file"
+            id="media"
+            name="media"
+            accept="image/png, image/jpeg, video/*, gif/*"
+          ></input>
         </div>
 
         <input type="submit" value="Reply" onClick={processReplyData}></input>
