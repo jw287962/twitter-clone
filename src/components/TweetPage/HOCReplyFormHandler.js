@@ -3,12 +3,21 @@ import React, { useState } from "react";
 const TweetHandlerWrapper = (OriginalComponent) => {
   // A REPLY FORM FOR REPLY TWEET
 
-  const NewComponent = () => {
+  const NewComponent = (prop) => {
+    // const {
+    //   toggleFormHidden,
+    //   setToggleFormHidden,
+    //   tweet,
+    //   setReplyMiniText,
+    //   replyMiniText,
+    //   arrayReplyNum,
+    // } = prop;
     const [userTweetText, setUserTweetText] = useState("");
     const [media, setMedia] = useState("");
 
     const toggleFileInput = (e) => {
-      const fileInput = document.querySelector("#media");
+      e.preventDefault();
+      const fileInput = e.target.nextSibling;
       fileInput.click();
     };
 
@@ -37,6 +46,7 @@ const TweetHandlerWrapper = (OriginalComponent) => {
 
     return (
       <OriginalComponent
+        {...prop}
         media={media}
         toggleFileInput={toggleFileInput}
         userTweetText={userTweetText}
