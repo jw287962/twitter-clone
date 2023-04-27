@@ -87,12 +87,7 @@ function uploadImage(img) {
     contentType: "image/jpeg",
   };
 
-  console.log(img.file);
   const uploadTask = uploadBytesResumable(storageRef, file, metadata);
-  // .then((snapshot) => {
-  //   console.log(snapshot);
-  //   console.log('Uploaded a blob or file!');
-  // });;
 
   uploadTask.on(
     "state_changed",
@@ -134,7 +129,9 @@ function uploadImage(img) {
       });
     }
   );
-  return uploadTask;
+  return new Promise((resolve) => {
+    resolve(uploadTask);
+  });
 }
 
 async function addTweetFireBase(text, url) {
@@ -367,7 +364,6 @@ async function addMiniReplies(
     addContinuousReply(orignalReplyArrayData, tweetUser, textID, replyID);
   } else {
     const newArray = arrayReplyNum.split(",");
-    console.log(newArray);
     var arrayHolder = originalReply;
     while (newArray.length != 0) {
       const number = Number(newArray.splice(0, 1));

@@ -106,6 +106,8 @@ const MiniReply = (props) => {
         </button>
       </div>
       {reply.reply.map((tweet, i) => {
+        console.log(",tweet", tweet.date);
+
         if (!tweet) {
           return null;
         }

@@ -52,10 +52,13 @@ const MiniReplyForm = (prop) => {
     const holder = currentMiniReply;
 
     if (media) {
-      const uploadTask = uploadImage(media);
-      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+      const uploadTask = await uploadImage(media);
+      console.log(uploadTask);
+      getDownloadURL(uploadTask.ref).then((downloadURL) => {
         console.log(holder);
-        holder.reply.media = downloadURL;
+        // const array = arrayReplyNum.split(",");
+
+        holder.reply[holder.reply.length - 1].media = downloadURL;
         addMiniReplies(
           tweet.email,
           tweet.date,
