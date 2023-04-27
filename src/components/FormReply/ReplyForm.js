@@ -19,51 +19,19 @@ const ReplyForm = (prop) => {
     setReplyMiniText,
     replyMiniText,
     arrayReplyNum,
+
+    media,
+    toggleFileInput,
+
+    handleFileInput,
   } = prop;
   const { login } = user;
   const { currentReply } = prop;
-  // ,user,text,date,displayName,media,profilePic
-  // const {tweet} =prop;
-  // const [userTweetText,setUserTweetText] = useState('');
-  const [mediaReply, setMediaReply] = useState("");
 
   const [replyArrayData, setReplyArrayData] = useState([]);
-  const toggleFileInput = (e) => {
-    e.preventDefault();
-    const fileInput = e.target.nextSibling;
-    console.log(e.target);
-
-    fileInput.click();
-  };
-
-  useEffect(() => {
-    console.log(login);
-
-    console.log(prop);
-    return () => {};
-  });
 
   const textAreaInput = (e) => {
     setReplyMiniText(e.target.value);
-  };
-
-  const handleFileInput = (e) => {
-    // e.preventDefault();
-    // console.log(this.readFile(e.target.value))
-    const reader = new FileReader();
-    console.log(e.target.files);
-    reader.addEventListener("load", () => {
-      const holder = reader.result;
-      const imgURL = URL.createObjectURL(e.target.files[0]);
-      setMediaReply({
-        file: e.target.files[0],
-        name: e.target.files[0].name,
-        load: imgURL,
-      });
-      // setMedia(reader.result);
-    });
-    console.log(e.target.files);
-    reader.readAsDataURL(e.target.files[0]);
   };
 
   const removeForm = (e) => {
@@ -96,8 +64,8 @@ const ReplyForm = (prop) => {
     }; //arrayPosition:
 
     console.log(currentReply);
-    if (mediaReply) {
-      const uploadTask = uploadImage(mediaReply);
+    if (media) {
+      const uploadTask = uploadImage(media);
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
         holder.media = downloadURL;
         console.log("finish upload");
@@ -110,7 +78,7 @@ const ReplyForm = (prop) => {
         );
       });
     } else {
-      const data = await addSecondaryReply(
+      addSecondaryReply(
         holder,
         tweet.email,
         tweet.date,
@@ -130,7 +98,6 @@ const ReplyForm = (prop) => {
     );
   }
 
-  console.log(currentReply);
   return (
     <div
       onClick={removeForm}
@@ -166,7 +133,7 @@ const ReplyForm = (prop) => {
           ></textarea>
         </div>
         <label htmlFor="media"></label>
-        <img className="mediaInput" src={mediaReply.load} width="250"></img>
+        <img className="mediaInput" src={media && media.load} width="250"></img>
         <div className="flexcol flexcenterxy">
           <span onClick={toggleFileInput} className="material-icons">
             image
@@ -178,7 +145,7 @@ const ReplyForm = (prop) => {
             name="media"
             accept="image/png, image/jpeg, video/*, gif/*"
           ></input>
-          <span className="imageFile">{mediaReply.name}</span>
+          <span className="imageFile">{media && media.name}</span>
         </div>
         <input type="submit" value="Reply" onClick={processFormData}></input>
       </form>

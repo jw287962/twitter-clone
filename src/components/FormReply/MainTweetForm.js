@@ -75,14 +75,14 @@ const Form = (props) => {
       <div className="flexcol">
         <div onClick={toggleFileInput} className="material-icons">
           image
-          <input
-            onChange={handleFileInput}
-            type="file"
-            id="media"
-            name="media"
-            accept="image/png, image/jpeg, video/*, gif/*"
-          ></input>
         </div>
+        <input
+          onChange={handleFileInput}
+          type="file"
+          id="media"
+          name="media"
+          accept="image/png, image/jpeg, video/*, gif/*"
+        ></input>
       </div>
 
       <input type="submit" value="Tweet" onClick={processTweetData}></input>
