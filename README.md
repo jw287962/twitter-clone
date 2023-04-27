@@ -6,11 +6,11 @@
   ### Image
 - supports only IMAGE medias for now (Hosted on Firebase)
 
-### auth
+### `auth`
 
 - Authentication is done through Firebase (google sign-in);
 
-### NAV
+### `NAV`
 
 - Only supports Home and Profile
 
