@@ -16,15 +16,10 @@ const Middle = (props) => {
   const { login, signInUser } = user;
   useEffect(() => {
     async function queryTweetData() {
-      if (tweetsData.length <= loadLimiter) {
-        // querySnapshotUpdate();
-        console.log("test");
-        await queryData(setTweetsData, setLoadingData);
-        //  console.log(holderData);
-      }
+      await queryData(setTweetsData, setLoadingData);
     }
     queryTweetData();
-  }, [loadLimiter, setTweetsData]);
+  }, [loadLimiter]);
 
   const addFiveLimit = () => {
     setLoadLimiter(loadLimiter + 5);
@@ -45,28 +40,24 @@ const Middle = (props) => {
       addFiveLimit();
     }
     // console.log(document.body.scrollHeight,  'scrollehight of body');
-    // console.log(window.innerHeight , 'innerheight screen')
-    // console.log(window.outerHeight, ' outerheight, ')
-
-    // console.log(window.pageYOffset);
   }
   useEffect(() => {
     document.addEventListener("scroll", isBottom);
 
-    console.log(loadingData);
     if (tweetsDataSliced.length !== loadLimiter && !loadingData) {
       // querySnapshotUpdate();
       const arrayHolder = tweetsData.slice(0, loadLimiter);
       setTweetsDataSliced(arrayHolder);
-      console.log(arrayHolder, loadLimiter, tweetsData);
     }
 
     return () => document.removeEventListener("keyup", isBottom);
   }, [tweetsData, loadLimiter, loadingData]);
 
   useEffect(() => {
-    console.log(props.login);
-  });
+    console.log("ness");
+    const arrayHolder = tweetsData.slice(0, loadLimiter);
+    setTweetsDataSliced(arrayHolder);
+  }, [tweetsData]);
   // async function querySnapshotUpdate(){
   //   const querySnapshot = await queryData(tweetsData,setTweetsData);
   //   const newArray = [];

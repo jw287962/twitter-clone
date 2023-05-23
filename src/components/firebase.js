@@ -273,7 +273,6 @@ async function queryReplyFirebase(
 // add seconds instad of just minte in data collection name and query by date or something
 
 async function queryData(setTweetsData, setLoadingData) {
-  console.log("new");
   setLoadingData(true);
   // console.log('auth',getAuth().currentUser);
   // console.log('query')
