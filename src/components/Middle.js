@@ -18,17 +18,13 @@ const Middle = (props) => {
     async function queryTweetData() {
       if (tweetsData.length <= loadLimiter) {
         // querySnapshotUpdate();
-        const holderData = await queryData(
-          tweetsData,
-          setTweetsData,
-          setLoadingData
-        );
+        console.log("test");
+        await queryData(setTweetsData, setLoadingData);
         //  console.log(holderData);
-        setLoadingData(false);
       }
     }
     queryTweetData();
-  }, [loadLimiter]);
+  }, [loadLimiter, setTweetsData]);
 
   const addFiveLimit = () => {
     setLoadLimiter(loadLimiter + 5);
@@ -59,9 +55,7 @@ const Middle = (props) => {
 
     console.log(loadingData);
     if (tweetsDataSliced.length !== loadLimiter && !loadingData) {
-      console.log("slice data");
       // querySnapshotUpdate();
-      console.log(tweetsData);
       const arrayHolder = tweetsData.slice(0, loadLimiter);
       setTweetsDataSliced(arrayHolder);
       console.log(arrayHolder, loadLimiter, tweetsData);
@@ -103,6 +97,9 @@ const Middle = (props) => {
             date={tweet.date}
             login={login}
             profilePic={tweet.profilePic}
+            likes={tweet.likes}
+            setTweetsData={setTweetsData}
+            setLoadingData={setLoadingData}
           >
             TEST
           </Tweets>

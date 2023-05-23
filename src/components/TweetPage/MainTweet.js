@@ -140,6 +140,7 @@ const MainTweet = (prop) => {
         date={tweet.date}
         login={login}
         profilePic={tweet.profilePic}
+        likes={tweet.likes}
       ></Tweets>
 
       <form className="tweetform" id="replyform">

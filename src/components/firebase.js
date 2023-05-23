@@ -19,6 +19,9 @@ import {
   collection,
   query,
   where,
+  increment,
+  updateDoc,
+  onSnapshot,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -201,7 +204,6 @@ async function getUserData(
   if (!searchParam) {
     searchParam = getAuth().currentUser.email;
   }
-  console.log("query", searchParam);
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const allUsers = query(doc(db, "users", `${searchParam}`));
@@ -270,7 +272,8 @@ async function queryReplyFirebase(
 
 // add seconds instad of just minte in data collection name and query by date or something
 
-async function queryData(tweetsData, setTweetsData, setLoadingData) {
+async function queryData(setTweetsData, setLoadingData) {
+  console.log("new");
   setLoadingData(true);
   // console.log('auth',getAuth().currentUser);
   // console.log('query')
@@ -288,8 +291,8 @@ async function queryData(tweetsData, setTweetsData, setLoadingData) {
     // console.log(doc.data(), "users");
     const q = query(collection(db, "users", doc.data().user, "tweets"));
 
-    // const docSnap = await getDoc(docRef);
     const tweetsSnapshot = await getDocs(q);
+    // const tweetsSnapshot = await onSnapshot(q);
     // console.log(tweetsSnapshot);
     // return querySapshot;
     await tweetsSnapshot.forEach((doc) => {
@@ -298,6 +301,7 @@ async function queryData(tweetsData, setTweetsData, setLoadingData) {
       // console.log(doc.data());
       newArray.push(doc.data());
     });
+    setLoadingData(false);
     setTweetsData(newArray.concat([]));
   });
 }
@@ -440,6 +444,14 @@ function getDate(date) {
   return `${dateObj.getTime()}`;
 }
 
+async function incrementLikes(email, dateid) {
+  console.log(email);
+  const tweet = doc(db, "users", `${email}`, "tweets", `${getDate(dateid)}`);
+
+  await updateDoc(tweet, {
+    likes: increment(1),
+  });
+}
 export {
   signInPopUp,
   signOutUser,
@@ -456,4 +468,5 @@ export {
   queryContinuousReply,
   addContinuousReply,
   addSecondaryReply,
+  incrementLikes,
 };
