@@ -123,6 +123,7 @@ h2 {
   width: 40px;
   background-color: unset;
   height: 100%;
+  align-items: center;
 }
 a {
   text-decoration: none;
