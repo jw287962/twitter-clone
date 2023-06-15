@@ -35,7 +35,7 @@ const Tweet = (props) => {
   });
 
   async function processLike(e) {
-    await incrementLikes(email, date);
+    const data = await incrementLikes(email, date);
     queryData(setTweetsData, setLoadingData);
   }
   if (media) {

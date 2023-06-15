@@ -194,7 +194,6 @@ async function addUserFirebase() {
     background: "unset image",
     profilepic: user.photoURL,
     following: [],
-
   });
 }
 async function getUserData(
@@ -446,7 +445,6 @@ function getDate(date) {
 }
 
 async function incrementLikes(email, dateid) {
-  console.log(email);
   const tweet = doc(db, "users", `${email}`, "tweets", `${getDate(dateid)}`);
 
   await updateDoc(tweet, {
