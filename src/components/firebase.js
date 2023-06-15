@@ -193,6 +193,8 @@ async function addUserFirebase() {
     name: user.displayName,
     background: "unset image",
     profilepic: user.photoURL,
+    following: [],
+
   });
 }
 async function getUserData(

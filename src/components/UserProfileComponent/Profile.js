@@ -5,11 +5,13 @@ import UserProfile from "./UserProfile";
 import { useLocation } from "react-router";
 const Profile = (props) => {
   let data = useLocation();
-  const { login, search } = data.state;
+  console.log(data);
+  const { login, search } = data;
 
   useEffect(() => {
     console.log(data.search.substring(1));
     // let data = useLocation();
+
     console.log(data);
   });
 

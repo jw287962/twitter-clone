@@ -34,15 +34,11 @@ const Tweet = (props) => {
     getDate();
   });
 
-  function processLike(e) {
-    // e.preventDefault();
-    // e.stopPropagation();
-
-    incrementLikes(email, date);
+  async function processLike(e) {
+    await incrementLikes(email, date);
     queryData(setTweetsData, setLoadingData);
   }
   if (media) {
-    // console.log(props);
     return (
       <div className="tweet">
         <Link
