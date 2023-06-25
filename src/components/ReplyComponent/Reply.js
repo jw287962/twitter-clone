@@ -2,7 +2,6 @@ import { Markup } from "interweave";
 import "../css/Replies.css";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { queryContinuousReply } from "../firebase";
 import MiniReply from "./MiniReply";
 const Reply = (props) => {
   const {
@@ -21,11 +20,9 @@ const Reply = (props) => {
   } = props;
   let data = useLocation();
   // profilePic,date,media,user,displayName,text,
-  const [queryReply, setQueryReply] = useState(false);
-  const [replyArrayHolder, setReplyArrayHolder] = useState([]);
 
-  const [replyData, setReplyData] = useState(undefined);
-  // 
+  const [replyData, setReplyData] = useState(reply);
+  //
   const handleInternalReply = () => {
     // const replyDiv = e.target.parentElement.parentElement.parentElement
     setToggleFormHidden(false);
@@ -33,43 +30,28 @@ const Reply = (props) => {
 
     setCurrentReply(reply);
   };
-  useEffect(() => {
-    if (!replyData && !queryReply) {
-      queryReplies();
-    }
-    function queryReplies() {
-      queryContinuousReply(
-        data.pathname.substring(7),
-        data.search.substring(1),
-        reply.date,
-        setReplyData,
-        setQueryReply
-      );
-    }
-  }, [replyData]);
+  // useEffect(() => {
+  // if (!replyData && !queryReply) {
+  //   queryReplies();
+  // }
+  // function queryReplies() {}
+  // }, [replyData]);
 
-  useEffect(() => {
-    if (
-      queryReply &&
-      replyData &&
-      replyData.reply &&
-      replyData.reply.length !== 0
-    ) {
-      // will be an arry of reply objects instead
-      console.log(replyData);
-      // if(!replyDataHolder)return;
-      // while(replyDataHolder.reply){
-
-      //   array.push(replyDataHolder.reply);
-      //   replyDataHolder = replyDataHolder.reply;
-      // }
-      setReplyArrayHolder(replyData.reply.concat([]));
-      setQueryReply(false);
-    }
-  }, [queryReply]);
+  // useEffect(() => {
+  //   if (
+  //     queryReply &&
+  //     replyData &&
+  //     replyData.reply &&
+  //     replyData.reply.length !== 0
+  //   ) {
+  //     setReplyArrayHolder(replyData.reply.concat([]));
+  //     setQueryReply(false);
+  //   }
+  // }, [queryReply]);
   // console.log(reply);
   // NEED TO STORE OBJECTS INSIDE REPLY IE: const obj = {reply: {text: 'hi', reply: {text: "newb"}, reply1: {}}};
   // console.log(replyArrayHolder);
+
   return (
     <div className="reply">
       <div className="flexrow tweetuser">
@@ -106,21 +88,19 @@ const Reply = (props) => {
         </button>
       </div>
       <div className="replyContainer">
-        {replyArrayHolder &&
-          replyArrayHolder.map((tweet, i) => {
-            // console.log(tweet);
-
+        {reply &&
+          reply.reply.map((tweet, i) => {
             return (
               <MiniReply
+                login={login}
                 setArrayReplyNum={setArrayReplyNum}
                 replyNum={i++}
                 replyMiniText={replySecondMiniText}
                 key={tweet.user + tweet.date}
                 setCurrentReply={setCurrentReply}
                 reply={tweet}
-                setToggleFormHidden={setToggleReplyFormHidden}
                 replyData={replyData}
-                login={login}
+                setToggleFormHidden={setToggleReplyFormHidden}
                 newReplyData={newReplyData}
                 setNewReplyData={setNewReplyData}
                 currentMiniReply={currentMiniReply}

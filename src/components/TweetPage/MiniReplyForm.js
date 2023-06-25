@@ -17,20 +17,16 @@ const MiniReplyForm = (prop) => {
     replyMiniText,
     arrayReplyNum,
     setNewReplyData,
-
     currentMiniReply,
     currentReplyData,
-
     media,
     toggleFileInput,
-
     handleFileInput,
   } = prop;
   const { login } = user;
   const { currentReply } = prop;
 
   useEffect(() => {
-    console.log(prop);
     return () => {};
   }, []);
 
@@ -48,7 +44,7 @@ const MiniReplyForm = (prop) => {
 
   const processReplyFormData = async (e) => {
     e.preventDefault();
-    await makeNewReplyData();
+    makeNewReplyData();
     const holder = currentMiniReply;
 
     if (media) {
@@ -67,7 +63,8 @@ const MiniReplyForm = (prop) => {
       });
     } else {
       // tweet.date is a string right now
-      await addMiniReplies(
+      console.log(currentReplyData);
+      addMiniReplies(
         tweet.email,
         tweet.date,
         currentReplyData.date,

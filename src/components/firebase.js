@@ -148,22 +148,7 @@ async function addTweetFireBase(text, url) {
 
   const date = new Date();
   const dateString = date.toString();
-  // Add a new document in collection jasonwong28798
-  // await setDoc(doc(db, user.substring(0,user.indexOf('@')), `tweet${date}`), {
-  // const currentUser = collection(db, 'users', `${user.substring(0,user.indexOf('@'))}`,'tweets',`${date}`)
-  // await setDoc(
-  //   doc(db, "users", `${user.email}`, "tweets", `${date.getTime()}`),
-  //   {
-  //     text: text,
-  //     media: url,
-  //     user: user.email.substring(0, user.email.indexOf("@")),
-  //     displayName: user.displayName,
-  //     email: user.email,
-  //     profilePic: user.photoURL,
-  //     date: makeDatewithMS(dateString, date),
-  //     likes: 0,
-  //   }
-  // );
+
   await setDoc(doc(db, "tweets", `${date.getTime()}`), {
     text: text,
     media: url,
@@ -175,23 +160,7 @@ async function addTweetFireBase(text, url) {
     likes: 0,
   });
 }
-function makeDatewithMS(dateString, date) {
-  if (date.getMilliseconds() <= 99)
-    return (
-      dateString.substring(0, dateString.indexOf("GMT") - 1) +
-      ".0" +
-      date.getMilliseconds() +
-      " " +
-      dateString.substring(dateString.indexOf("GMT"))
-    );
-  return (
-    dateString.substring(0, dateString.indexOf("GMT") - 1) +
-    "." +
-    date.getMilliseconds() +
-    " " +
-    dateString.substring(dateString.indexOf("GMT"))
-  );
-}
+
 async function addUserFirebase() {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
@@ -209,6 +178,7 @@ async function addUserFirebase() {
     following: [],
   });
 }
+
 async function getUserData(
   searchParam = auth.currentUser.email,
   setLoadingData,
@@ -240,9 +210,7 @@ async function addReplyFirebase(textData, textID, tweetUser, downloadURL = "") {
 
   const date = new Date();
   const dateString = date.toString();
-  // Add a new document in collection jasonwong28798
-  // await setDoc(doc(db, user.substring(0,user.indexOf('@')), `tweet${date}`), {
-  // updates on completion
+
   return new Promise(async (resolve) => {
     const finish = await setDoc(
       doc(db, "tweets", textID, "replies", `${date.getTime()}`),
@@ -284,26 +252,24 @@ async function queryReplyFirebase(
 async function queryData(setTweetsData, setLoadingData) {
   setLoadingData(true);
   // console.log('auth',getAuth().currentUser);
-  // console.log('query')
+
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
   const allTweets = query(collection(db, "tweets"));
   const allTweetsSnapshot = await getDocs(allTweets);
-  // prob better when more users, to change to followers or something instead of all users or if users > 30
-  // const usersArray = [];
+
   const newArray = [];
 
   const data = allTweetsSnapshot.forEach(async (doc) => {
     newArray.push(doc.data());
 
-    // await tweetsSnapshot.forEach((doc) => {
-    // });
     setLoadingData(false);
     setTweetsData(newArray.concat([]));
   });
 }
 
+// QUERY THE TWEET DATA
 async function queryTweetSingle(tweetUser, tweetIDDate, setTweet) {
   const user = query(doc(db, "tweets", tweetIDDate));
   const allUserSnapshot = await getDoc(user);
@@ -313,19 +279,16 @@ async function queryTweetSingle(tweetUser, tweetIDDate, setTweet) {
 }
 
 async function queryContinuousReply(
-  tweetUser,
   textID,
   replyID,
   setReplyData,
   setQueryReply
 ) {
-  // console.log(textID);
   const replies = query(doc(db, "tweets", textID, "replies", getDate(replyID)));
   const allRepliesSnapshot = await getDoc(replies);
-  // console.log(allRepliesSnapshot.data());
 
   // need to chnage to array of replies objects
-  await setReplyData(allRepliesSnapshot.data());
+  setReplyData(allRepliesSnapshot.data());
 
   if (setQueryReply) setQueryReply(true);
 }
@@ -339,16 +302,17 @@ async function addMiniReplies(
   arrayReplyNum,
   holder
 ) {
+  console.log(getDate(textID), replyID);
   const replies = query(
     doc(db, "tweets", getDate(textID), "replies", getDate(replyID))
   );
   const allRepliesSnapshot = await getDoc(replies);
   // console.log(allRepliesSnapshot.data());
+  console.log(allRepliesSnapshot.data());
   const originalReply = allRepliesSnapshot.data();
   // DO THIS FOR ONLY STRING LENGHT OF 1 (JUST NUMBER):
   const orignalReplyArrayData = originalReply.reply;
   if (typeof arrayReplyNum == "number") {
-    console.log("here");
     orignalReplyArrayData.splice(arrayReplyNum, 1, holder);
     addContinuousReply(orignalReplyArrayData, tweetUser, textID, replyID);
   } else {
@@ -408,6 +372,32 @@ async function addContinuousReply(reply, tweetUser, textID, replyID) {
   }
 }
 
+async function incrementLikes(email, dateid) {
+  const tweet = doc(db, "tweets", `${getDate(dateid)}`);
+
+  await updateDoc(tweet, {
+    likes: increment(1),
+  });
+}
+
+// utility
+function makeDatewithMS(dateString, date) {
+  if (date.getMilliseconds() <= 99)
+    return (
+      dateString.substring(0, dateString.indexOf("GMT") - 1) +
+      ".0" +
+      date.getMilliseconds() +
+      " " +
+      dateString.substring(dateString.indexOf("GMT"))
+    );
+  return (
+    dateString.substring(0, dateString.indexOf("GMT") - 1) +
+    "." +
+    date.getMilliseconds() +
+    " " +
+    dateString.substring(dateString.indexOf("GMT"))
+  );
+}
 function getDate(date) {
   // const dateObject = new Date(date);
   const convertmmddyy = date.substring(0, date.indexOf("2023") + 4);
@@ -416,14 +406,6 @@ function getDate(date) {
     firstDate + date.substring(date.indexOf(2023) + 4, date.indexOf("GMT") - 1)
   );
   return `${dateObj.getTime()}`;
-}
-
-async function incrementLikes(email, dateid) {
-  const tweet = doc(db, "tweets", `${getDate(dateid)}`);
-
-  await updateDoc(tweet, {
-    likes: increment(1),
-  });
 }
 export {
   signInPopUp,

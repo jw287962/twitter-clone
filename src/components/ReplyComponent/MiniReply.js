@@ -20,10 +20,8 @@ const MiniReply = (props) => {
   const {
     login,
     reply,
-    removeForm,
-    setCurrentReply,
     replyData,
-    replyMiniText,
+    setCurrentReply,
     setArrayReplyNum,
     setToggleFormHidden,
     setCurrentMiniReply,
@@ -44,9 +42,9 @@ const MiniReply = (props) => {
 
     //  current secondary reply data and first reply data
     setCurrentMiniReply(reply);
+    console.log(replyData);
     setCurrentReplyData(replyData);
   };
-  useEffect(() => {}, [replyMiniText]);
 
   useEffect(() => {}, []);
   const string = replyNum + ",";

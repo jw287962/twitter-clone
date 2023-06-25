@@ -12,7 +12,7 @@ import {
 import { useLocation } from "react-router-dom";
 import ReplyForm from "./ReplyForm";
 import MiniReplyForm from "./MiniReplyForm";
-import Reply from "../DisplayReplyData/Reply";
+import Reply from "../ReplyComponent/Reply";
 import { getDownloadURL } from "firebase/storage";
 
 const MainTweet = (prop) => {
@@ -213,13 +213,12 @@ const MainTweet = (prop) => {
         arrayReplyNum={arrayReplyNum}
         login={login}
         currentReply={currentReply}
-     
         tweet={tweet}
-        currentMiniReply={currentMiniReply}
         toggleFormHidden={toggleReplyFormHidden}
         setToggleFormHidden={setToggleReplyFormHidden}
         replyMiniText={replySecondMiniText}
         setReplyMiniText={setReplySecondMiniText}
+        currentMiniReply={currentMiniReply}
         setNewReplyData={setNewReplyData}
         currentReplyData={currentReplyData}
       ></MiniReplyForm>
