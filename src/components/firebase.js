@@ -242,18 +242,23 @@ async function addReplyFirebase(textData, textID, tweetUser, downloadURL = "") {
   const dateString = date.toString();
   // Add a new document in collection jasonwong28798
   // await setDoc(doc(db, user.substring(0,user.indexOf('@')), `tweet${date}`), {
-  const data = await setDoc(
-    doc(db, "tweets", textID, "replies", `${date.getTime()}`),
-    {
-      user: user.email,
-      date: makeDatewithMS(dateString, date),
-      displayName: user.displayName,
-      profilePic: user.photoURL,
-      text: textData,
-      media: downloadURL,
-      reply: [],
-    }
-  );
+  // updates on completion
+  return new Promise(async (resolve) => {
+    const finish = await setDoc(
+      doc(db, "tweets", textID, "replies", `${date.getTime()}`),
+      {
+        user: user.email,
+        date: makeDatewithMS(dateString, date),
+        displayName: user.displayName,
+        profilePic: user.photoURL,
+        text: textData,
+        media: downloadURL,
+        reply: [],
+      }
+    );
+
+    resolve(finish);
+  });
 }
 
 async function queryReplyFirebase(

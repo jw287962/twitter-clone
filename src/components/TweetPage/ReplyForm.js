@@ -45,6 +45,7 @@ const ReplyForm = (prop) => {
   };
 
   const processFormData = async (e) => {
+    console.log("reply on a main tweet");
     e.preventDefault();
     const date = new Date();
     const dateString = date.toString();

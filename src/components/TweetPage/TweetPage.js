@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Markup } from "interweave";
 import Left from "../Left";
 import Right from "../Right";
-import MainTweet from "./MainTweet";
+import MainTweet from "./InsideTweet";
 import { Link } from "react-router-dom";
 import UserProfile from "../UserProfileComponent/UserProfile";
 import { useLocation } from "react-router";

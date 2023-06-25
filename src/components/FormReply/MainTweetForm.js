@@ -23,14 +23,11 @@ const Form = (props) => {
 
   const processTweetData = (e) => {
     e.preventDefault();
-
-    console.log(media);
     if (media) {
       // const img = document.querySelector('#media');
       // console.log(img.files[0])
       // const imgURL  = URL.createObjectURL(img.files[0]);
       // console.log(imgURL);
-      console.log("tweet text", userTweetText);
       const uploadTask = uploadImage(media);
       uploadTask.then((downloadURL) => {
         addTweetFireBase(userTweetText, downloadURL);

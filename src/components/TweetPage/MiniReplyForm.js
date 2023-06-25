@@ -5,7 +5,7 @@ import { getDownloadURL } from "firebase/storage";
 import { UserContext } from "../../Router";
 import Tweets from "../Tweets";
 
-import TweetHandlerWrapper from "../TweetPage/HOCReplyFormHandler";
+import TweetHandlerWrapper from "./HOCReplyFormHandler";
 const MiniReplyForm = (prop) => {
   const user = useContext(UserContext);
   // get tweetID and user of original tweet
@@ -111,32 +111,6 @@ const MiniReplyForm = (prop) => {
 
       resolve("resolved");
     });
-  };
-
-  const looper = (replyDataFunc) => {
-    // console.log('loop')
-    // console.log(replyDataFunc);
-
-    // for(const key in replyDataFunc){
-    //   if(key === 'reply'){
-    //     console.log(replyDataFunc['reply']);
-    //    if(replyDataFunc['reply'] === ''){
-
-    //       const date = new Date();
-    // const dateString = date.toString();
-    // const dateData = makeDatewithMS(dateString,date)
-    //       const holder = {user:login.email, displayName:login.displayName,
-    //         profilePic: login.photoURL,date:dateData, text:replyMiniText,reply:""}
-    //       replyDataFunc.reply = holder;
-    //       console.log(replyDataFunc);
-    //    }else
-    //     looper(replyDataFunc['reply']);
-
-    //   }else
-    //   if(key === 'date'|| key === 'displayName' || key === 'media' || key === 'profilePic' || key === 'text' || key === 'user'){}
-    // }
-
-    console.log(currentReplyData);
   };
 
   function makeDatewithMS(dateString, date) {

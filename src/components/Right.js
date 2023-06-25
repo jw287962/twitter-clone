@@ -6,7 +6,7 @@ import "material-icons/iconfont/material-icons.css";
 const Right = (props) => {
   const user = useContext(UserContext);
   // const { setLogin, login, signInUser } = user;
-
+  const [searchData, setSearchData] = useState("");
   // console.log(user());
 
   const signOutUser = () => {
@@ -16,17 +16,30 @@ const Right = (props) => {
 
   useEffect(() => {});
 
+  function updateSearchData(e) {
+    setSearchData(e.target.value);
+  }
+
+  function handleSearch(e) {
+    e.preventDefault();
+    console.log(handleSearch);
+  }
+
   if (user.login) {
     return (
       <nav className="searchNav">
         <div>
           <button onClick={signOutUser}>Logout</button>
-          <form className="searchForm">
+          <form className="searchForm" onSubmit={handleSearch}>
             <label className="flexrow">
               <span className="material-icons" id="searchbar">
                 search
-              </span>{" "}
-              <input type="text"></input>
+              </span>
+              <input
+                type="text"
+                onChange={updateSearchData}
+                value={searchData}
+              ></input>
             </label>
           </form>
         </div>

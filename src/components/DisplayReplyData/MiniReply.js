@@ -36,7 +36,8 @@ const MiniReply = (props) => {
 
   const [replyArrayHolder, setReplyArrayHolder] = useState([]);
   const handleInternalReply = (e) => {
-    const replyDiv = e.target.parentElement.parentElement.parentElement;
+    console.log("second reply");
+    // const replyDiv = e.target.parentElement.parentElement.parentElement;
     setToggleFormHidden(false);
     // query reply
     setArrayReplyNum(replyNum);
@@ -47,29 +48,7 @@ const MiniReply = (props) => {
   };
   useEffect(() => {}, [replyMiniText]);
 
-  useEffect(() => {
-    //   if(replyData && replyData.reply && replyData.reply.length !== 0){
-    //       let replyDataHolder = replyData.reply[0];
-    // const array = [];
-    //     // will be an arry of reply objects instead
-    //     console.log(replyDataHolder);
-    //         if(!replyDataHolder)return;
-    //         while(replyDataHolder.reply){
-    //             // if( Array.isArray(replyDataHolder.reply)){
-    //             //   array.push(replyDataHolder.reply[0]);
-    //             //   replyDataHolder = replyDataHolder.reply[0];
-    //             // }
-    //             //
-    //         if(replyDataHolder.reply !== ''){
-    //             array.push(replyDataHolder.reply);
-    //             replyDataHolder = replyDataHolder.reply;
-    //           }else{
-    //             replyDataHolder = replyDataHolder.reply;
-    //           }
-    //         }
-    //         setReplyArrayHolder(array.concat([]));
-    //       }
-  }, []);
+  useEffect(() => {}, []);
   const string = replyNum + ",";
 
   return (
@@ -106,8 +85,6 @@ const MiniReply = (props) => {
         </button>
       </div>
       {reply.reply.map((tweet, i) => {
-        console.log(",tweet", tweet.date);
-
         if (!tweet) {
           return null;
         }

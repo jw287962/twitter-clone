@@ -10,9 +10,9 @@ import {
   queryReplyFirebase,
 } from "../firebase";
 import { useLocation } from "react-router-dom";
-import ReplyForm from "../FormReply/ReplyForm";
-import MiniReplyForm from "../FormReply/MiniReplyForm";
-import Reply from "../HandleReplies/Reply";
+import ReplyForm from "./ReplyForm";
+import MiniReplyForm from "./MiniReplyForm";
+import Reply from "../DisplayReplyData/Reply";
 import { getDownloadURL } from "firebase/storage";
 
 const MainTweet = (prop) => {
@@ -101,6 +101,7 @@ const MainTweet = (prop) => {
     }
   }
   const processReplyData = (e) => {
+    console.log("first reply off main tweet");
     e.preventDefault();
     if (media) {
       // const img = document.querySelector('#media');
@@ -113,7 +114,11 @@ const MainTweet = (prop) => {
         addReplyFirebase(userTweetText, tweetID, tweetUser, downloadURL);
       });
     } else {
-      addReplyFirebase(userTweetText, tweetID, tweetUser);
+      const finish = addReplyFirebase(userTweetText, tweetID, tweetUser);
+
+      finish.then((complete) => {
+        queryReplyFirebase(tweetUser, tweetID, setReplies, setLoadingData);
+      });
     }
 
     setUserTweetText("");
@@ -208,8 +213,9 @@ const MainTweet = (prop) => {
         arrayReplyNum={arrayReplyNum}
         login={login}
         currentReply={currentReply}
-        currentMiniReply={currentMiniReply}
+     
         tweet={tweet}
+        currentMiniReply={currentMiniReply}
         toggleFormHidden={toggleReplyFormHidden}
         setToggleFormHidden={setToggleReplyFormHidden}
         replyMiniText={replySecondMiniText}
