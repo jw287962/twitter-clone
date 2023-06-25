@@ -124,6 +124,10 @@ const MainTweet = (prop) => {
     setMedia("");
   };
 
+  useEffect(() => {
+    console.log("inside main", media);
+  }, [media]);
+
   if (!tweet) {
     return (
       <main className="content">
@@ -202,9 +206,12 @@ const MainTweet = (prop) => {
         login={login}
         currentReply={currentReply}
         tweet={tweet}
+        toggleFileInput={toggleFileInput}
         toggleFormHidden={toggleFormHidden}
+        media={media}
         setToggleFormHidden={setToggleFormHidden}
         replyMiniText={replyMiniText}
+        handleFileInput={handleFileInput}
         setReplyMiniText={setReplyMiniText}
         currentMiniReply={currentMiniReply}
         setNewReplyData={setNewReplyData}

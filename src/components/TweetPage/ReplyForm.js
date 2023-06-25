@@ -20,7 +20,6 @@ const ReplyForm = (prop) => {
     setReplyMiniText,
     replyMiniText,
     arrayReplyNum,
-
     media,
     toggleFileInput,
 
@@ -56,13 +55,13 @@ const ReplyForm = (prop) => {
       const holder = await makeNewReplyData();
 
       // const holder = currentMiniReply;
-
+      console.log(holder);
       if (media) {
         const uploadTask = uploadImage(media);
         uploadTask.then((downloadURL) => {
           // const array = arrayReplyNum.split(",");
 
-          holder.reply[holder.reply.length - 1].media = downloadURL;
+          holder.media = downloadURL;
           addMiniReplies(
             tweet.email,
             tweet.date,
@@ -102,6 +101,7 @@ const ReplyForm = (prop) => {
         date: dateData,
         text: replyMiniText,
         reply: [],
+        media: "",
       }; //arrayPosition:
 
       console.log(currentReply);
@@ -170,6 +170,10 @@ const ReplyForm = (prop) => {
       resolve(holder);
     });
   };
+
+  useEffect(() => {
+    console.log(media);
+  }, [media]);
   return (
     <div
       onClick={removeForm}

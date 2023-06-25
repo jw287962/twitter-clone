@@ -18,6 +18,7 @@ const TweetHandlerWrapper = (OriginalComponent) => {
     const toggleFileInput = (e) => {
       e.preventDefault();
       const fileInput = e.target.nextSibling;
+      console.log("input", fileInput);
       fileInput.click();
     };
 
@@ -25,6 +26,7 @@ const TweetHandlerWrapper = (OriginalComponent) => {
       setUserTweetText(e.target.value);
     };
     const handleFileInput = (e) => {
+      console.log("wrong");
       // e.preventDefault();
       // console.log(this.readFile(e.target.value))
       const reader = new FileReader();
