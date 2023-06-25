@@ -91,54 +91,57 @@ function uploadImage(img) {
   };
 
   const uploadTask = uploadBytesResumable(storageRef, file, metadata);
-
-  uploadTask.on(
-    "state_changed",
-    (snapshot) => {
-      // Observe state change events such as progress, pause, and resume
-      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log("Upload is " + progress + "% done");
-      switch (snapshot.state) {
-        case "paused":
-          console.log("Upload is paused");
-          break;
-        case "running":
-          console.log("Upload is running");
-          break;
-      }
-    },
-    (error) => {
-      switch (error.code) {
-        case "storage/unauthorized":
-          // User doesn't have permission to access the object
-          break;
-        case "storage/canceled":
-          // User canceled the upload
-          break;
-
-        // ...
-
-        case "storage/unknown":
-          // Unknown error occurred, inspect error.serverResponse
-          break;
-      }
-    },
-    () => {
-      // Handle successful uploads on complete
-      // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        console.log("File available at", downloadURL);
-      });
-    }
-  );
   return new Promise((resolve) => {
-    resolve(uploadTask);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress + "% done");
+        switch (snapshot.state) {
+          case "paused":
+            console.log("Upload is paused");
+            break;
+          case "running":
+            console.log("Upload is running");
+            break;
+          default:
+            console.log("Neither paused nor running upload");
+        }
+      },
+      (error) => {
+        switch (error.code) {
+          case "storage/unauthorized":
+            // User doesn't have permission to access the object
+            break;
+          case "storage/canceled":
+            // User canceled the upload
+            break;
+          case "storage/unknown":
+            // Unknown error occurred, inspect error.serverResponse
+            break;
+          default:
+            console.log("Neither Unauthorized/canceled/unknown");
+        }
+      },
+      () => {
+        // Handle successful uploads on complete
+        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log("File available at", downloadURL);
+          resolve(downloadURL);
+        });
+      }
+    );
   });
 }
 
 async function addTweetFireBase(text, url) {
   if (!text) return;
+
+  console.log("add tweet");
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const user = getAuth().currentUser;
@@ -148,19 +151,29 @@ async function addTweetFireBase(text, url) {
   // Add a new document in collection jasonwong28798
   // await setDoc(doc(db, user.substring(0,user.indexOf('@')), `tweet${date}`), {
   // const currentUser = collection(db, 'users', `${user.substring(0,user.indexOf('@'))}`,'tweets',`${date}`)
-  await setDoc(
-    doc(db, "users", `${user.email}`, "tweets", `${date.getTime()}`),
-    {
-      text: text,
-      media: url,
-      user: user.email.substring(0, user.email.indexOf("@")),
-      displayName: user.displayName,
-      email: user.email,
-      profilePic: user.photoURL,
-      date: makeDatewithMS(dateString, date),
-      likes: 0,
-    }
-  );
+  // await setDoc(
+  //   doc(db, "users", `${user.email}`, "tweets", `${date.getTime()}`),
+  //   {
+  //     text: text,
+  //     media: url,
+  //     user: user.email.substring(0, user.email.indexOf("@")),
+  //     displayName: user.displayName,
+  //     email: user.email,
+  //     profilePic: user.photoURL,
+  //     date: makeDatewithMS(dateString, date),
+  //     likes: 0,
+  //   }
+  // );
+  await setDoc(doc(db, "tweets", `${date.getTime()}`), {
+    text: text,
+    media: url,
+    user: user.email.substring(0, user.email.indexOf("@")),
+    displayName: user.displayName,
+    email: user.email,
+    profilePic: user.photoURL,
+    date: makeDatewithMS(dateString, date),
+    likes: 0,
+  });
 }
 function makeDatewithMS(dateString, date) {
   if (date.getMilliseconds() <= 99)
@@ -230,15 +243,7 @@ async function addReplyFirebase(textData, textID, tweetUser, downloadURL = "") {
   // Add a new document in collection jasonwong28798
   // await setDoc(doc(db, user.substring(0,user.indexOf('@')), `tweet${date}`), {
   const data = await setDoc(
-    doc(
-      db,
-      "users",
-      `${tweetUser}`,
-      "tweets",
-      textID,
-      "replies",
-      `${date.getTime()}`
-    ),
+    doc(db, "tweets", textID, "replies", `${date.getTime()}`),
     {
       user: user.email,
       date: makeDatewithMS(dateString, date),
@@ -258,9 +263,7 @@ async function queryReplyFirebase(
   setLoadingData
 ) {
   setLoadingData(true);
-  const allReplies = query(
-    collection(db, "users", tweetUser, "tweets", textID, "replies")
-  );
+  const allReplies = query(collection(db, "tweets", textID, "replies"));
   const allRepliesSnapshot = await getDocs(allReplies);
   const array = [];
   allRepliesSnapshot.forEach(async (doc) => {
@@ -280,34 +283,24 @@ async function queryData(setTweetsData, setLoadingData) {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  const allUsers = query(collection(db, "users"));
-  const allUserSnapshot = await getDocs(allUsers);
+  const allTweets = query(collection(db, "tweets"));
+  const allTweetsSnapshot = await getDocs(allTweets);
   // prob better when more users, to change to followers or something instead of all users or if users > 30
   // const usersArray = [];
   const newArray = [];
 
-  const data = allUserSnapshot.forEach(async (doc) => {
-    // usersArray.push(doc.data());
-    // console.log(doc.data(), "users");
-    const q = query(collection(db, "users", doc.data().user, "tweets"));
+  const data = allTweetsSnapshot.forEach(async (doc) => {
+    newArray.push(doc.data());
 
-    const tweetsSnapshot = await getDocs(q);
-    // const tweetsSnapshot = await onSnapshot(q);
-    // console.log(tweetsSnapshot);
-    // return querySapshot;
-    await tweetsSnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      // console.log(doc.id, " => ", doc.data())
-      // console.log(doc.data());
-      newArray.push(doc.data());
-    });
+    // await tweetsSnapshot.forEach((doc) => {
+    // });
     setLoadingData(false);
     setTweetsData(newArray.concat([]));
   });
 }
 
 async function queryTweetSingle(tweetUser, tweetIDDate, setTweet) {
-  const user = query(doc(db, "users", tweetUser, "tweets", tweetIDDate));
+  const user = query(doc(db, "tweets", tweetIDDate));
   const allUserSnapshot = await getDoc(user);
   // prob better when more users, to change to followers or something instead of all users or if users > 30
   const data = allUserSnapshot;
@@ -322,9 +315,7 @@ async function queryContinuousReply(
   setQueryReply
 ) {
   // console.log(textID);
-  const replies = query(
-    doc(db, "users", tweetUser, "tweets", textID, "replies", getDate(replyID))
-  );
+  const replies = query(doc(db, "tweets", textID, "replies", getDate(replyID)));
   const allRepliesSnapshot = await getDoc(replies);
   // console.log(allRepliesSnapshot.data());
 
@@ -343,19 +334,8 @@ async function addMiniReplies(
   arrayReplyNum,
   holder
 ) {
-  // console.log(arrayReplyNum);
-  // console.log(holder);
-  // console.log(textID);
   const replies = query(
-    doc(
-      db,
-      "users",
-      tweetUser,
-      "tweets",
-      getDate(textID),
-      "replies",
-      getDate(replyID)
-    )
+    doc(db, "tweets", getDate(textID), "replies", getDate(replyID))
   );
   const allRepliesSnapshot = await getDoc(replies);
   // console.log(allRepliesSnapshot.data());
@@ -376,10 +356,6 @@ async function addMiniReplies(
     arrayHolder.reply.push(holder);
     addContinuousReply(orignalReplyArrayData, tweetUser, textID, replyID);
   }
-
-  // need to chnage to array of replies objects
-  // console.log(holder);
-  // console.log(orignalReplyArrayData);
 }
 
 // first reply
@@ -392,46 +368,39 @@ async function addSecondaryReply(
   setReplyData,
   downloadURL = ""
 ) {
-  const replies = query(
-    doc(
-      db,
-      "users",
-      tweetUser,
-      "tweets",
-      getDate(textID),
-      "replies",
-      getDate(replyID)
-    )
-  );
-  const allRepliesSnapshot = await getDoc(replies);
-  const originalReply = await allRepliesSnapshot.data();
-  holder.arrayPosition = originalReply.reply.length;
-  // console.log(holder);
-  originalReply.reply.push(holder);
-  // need to chnage to array of replies objects
-  await setReplyData(originalReply.reply.concat([]));
-  addContinuousReply(originalReply.reply, tweetUser, textID, replyID);
+  try {
+    const replies = query(
+      doc(db, "tweets", getDate(textID), "replies", getDate(replyID))
+    );
+    const allRepliesSnapshot = await getDoc(replies);
+    const originalReply = await allRepliesSnapshot.data();
+    holder.arrayPosition = originalReply.reply.length;
+    // console.log(holder);
+    originalReply.reply.push(holder);
+
+    // need to chnage to array of replies objects
+    await setReplyData(originalReply.reply.concat([]));
+    addContinuousReply(originalReply.reply, tweetUser, textID, replyID);
+  } catch (e) {
+    console.log("addsecondaryreply", e);
+  }
 }
 
 // change to just for arrays of one reply
 async function addContinuousReply(reply, tweetUser, textID, replyID) {
-  const date = new Date();
+  try {
+    // const date = new Date();
 
-  const data = await setDoc(
-    doc(
-      db,
-      "users",
-      `${tweetUser}`,
-      "tweets",
-      getDate(textID),
-      "replies",
-      getDate(replyID)
-    ),
-    {
-      reply: reply,
-    },
-    { merge: true }
-  );
+    const data = await setDoc(
+      doc(db, "tweets", getDate(textID), "replies", getDate(replyID)),
+      {
+        reply: reply,
+      },
+      { merge: true }
+    );
+  } catch (e) {
+    console.log("addContinuousReply", e);
+  }
 }
 
 function getDate(date) {
@@ -445,7 +414,7 @@ function getDate(date) {
 }
 
 async function incrementLikes(email, dateid) {
-  const tweet = doc(db, "users", `${email}`, "tweets", `${getDate(dateid)}`);
+  const tweet = doc(db, "tweets", `${getDate(dateid)}`);
 
   await updateDoc(tweet, {
     likes: increment(1),

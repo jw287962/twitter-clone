@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { uploadImage, addContinuousReply, addMiniReplies } from "../firebase";
+import { uploadImage, addMiniReplies } from "../firebase";
 
 import { getDownloadURL } from "firebase/storage";
 import { UserContext } from "../../Router";
@@ -52,10 +52,8 @@ const MiniReplyForm = (prop) => {
     const holder = currentMiniReply;
 
     if (media) {
-      const uploadTask = await uploadImage(media);
-      console.log(uploadTask);
-      getDownloadURL(uploadTask.ref).then((downloadURL) => {
-        console.log(holder);
+      const uploadTask = uploadImage(media);
+      uploadTask.then((downloadURL) => {
         // const array = arrayReplyNum.split(",");
 
         holder.reply[holder.reply.length - 1].media = downloadURL;

@@ -30,8 +30,9 @@ const Form = (props) => {
       // console.log(img.files[0])
       // const imgURL  = URL.createObjectURL(img.files[0]);
       // console.log(imgURL);
+      console.log("tweet text", userTweetText);
       const uploadTask = uploadImage(media);
-      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+      uploadTask.then((downloadURL) => {
         addTweetFireBase(userTweetText, downloadURL);
       });
     } else {

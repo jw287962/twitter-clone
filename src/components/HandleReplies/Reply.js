@@ -2,7 +2,7 @@ import { Markup } from "interweave";
 import "../css/Replies.css";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { addContinuousReply, queryContinuousReply } from "../firebase";
+import { queryContinuousReply } from "../firebase";
 import MiniReply from "./MiniReply";
 const Reply = (props) => {
   const {

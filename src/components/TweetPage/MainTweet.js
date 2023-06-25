@@ -52,13 +52,13 @@ const MainTweet = (prop) => {
   const [loadingData, setLoadingData] = useState(false);
   const [loadLimiter, setLoadLimiter] = useState(5);
   // REMOVE REPLY FORM IF VISIBLE
-  const removeForm = (e) => {
-    console.log(toggleFormHidden, "remove form condition");
-    if (!toggleFormHidden) {
-      console.log("remove form");
-      setToggleFormHidden(true);
-    }
-  };
+  // const removeForm = (e) => {
+  //   console.log(toggleFormHidden, "remove form condition");
+  //   if (!toggleFormHidden) {
+  //     console.log("remove form");
+  //     setToggleFormHidden(true);
+  //   }
+  // };
 
   // QUERY TWEET
   useEffect(() => {
@@ -91,12 +91,12 @@ const MainTweet = (prop) => {
     if (window.innerHeight * 2 >= document.body.scrollHeight) {
       if (
         Math.abs(
-          document.body.scrollHeight - window.innerHeight - window.pageYOffset
+          document.body.scrollHeight - window.innerHeight - window.scrollY
         ) <= 8
       ) {
         addFiveLimit();
       }
-    } else if (window.pageYOffset >= window.innerHeight) {
+    } else if (window.scrollY >= window.innerHeight) {
       addFiveLimit();
     }
   }
