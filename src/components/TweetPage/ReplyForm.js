@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import {
   uploadImage,
   addContinuousReply,
+  addMiniReplies,
   addSecondaryReply,
 } from "../firebase";
 import { getDownloadURL } from "firebase/storage";
@@ -24,6 +25,9 @@ const ReplyForm = (prop) => {
     toggleFileInput,
 
     handleFileInput,
+    setNewReplyData,
+    currentReplyData,
+    currentMiniReply,
   } = prop;
   const { login } = user;
   const { currentReply } = prop;
@@ -45,31 +49,76 @@ const ReplyForm = (prop) => {
   };
 
   const processFormData = async (e) => {
-    console.log("reply on a main tweet");
     e.preventDefault();
-    const date = new Date();
-    const dateString = date.toString();
-    const dateData = makeDatewithMS(dateString, date);
 
-    // query the array and push a new arrayZ?
+    if (currentMiniReply) {
+      console.log("mini replies");
+      const holder = await makeNewReplyData();
 
-    console.log(replyArrayData);
+      // const holder = currentMiniReply;
 
-    const holder = {
-      user: login.email,
-      displayName: login.displayName,
-      profilePic: login.photoURL,
-      date: dateData,
-      text: replyMiniText,
-      reply: [],
-    }; //arrayPosition:
+      if (media) {
+        const uploadTask = uploadImage(media);
+        uploadTask.then((downloadURL) => {
+          // const array = arrayReplyNum.split(",");
 
-    console.log(currentReply);
-    if (media) {
-      const uploadTask = uploadImage(media);
-      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        holder.media = downloadURL;
-        console.log("finish upload");
+          holder.reply[holder.reply.length - 1].media = downloadURL;
+          addMiniReplies(
+            tweet.email,
+            tweet.date,
+            currentReplyData.date,
+            arrayReplyNum,
+            holder
+          );
+        });
+      } else {
+        // tweet.date is a string right now
+        console.log(currentReplyData);
+        addMiniReplies(
+          tweet.email,
+          tweet.date,
+          currentReplyData.date,
+          arrayReplyNum,
+          holder
+        );
+      }
+
+      setNewReplyData("");
+      setReplyMiniText("");
+    } else {
+      console.log("reply on a main tweet");
+      const date = new Date();
+      const dateString = date.toString();
+      const dateData = makeDatewithMS(dateString, date);
+
+      // query the array and push a new arrayZ?
+
+      console.log(replyArrayData);
+
+      const holder = {
+        user: login.email,
+        displayName: login.displayName,
+        profilePic: login.photoURL,
+        date: dateData,
+        text: replyMiniText,
+        reply: [],
+      }; //arrayPosition:
+
+      console.log(currentReply);
+      if (media) {
+        const uploadTask = uploadImage(media);
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          holder.media = downloadURL;
+          console.log("finish upload");
+          addSecondaryReply(
+            holder,
+            tweet.email,
+            tweet.date,
+            currentReply.date,
+            setReplyArrayData
+          );
+        });
+      } else {
         addSecondaryReply(
           holder,
           tweet.email,
@@ -77,15 +126,7 @@ const ReplyForm = (prop) => {
           currentReply.date,
           setReplyArrayData
         );
-      });
-    } else {
-      addSecondaryReply(
-        holder,
-        tweet.email,
-        tweet.date,
-        currentReply.date,
-        setReplyArrayData
-      );
+      }
     }
   };
 
@@ -98,7 +139,37 @@ const ReplyForm = (prop) => {
       dateString.substring(dateString.indexOf("GMT"))
     );
   }
+  const makeNewReplyData = (e) => {
+    return new Promise((resolve) => {
+      console.log("before add holder", currentMiniReply);
+      // setCurrentReply(reply);
+      // const replyDiv = e.target.parentElement.parentElement.parentElement
+      const date = new Date();
+      const dateString = date.toString();
+      const dateData = makeDatewithMS(dateString, date);
+      console.log(login);
+      const holder = {
+        user: login.email,
+        displayName: login.displayName,
+        profilePic: login.photoURL,
+        date: dateData,
+        text: replyMiniText,
+        reply: [],
+        arrayPosition:
+          currentMiniReply.arrayPosition + "," + currentMiniReply.reply.length,
+      };
 
+      // console.log(holder);
+      setToggleFormHidden(false);
+      // query reply
+      // currentMiniReply.reply.push(holder)
+
+      // looper(currentMiniReply);
+      // setNewReplyData(currentMiniReply);
+
+      resolve(holder);
+    });
+  };
   return (
     <div
       onClick={removeForm}

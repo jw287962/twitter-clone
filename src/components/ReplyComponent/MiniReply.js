@@ -34,15 +34,17 @@ const MiniReply = (props) => {
 
   const [replyArrayHolder, setReplyArrayHolder] = useState([]);
   const handleInternalReply = (e) => {
-    console.log("second reply");
+    console.log("second reply", replyData);
     // const replyDiv = e.target.parentElement.parentElement.parentElement;
     setToggleFormHidden(false);
     // query reply
     setArrayReplyNum(replyNum);
 
     //  current secondary reply data and first reply data
+
+    setCurrentReply(reply);
+    // keep tracks of current reply data, to update later
     setCurrentMiniReply(reply);
-    console.log(replyData);
     setCurrentReplyData(replyData);
   };
 

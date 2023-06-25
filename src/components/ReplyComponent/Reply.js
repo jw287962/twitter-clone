@@ -12,6 +12,7 @@ const Reply = (props) => {
     setNewReplyData,
     setToggleReplyFormHidden,
     replySecondMiniText,
+    integer,
     newReplyData,
     currentMiniReply,
     setCurrentMiniReply,
@@ -24,11 +25,13 @@ const Reply = (props) => {
   const [replyData, setReplyData] = useState(reply);
   //
   const handleInternalReply = () => {
+    console.log("reply");
     // const replyDiv = e.target.parentElement.parentElement.parentElement
     setToggleFormHidden(false);
     // query reply
 
     setCurrentReply(reply);
+    setCurrentMiniReply("");
   };
   // useEffect(() => {
   // if (!replyData && !queryReply) {
@@ -51,9 +54,9 @@ const Reply = (props) => {
   // console.log(reply);
   // NEED TO STORE OBJECTS INSIDE REPLY IE: const obj = {reply: {text: 'hi', reply: {text: "newb"}, reply1: {}}};
   // console.log(replyArrayHolder);
-
+  const string = integer + ",";
   return (
-    <div className="reply">
+    <div className="reply" key-num={integer}>
       <div className="flexrow tweetuser">
         <h2>
           <img
@@ -94,13 +97,13 @@ const Reply = (props) => {
               <MiniReply
                 login={login}
                 setArrayReplyNum={setArrayReplyNum}
-                replyNum={i++}
+                replyNum={string + i}
                 replyMiniText={replySecondMiniText}
                 key={tweet.user + tweet.date}
                 setCurrentReply={setCurrentReply}
                 reply={tweet}
                 replyData={replyData}
-                setToggleFormHidden={setToggleReplyFormHidden}
+                setToggleFormHidden={setToggleFormHidden}
                 newReplyData={newReplyData}
                 setNewReplyData={setNewReplyData}
                 currentMiniReply={currentMiniReply}

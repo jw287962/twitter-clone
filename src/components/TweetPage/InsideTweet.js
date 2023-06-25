@@ -11,7 +11,6 @@ import {
 } from "../firebase";
 import { useLocation } from "react-router-dom";
 import ReplyForm from "./ReplyForm";
-import MiniReplyForm from "./MiniReplyForm";
 import Reply from "../ReplyComponent/Reply";
 import { getDownloadURL } from "firebase/storage";
 
@@ -147,7 +146,6 @@ const MainTweet = (prop) => {
         profilePic={tweet.profilePic}
         likes={tweet.likes}
       ></Tweets>
-
       <form className="tweetform" id="replyform">
         <textarea
           placeholder="TWEET YOUR REPLY!"
@@ -177,13 +175,14 @@ const MainTweet = (prop) => {
         <input type="submit" value="Reply" onClick={processReplyData}></input>
       </form>
       <div className="replyContainer">
-        {replies.map((reply) => {
+        {replies.map((reply, i) => {
           return (
             <Reply
               setArrayReplyNum={setArrayReplyNum}
               login={login}
               key={reply.name + reply.date}
               reply={reply}
+              integer={i}
               toggleFormHidden={toggleFormHidden}
               replySecondMiniText={replySecondMiniText}
               setToggleFormHidden={setToggleFormHidden}
@@ -207,21 +206,10 @@ const MainTweet = (prop) => {
         setToggleFormHidden={setToggleFormHidden}
         replyMiniText={replyMiniText}
         setReplyMiniText={setReplyMiniText}
-      ></ReplyForm>
-
-      <MiniReplyForm
-        arrayReplyNum={arrayReplyNum}
-        login={login}
-        currentReply={currentReply}
-        tweet={tweet}
-        toggleFormHidden={toggleReplyFormHidden}
-        setToggleFormHidden={setToggleReplyFormHidden}
-        replyMiniText={replySecondMiniText}
-        setReplyMiniText={setReplySecondMiniText}
         currentMiniReply={currentMiniReply}
         setNewReplyData={setNewReplyData}
         currentReplyData={currentReplyData}
-      ></MiniReplyForm>
+      ></ReplyForm>
       {/*   setCurrentReplyData={setCurrentReplyData} is for the .reply objects */}
       {/* after setting new reply data . i need to update reply with new reply */}
     </main>

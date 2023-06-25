@@ -312,16 +312,20 @@ async function addMiniReplies(
   const originalReply = allRepliesSnapshot.data();
   // DO THIS FOR ONLY STRING LENGHT OF 1 (JUST NUMBER):
   const orignalReplyArrayData = originalReply.reply;
+  console.log(arrayReplyNum);
   if (typeof arrayReplyNum == "number") {
-    orignalReplyArrayData.splice(arrayReplyNum, 1, holder);
+    orignalReplyArrayData.push(holder);
     addContinuousReply(orignalReplyArrayData, tweetUser, textID, replyID);
   } else {
+    // need to loop trhough all the replies
     const newArray = arrayReplyNum.split(",");
     var arrayHolder = originalReply;
-    while (newArray.length != 0) {
-      const number = Number(newArray.splice(0, 1));
+
+    while (newArray.length > 1) {
+      const number = Number(newArray.splice(1, 1));
       arrayHolder = arrayHolder.reply[number];
     }
+
     arrayHolder.reply.push(holder);
     addContinuousReply(orignalReplyArrayData, tweetUser, textID, replyID);
   }
