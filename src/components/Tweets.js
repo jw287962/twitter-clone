@@ -3,7 +3,7 @@ import { Markup } from "interweave";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
-import { incrementLikes, queryData } from "./firebase";
+import { incrementLikes, queryData, queryTweetSingle } from "./firebase";
 const Tweet = (props) => {
   const {
     text,
@@ -16,12 +16,13 @@ const Tweet = (props) => {
     likes,
     setTweetsData,
     setLoadingData,
+    setTweet,
   } = props;
-  const [origText, setNewText] = useState(text);
+  const [origText] = useState(text);
   const { login } = props;
   const [dateNumber, setDateNumber] = useState(undefined);
   useEffect(() => {
-    function getDate() {
+    function getDateDefault() {
       // const dateObject = new Date(date);
       const convertmmddyy = date.substring(0, date.indexOf("2023") + 4);
       var firstDate = moment(convertmmddyy).format("YYYY-MM-DD");
@@ -31,12 +32,21 @@ const Tweet = (props) => {
       );
       setDateNumber(dateObj.getTime());
     }
-    getDate();
+    getDateDefault();
   });
 
   async function processLike(e) {
-    const data = await incrementLikes(email, date);
-    queryData(setTweetsData, setLoadingData);
+    try {
+       await incrementLikes(email, date);
+
+      if (setTweet) {
+        queryTweetSingle(dateNumber, setTweet);
+      } else {
+        queryData(setTweetsData, setLoadingData);
+      }
+    } catch (e) {
+      console.log("processLike in Tweets.js", e);
+    }
   }
   if (media) {
     return (

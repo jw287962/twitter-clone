@@ -62,7 +62,7 @@ const MainTweet = (prop) => {
   // QUERY TWEET
   useEffect(() => {
     if (!prop.tweet && !tweet) {
-      queryTweetSingle(tweetUser, tweetID, setTweet);
+      queryTweetSingle(tweetID, setTweet);
     }
   }, [tweet]);
 
@@ -149,6 +149,7 @@ const MainTweet = (prop) => {
         login={login}
         profilePic={tweet.profilePic}
         likes={tweet.likes}
+        setTweet={setTweet}
       ></Tweets>
       <form className="tweetform" id="replyform">
         <textarea

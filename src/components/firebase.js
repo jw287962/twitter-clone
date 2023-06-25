@@ -249,33 +249,47 @@ async function queryReplyFirebase(
 
 // add seconds instad of just minte in data collection name and query by date or something
 
-async function queryData(setTweetsData, setLoadingData) {
-  setLoadingData(true);
-  // console.log('auth',getAuth().currentUser);
+async function queryData(setTweetsData, setLoadingData, innerTweet = false) {
+  try {
+    if (innerTweet) {
+      // queryTweetSingle(tweetIdDate, setTweet);
+    }
+    setLoadingData(true);
+    // console.log('auth',getAuth().currentUser);
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-  const allTweets = query(collection(db, "tweets"));
-  const allTweetsSnapshot = await getDocs(allTweets);
+    const allTweets = query(collection(db, "tweets"));
+    const allTweetsSnapshot = await getDocs(allTweets);
 
-  const newArray = [];
+    const newArray = [];
 
-  const data = allTweetsSnapshot.forEach(async (doc) => {
-    newArray.push(doc.data());
+    const data = allTweetsSnapshot.forEach(async (doc) => {
+      newArray.push(doc.data());
 
-    setLoadingData(false);
-    setTweetsData(newArray.concat([]));
-  });
+      setLoadingData(false);
+      setTweetsData(newArray.concat([]));
+    });
+  } catch (e) {
+    console.log("queryData", e);
+    return new Error(e);
+  }
 }
 
 // QUERY THE TWEET DATA
-async function queryTweetSingle(tweetUser, tweetIDDate, setTweet) {
-  const user = query(doc(db, "tweets", tweetIDDate));
-  const allUserSnapshot = await getDoc(user);
-  // prob better when more users, to change to followers or something instead of all users or if users > 30
-  const data = allUserSnapshot;
-  setTweet(data.data());
+async function queryTweetSingle(tweetIDDate, setTweet) {
+  console.log("singlequerytweet", tweetIDDate);
+  try {
+    const user = query(doc(db, "tweets", `${tweetIDDate}`));
+    console.log(user);
+    const allUserSnapshot = await getDoc(user);
+    // prob better when more users, to change to followers or something instead of all users or if users > 30
+    const data = allUserSnapshot;
+    setTweet(data.data());
+  } catch (e) {
+    console.log("query tweet single", e);
+  }
 }
 
 async function queryContinuousReply(
@@ -412,6 +426,7 @@ function getDate(date) {
   return `${dateObj.getTime()}`;
 }
 export {
+  getDate,
   signInPopUp,
   signOutUser,
   getUserAuth,
