@@ -23,8 +23,10 @@ const Left = (props) => {
       nav.style.paddingLeft = "0px";
       search.style.paddingRight = "0px";
     }
+
     if (viewport >= 501) {
       nav.style.visibility = "visible";
+      hideNavBarMobile();
       main.classList.remove("darkness");
     } else {
       nav.style.visibility = "hidden";
@@ -33,29 +35,35 @@ const Left = (props) => {
 
   const findViewport = () => {
     setViewport(window.innerWidth);
+    if (!menu) {
+      setMenu(true);
+    }
   };
 
-  const toggleMenu = () => {
+  function hideNavBarMobile() {
     const nav = document.querySelector(".userNav");
     const main = document.querySelector("main");
-    const mainNav = document.querySelector(".mainNavList");
-    const navLink = document.querySelector(".navLink");
     const navLinks = document.querySelector(".leftNavLink");
 
-    !menu
-      ? mainNav.classList.add("widthTrans")
-      : mainNav.classList.remove("widthTrans");
-    !menu
-      ? navLink.classList.add("widthTrans")
-      : navLink.classList.remove("widthTrans");
-    !menu
-      ? navLinks.classList.add("widthTrans")
-      : navLinks.classList.remove("widthTrans");
+    const mainNav = document.querySelector(".mainNavList");
+    const navLink = document.querySelector(".navLink");
+    if (menu) {
+      mainNav.classList.remove("widthTrans");
+      navLink.classList.remove("widthTrans");
+      main.classList.add("darkness");
 
-    menu ? main.classList.add("darkness") : main.classList.remove("darkness");
-    menu
-      ? (nav.style.visibility = "visible")
-      : (nav.style.visibility = "hidden");
+      nav.style.visibility = "visible";
+    } else {
+      mainNav.classList.add("widthTrans");
+      navLink.classList.add("widthTrans");
+      nav.style.visibility = "hidden";
+      main.classList.remove("darkness");
+    }
+  }
+
+  // mobile view
+  const toggleMenu = () => {
+    hideNavBarMobile();
     setMenu(!menu);
   };
   return (
