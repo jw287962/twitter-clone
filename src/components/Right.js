@@ -3,6 +3,10 @@ import "./css/Right.css";
 import { UserContext } from "../Router";
 import "material-icons/iconfont/material-icons.css";
 
+import { Link } from "react-router-dom";
+
+import { querySearchTerm } from "./firebase";
+
 const Right = (props) => {
   const user = useContext(UserContext);
   // const { setLogin, login, signInUser } = user;
@@ -22,6 +26,9 @@ const Right = (props) => {
 
   function handleSearch(e) {
     e.preventDefault();
+    const search = document.querySelector(".search");
+    console.log(search.click());
+    // const result = querySearchTerm(searchData);
   }
 
   if (user.login) {
@@ -42,6 +49,13 @@ const Right = (props) => {
             </label>
           </form>
         </div>
+        <Link
+          className="search"
+          to={{
+            pathname: `/search/`,
+            search: `${searchData}`,
+          }}
+        ></Link>
       </nav>
     );
   }

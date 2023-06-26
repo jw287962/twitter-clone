@@ -37,11 +37,8 @@ const auth = getAuth();
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-
-
 function signInPopUp() {
   const provider = new GoogleAuthProvider();
-  const signedIn = 0;
 
   const promise = signInWithPopup(auth, provider)
     .then((result) => {
@@ -143,7 +140,6 @@ function uploadImage(img) {
 async function addTweetFireBase(text, url) {
   if (!text) return;
 
-  console.log("add tweet");
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const user = getAuth().currentUser;
@@ -251,7 +247,12 @@ async function queryReplyFirebase(
 
 // add seconds instad of just minte in data collection name and query by date or something
 
-async function queryData(setTweetsData, setLoadingData, innerTweet = false) {
+async function queryData(
+  setTweetsData,
+  setLoadingData,
+  innerTweet = false,
+  searchTerm = ""
+) {
   try {
     if (innerTweet) {
       // queryTweetSingle(tweetIdDate, setTweet);
@@ -261,8 +262,14 @@ async function queryData(setTweetsData, setLoadingData, innerTweet = false) {
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    const tweetRef = collection(db, "tweets");
+    let allTweets = undefined;
+    if (searchTerm) {
+      allTweets = query(tweetRef, where("text", "==", searchTerm));
+    } else {
+      allTweets = query(tweetRef);
+    }
 
-    const allTweets = query(collection(db, "tweets"));
     const allTweetsSnapshot = await getDocs(allTweets);
 
     const newArray = [];
@@ -395,7 +402,21 @@ async function incrementLikes(email, dateid) {
   });
 }
 
-// utility
+export async function querySearchTerm(setSearchData, searchTerm) {
+  console.log(searchTerm);
+  const tweetRef = collection(db, "tweets");
+
+  const tweets = query(tweetRef, where("text", "==", searchTerm));
+  const tweetSnapshot = await getDocs(tweets);
+  const array = [];
+  tweetSnapshot.forEach(async (doc) => {
+    array.push(doc.data());
+  });
+  console.log(array);
+  setSearchData(array);
+}
+
+// `###  Utility   `
 function makeDatewithMS(dateString, date) {
   if (date.getMilliseconds() <= 99)
     return (

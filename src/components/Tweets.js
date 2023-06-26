@@ -17,6 +17,7 @@ const Tweet = (props) => {
     setTweetsData,
     setLoadingData,
     setTweet,
+    searchTerm,
   } = props;
   const [origText] = useState(text);
   const { login } = props;
@@ -37,12 +38,12 @@ const Tweet = (props) => {
 
   async function processLike(e) {
     try {
-       await incrementLikes(email, date);
+      await incrementLikes(email, date);
 
       if (setTweet) {
         queryTweetSingle(dateNumber, setTweet);
       } else {
-        queryData(setTweetsData, setLoadingData);
+        queryData(setTweetsData, setLoadingData, false, searchTerm);
       }
     } catch (e) {
       console.log("processLike in Tweets.js", e);

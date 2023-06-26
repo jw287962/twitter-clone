@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import Profile from "./components/UserProfileComponent/Profile";
 import TweetPage from "./components/TweetPage/TweetPage";
+import { SearchComponent } from "./components/Search route/SearchComponent";
 
 import {
   signInPopUp,
@@ -40,6 +41,7 @@ const Router = () => {
           <Route path="/" element={<App />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/tweet/*" element={<TweetPage />}></Route>
+          <Route path="/search/*" element={<SearchComponent />}></Route>
         </Routes>
       </UserContext.Provider>
     </BrowserRouter>

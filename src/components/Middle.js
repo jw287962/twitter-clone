@@ -3,9 +3,9 @@ import { UserContext } from "../Router";
 import "./css/Middle.css";
 import Tweets from "./Tweets";
 import MainTweetForm from "./FormReply/MainTweetForm";
-import { getUserAuth, queryData } from "./firebase";
+import { getUserAuth, queryData, querySearchTerm } from "./firebase";
 
-const Middle = (props) => {
+const Middle = ({ searchTerm }) => {
   const user = useContext(UserContext);
 
   const [tweetsData, setTweetsData] = useState([]);
@@ -18,7 +18,11 @@ const Middle = (props) => {
     async function queryTweetData() {
       await queryData(setTweetsData, setLoadingData);
     }
-    queryTweetData();
+    if (searchTerm) {
+      querySearchTerm(setTweetsData, searchTerm);
+    } else {
+      queryTweetData(setTweetsData, searchTerm);
+    }
   }, [loadLimiter]);
 
   const addFiveLimit = () => {
@@ -91,6 +95,7 @@ const Middle = (props) => {
             likes={tweet.likes}
             setTweetsData={setTweetsData}
             setLoadingData={setLoadingData}
+            searchTerm={searchTerm}
           >
             TEST
           </Tweets>
