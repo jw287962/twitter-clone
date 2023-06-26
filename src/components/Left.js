@@ -35,9 +35,6 @@ const Left = (props) => {
 
   const findViewport = () => {
     setViewport(window.innerWidth);
-    if (!menu) {
-      setMenu(true);
-    }
   };
 
   function hideNavBarMobile() {
