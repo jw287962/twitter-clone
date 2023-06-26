@@ -31,9 +31,12 @@ https://twitter-clone-33714.web.app/
 
 1. Tweets and Users are stored in firebase
 
+2. No state management as I did not know about it when starting on this project. (I have used it on latest projects and will continue to do so... I may implement it on this project one day)
+
 # Update
 
-1. Added Support for Likes on main tweets.
+1. ✅ Added Support for Likes on main tweets.
+2. ✅ Search Support
 
 # DEFAULT
 
