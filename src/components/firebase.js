@@ -37,6 +37,8 @@ const auth = getAuth();
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+
+
 function signInPopUp() {
   const provider = new GoogleAuthProvider();
   const signedIn = 0;
@@ -279,7 +281,6 @@ async function queryData(setTweetsData, setLoadingData, innerTweet = false) {
 
 // QUERY THE TWEET DATA
 async function queryTweetSingle(tweetIDDate, setTweet) {
-  console.log("singlequerytweet", tweetIDDate);
   try {
     const user = query(doc(db, "tweets", `${tweetIDDate}`));
     console.log(user);
@@ -322,11 +323,9 @@ async function addMiniReplies(
   );
   const allRepliesSnapshot = await getDoc(replies);
   // console.log(allRepliesSnapshot.data());
-  console.log(allRepliesSnapshot.data());
   const originalReply = allRepliesSnapshot.data();
   // DO THIS FOR ONLY STRING LENGHT OF 1 (JUST NUMBER):
   const orignalReplyArrayData = originalReply.reply;
-  console.log(arrayReplyNum);
   if (typeof arrayReplyNum == "number") {
     orignalReplyArrayData.push(holder);
     addContinuousReply(orignalReplyArrayData, tweetUser, textID, replyID);
@@ -346,14 +345,12 @@ async function addMiniReplies(
 }
 
 // first reply
-// will need a query before changign data and a query for outputting replies
 async function addSecondaryReply(
   holder,
   tweetUser,
   textID,
   replyID,
-  setReplyData,
-  downloadURL = ""
+  setReplyData
 ) {
   try {
     const replies = query(

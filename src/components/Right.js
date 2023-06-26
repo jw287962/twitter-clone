@@ -22,7 +22,6 @@ const Right = (props) => {
 
   function handleSearch(e) {
     e.preventDefault();
-    console.log(handleSearch);
   }
 
   if (user.login) {

@@ -1,9 +1,9 @@
 # Twitter Clone: Ongoing Project
 
-- Supports Infinite Comments/Replies using Array Data structure. (works like reddit comments)
-- I would use Nodes/Tree structure like my Knight Travails project if I wanted it to work like Twitter,
-  I think it would work if a tweet can contain tweets as nodes, and so on, and each tweet, would also exist as a separate tweet that would be accessible without entering any node, but a tweet, will have nodes to represent the connection between them as a reply (if needed). This way, you can access any deeply nested reply as a regular tweet just like twitter, while also allowing for two or more tweets to function as a parent and child if necessary.
+- Supports Infinite Comments/Replies using Array Data structure and firebase. (works like reddit comments)
+
   ### `Image`
+
 - supports only IMAGE medias for now (Hosted on Firebase)
 
 ### `auth`
@@ -21,15 +21,19 @@
 
 - Utilzes Higher Order Components for reuse
 
-### HOSTED ON FIREBASE
+# HOSTED ON FIREBASE
 
 make sure to run build first
 use firebase deploy to deploy after setting it up
 https://twitter-clone-33714.web.app/
 
+## DataStorage
+
+1. Tweets and Users are stored in firebase
+
 # Update
 
-### Added Support for Likes (Basic)
+1. Added Support for Likes on main tweets.
 
 # DEFAULT
 
