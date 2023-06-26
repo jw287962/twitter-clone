@@ -40,7 +40,7 @@ const Left = (props) => {
   function hideNavBarMobile() {
     const nav = document.querySelector(".userNav");
     const main = document.querySelector("main");
-    const navLinks = document.querySelector(".leftNavLink");
+    // const navLinks = document.querySelector(".leftNavLink");
 
     const mainNav = document.querySelector(".mainNavList");
     const navLink = document.querySelector(".navLink");

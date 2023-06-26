@@ -13,6 +13,7 @@ import {
 import {
   getFirestore,
   doc,
+  orderBy,
   setDoc,
   getDoc,
   getDocs,
@@ -267,7 +268,7 @@ async function queryData(
     if (searchTerm) {
       allTweets = query(tweetRef, where("text", "==", searchTerm));
     } else {
-      allTweets = query(tweetRef);
+      allTweets = query(tweetRef, orderBy("date"));
     }
 
     const allTweetsSnapshot = await getDocs(allTweets);

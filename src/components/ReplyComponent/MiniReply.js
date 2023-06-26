@@ -6,15 +6,15 @@ import { useLocation } from "react-router-dom";
 // import { addContinuousReply, queryContinuousReply } from "../firebase";
 // import ContinuousMiniReply from "./ContinuousMiniReply";
 // import Tweets from "../TweetPage/TweetPage";
-function makeDatewithMS(dateString, date) {
-  return (
-    dateString.substring(0, dateString.indexOf("GMT") - 1) +
-    "." +
-    date.getMilliseconds() +
-    " " +
-    dateString.substring(dateString.indexOf("GMT"))
-  );
-}
+// function makeDatewithMS(dateString, date) {
+//   return (
+//     dateString.substring(0, dateString.indexOf("GMT") - 1) +
+//     "." +
+//     date.getMilliseconds() +
+//     " " +
+//     dateString.substring(dateString.indexOf("GMT"))
+//   );
+// }
 
 const MiniReply = (props) => {
   const {
@@ -32,16 +32,12 @@ const MiniReply = (props) => {
   // profilePic,date,media,user,displayName,text,
   // const [newReplyData,setNewReplyData] = useState(props.replyData);
 
-  const [replyArrayHolder, setReplyArrayHolder] = useState([]);
+  // const [replyArrayHolder, setReplyArrayHolder] = useState([]);
   const handleInternalReply = (e) => {
     console.log("second reply", replyData);
-    // const replyDiv = e.target.parentElement.parentElement.parentElement;
     setToggleFormHidden(false);
-    // query reply
     setArrayReplyNum(replyNum);
-
     //  current secondary reply data and first reply data
-
     setCurrentReply(reply);
     // keep tracks of current reply data, to update later
     setCurrentMiniReply(reply);
