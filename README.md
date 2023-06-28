@@ -1,18 +1,32 @@
 # Twitter Clone: Ongoing Project
 
+# Updates
+
+1. ✅ Added Support for Likes on main tweets.
+2. ✅ Search Support
+
+## DataStorage
+
+1. Tweets and Users are stored in firebase (NOSQL)
+
+2. No state management as I did not know about it when starting on this project.
+   (I have used it on latest projects and will continue to do so... I may implement it on this project one day) - I may refactor and use State Management
+
+## Current
+
 - Supports Infinite Comments/Replies using Array Data structure and firebase. (works like reddit comments)
 
   ### `Image`
 
 - supports only IMAGE medias for now (Hosted on Firebase)
 
-### `auth`
+  ### `Auth`
 
-- Authentication is done through Firebase (google sign-in);
+  - Authentication is done through Firebase (google sign-in);
 
-### `NAV`
+  ### `NAV`
 
-- Only supports Home and Profile
+  - Only supports Home and Profile
 
 ## REFACTOR
 
@@ -20,23 +34,13 @@
 - I need to refactor my code first.
 
 - Utilzes Higher Order Components for reuse
+- Maybe use State Management
 
 # HOSTED ON FIREBASE
 
 make sure to run build first
 use firebase deploy to deploy after setting it up
 https://twitter-clone-33714.web.app/
-
-## DataStorage
-
-1. Tweets and Users are stored in firebase
-
-2. No state management as I did not know about it when starting on this project. (I have used it on latest projects and will continue to do so... I may implement it on this project one day)
-
-# Update
-
-1. ✅ Added Support for Likes on main tweets.
-2. ✅ Search Support
 
 # DEFAULT
 
