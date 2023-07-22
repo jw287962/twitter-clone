@@ -5,12 +5,25 @@
 1. ✅ Added Support for Likes on main tweets.
 2. ✅ Search Support
 
+
+## Note & Thoughts
+  - Lesson: I would think about using scalable options by taking advantage of NOSQL's inherent nature.
+  That is, infinite replies will be implemented not with Array data structure, but with proper reference ID on each individual tweet data. 
+  I would consider every reply as a separate tweet as well.
+  Thereby, I can lookup for each tweet's parent reply or child reply. IE: so, if i want to store a  tweet with _id: 12345 
+  and someone replies to it. the reply will have a parent: 12345.
+
+  That means, whenever I load tweet 12345, the noSQL database can query for tweets that a parentID of 12345, this will allow for dynamic and fluid retrieval of data that is not reliant on an entire array. 
+  For example, I can implement a load more replies button, that will load more replies from any tweet with proper flexibility and control because each tweet will be accessible directly from the collection.
+
 ## DataStorage
 
 1. Tweets and Users are stored in firebase (NOSQL)
 
 2. No state management as I did not know about it when starting on this project.
    (I have used it on latest projects and will continue to do so... I may implement it on this project one day) - I may refactor and use State Management
+
+
 
 ## Current
 
